@@ -1,110 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="jp.riku1227.mcbetool.activity.MainActivity"
-    android:background="#f8f6f5">
+    android:background="#f8f6f5"
+    android:id="@+id/drawerLayout">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardUseCompatPadding="true">
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:titleTextColor="@color/colorWhite"
+                android:elevation="4dp"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_name"
-                    style="@style/CardViewTitle"/>
+                    app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/app_version_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/app_version"
-                    style="@style/CardViewText" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/app_version_code_text_view"
-                    android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/app_name"
+                            style="@style/CardViewTitle"/>
+
+                        <TextView
+                            android:id="@+id/app_version_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/app_version"
+                            style="@style/CardViewText" />
+
+                        <TextView
+                            android:id="@+id/app_version_code_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/app_version_code"
+                            style="@style/CardViewText" />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/app_version_code"
-                    style="@style/CardViewText" />
+                    app:cardUseCompatPadding="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/about_author_title"
+                            style="@style/CardViewTitle"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/about_author"
+                            style="@style/CardViewText"/>
+
+                        <Button
+                            android:id="@+id/about_github_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/about_github"
+                            style="@style/MCButton"/>
+
+                        <Button
+                            android:id="@+id/about_google_plus_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/about_google_plus"
+                            style="@style/MCButton"/>
+
+                        <Button
+                            android:id="@+id/about_youtube_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/about_youtube"
+                            style="@style/MCButton"/>
+
+                        <Button
+                            android:id="@+id/about_homepage_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/about_homepage"
+                            style="@style/MCButton"/>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardUseCompatPadding="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_author_title"
-                    style="@style/CardViewTitle"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_author"
-                    style="@style/CardViewText"/>
-
-                <Button
-                    android:id="@+id/about_github_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/about_github"
-                    style="@style/MCButton"/>
-
-                <Button
-                    android:id="@+id/about_google_plus_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/about_google_plus"
-                    style="@style/MCButton"/>
-
-                <Button
-                    android:id="@+id/about_youtube_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/about_youtube"
-                    style="@style/MCButton"/>
-
-                <Button
-                    android:id="@+id/about_homepage_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/about_homepage"
-                    style="@style/MCButton"/>
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
+        </ScrollView>
 
     </LinearLayout>
 
-</ScrollView>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/drawer"/>
+
+</android.support.v4.widget.DrawerLayout>

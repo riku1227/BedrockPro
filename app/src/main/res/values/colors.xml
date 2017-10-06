@@ -5,6 +5,7 @@
     <color name="colorAccent">#ff4081</color>
 
     <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
 
     <color name="mc_button_color">#31ae1f</color>
     <color name="mc_button_text_color">#ffffff</color>
