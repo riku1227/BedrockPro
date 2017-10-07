@@ -15,5 +15,15 @@
     <string name="drawer_title_resource_pack">ResourcePack</string>
     <string name="drawer_resource_pack_gen">ResourcePackGen</string>
 
-    <string name="title_activity_resource_pack_gen">ResourcePackGenActivity</string>
+    <string name="resource_pack_gen_name">Name</string>
+    <string name="resource_pack_gen_description">Description</string>
+    <string name="resource_pack_gen_header_uuid">Header UUID</string>
+    <string name="resource_pack_gen_module_uuid">Module UUID</string>
+    <string name="resource_pack_gen_resource_cache">Cache default resource of MCBE in storage</string>
+    <string name="resource_pack_gen_auto_gen_uuid">Automatically generate UUID</string>
+    <string name="resource_pack_gen_custom_pack_icon">Custom pack icon</string>
+    <string name="resource_pack_gen_generate">Generate</string>
+    <string name="resource_pack_gen_pick_custom_icon">Pick custom icon</string>
+    <string name="resource_pack_gen_delete_cache">Delete Cache</string>
+    <string name="resource_pack_gen_icon">Icon</string>
 </resources>

@@ -10,9 +10,9 @@ import android.support.annotation.RequiresApi
 import android.support.design.widget.NavigationView
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
-import android.widget.ScrollView
 import jp.riku1227.mcbetool.*
 import jp.riku1227.mcbetool.fragment.HomeFragment
+import jp.riku1227.mcbetool.fragment.ResourcePackGenFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -41,16 +41,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item : MenuItem) : Boolean {
-        /* val id = item.itemId
-        val scroll : ScrollView = findViewById(R.id.main_scroll)
-        scroll.removeAllViews()
+        val id = item.itemId
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
         when (id) {
-            R.id.drawer_home -> layoutInflater.inflate(R.layout.activity_main,scroll)
-            //R.id.drawer_resource_pack_gen -> layoutInflater.inflate(R.layout.activity_resource_pack_gen,scroll)
-
-            else -> makeToast(this,"Test")
-        } */
-        makeToast(this,"Test")
+            R.id.drawer_home -> fragmentTransaction.replace(R.id.flameLayout,HomeFragment()).commit()
+            R.id.drawer_resource_pack_gen -> fragmentTransaction.replace(R.id.flameLayout,ResourcePackGenFragment()).commit()
+        }
         drawerLayout.closeDrawers()
         return true
     }
