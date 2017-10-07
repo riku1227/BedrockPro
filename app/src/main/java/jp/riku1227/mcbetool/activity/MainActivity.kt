@@ -8,20 +8,15 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.design.widget.NavigationView
-import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
-import android.widget.Button
-import android.widget.TextView
-import jp.riku1227.mcbetool.R
-import jp.riku1227.mcbetool.webIntent
+import android.view.MenuItem
+import android.widget.ScrollView
+import jp.riku1227.mcbetool.*
+import jp.riku1227.mcbetool.fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
-
-    private var pm : PackageManager? = null
-    private var packageInfo : PackageInfo? = null
-    private var res : Resources? = null
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,16 +32,26 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        pm = packageManager
-        packageInfo = pm?.getPackageInfo(applicationContext.packageName,0)
-        res = baseContext.resources
+        navigationView.setNavigationItemSelectedListener(this)
 
-        app_version_text_view.text = res?.getString(R.string.app_version)?.format(packageInfo?.versionName)
-        app_version_code_text_view.text = res?.getString(R.string.app_version_code)?.format(packageInfo?.versionCode)
+        val homeFragment = HomeFragment()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.flameLayout,homeFragment)
+        fragmentTransaction.commit()
+    }
 
-        about_github_button.setOnClickListener { webIntent(this, "https://github.com/riku1227/MCBETool") }
-        about_google_plus_button.setOnClickListener { webIntent(this, "https://plus.google.com/103470090583882439463") }
-        about_youtube_button.setOnClickListener { webIntent(this, "https://www.youtube.com/channel/UCIhk2bb4Y8kPCnjCeiEVtmA") }
-        about_homepage_button.setOnClickListener { webIntent(this, "https://riku1227.github.io") }
+    override fun onNavigationItemSelected(item : MenuItem) : Boolean {
+        /* val id = item.itemId
+        val scroll : ScrollView = findViewById(R.id.main_scroll)
+        scroll.removeAllViews()
+        when (id) {
+            R.id.drawer_home -> layoutInflater.inflate(R.layout.activity_main,scroll)
+            //R.id.drawer_resource_pack_gen -> layoutInflater.inflate(R.layout.activity_resource_pack_gen,scroll)
+
+            else -> makeToast(this,"Test")
+        } */
+        makeToast(this,"Test")
+        drawerLayout.closeDrawers()
+        return true
     }
 }

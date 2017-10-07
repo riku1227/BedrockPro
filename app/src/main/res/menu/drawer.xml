@@ -2,13 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/menu_item1"
-            android:title="Test1" />
-        <item
-            android:id="@+id/menu_item2"
-            android:title="Test2" />
-        <item
-            android:id="@+id/menu_item3"
-            android:title="Test2" />
+            android:id="@+id/drawer_home"
+            android:title="@string/drawer_home" />
     </group>
+
+    <item android:title="@string/drawer_title_resource_pack">
+        <menu>
+            <item
+                android:id="@+id/drawer_resource_pack_gen"
+                android:title="@string/drawer_resource_pack_gen" />
+        </menu>
+    </item>
 </menu>
