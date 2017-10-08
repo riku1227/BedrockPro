@@ -1,13 +1,12 @@
 package jp.riku1227.mcbetool.activity
 
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import jp.riku1227.mcbetool.*
@@ -44,10 +43,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val id = item.itemId
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         when (id) {
-            R.id.drawer_home -> fragmentTransaction.replace(R.id.flameLayout,HomeFragment()).commit()
-            R.id.drawer_resource_pack_gen -> fragmentTransaction.replace(R.id.flameLayout,ResourcePackGenFragment()).commit()
+            R.id.drawer_home -> replaceFragment(fragmentTransaction,HomeFragment())
+            R.id.drawer_resource_pack_gen -> replaceFragment(fragmentTransaction,ResourcePackGenFragment())
         }
         drawerLayout.closeDrawers()
         return true
+    }
+
+    fun replaceFragment(fragmentTransaction : FragmentTransaction, fragment : Fragment) {
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
+        fragmentTransaction.replace(R.id.flameLayout,fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 }
