@@ -1,9 +1,7 @@
 package jp.riku1227.mcbetool.util
 
-import java.io.BufferedInputStream
-import java.io.BufferedOutputStream
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import android.os.Environment
+import java.io.*
 
 class FileUtil {
     companion object {
@@ -18,6 +16,20 @@ class FileUtil {
             bufferedOutput.flush()
             bufferedInput.close()
             bufferedOutput.close()
+        }
+
+        fun createDirectory(directoryPath : String) {
+            val file = File(directoryPath)
+            file.mkdir()
+        }
+
+        fun createFile(filePath : String) {
+            val file = File(filePath)
+            file.createNewFile()
+        }
+
+        fun getExternalStoragePath() : String {
+            return Environment.getExternalStorageDirectory().absolutePath+"/"
         }
     }
 }
