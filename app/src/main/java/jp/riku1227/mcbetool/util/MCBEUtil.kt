@@ -6,14 +6,14 @@ import android.content.pm.PackageManager
 
 class MCBEUtil(pm : PackageManager) {
 
-    private val mcbePackageName = "com.mojang.minecraftpe"
+    private val packageName = "com.mojang.minecraftpe"
     private var packageInfo : PackageInfo? = null
     private var applicationInfo : ApplicationInfo? = null
 
     init {
         try{
-            packageInfo = pm.getPackageInfo(mcbePackageName,0)
-            applicationInfo = pm.getApplicationInfo(mcbePackageName,0)
+            packageInfo = pm.getPackageInfo(packageName,0)
+            applicationInfo = pm.getApplicationInfo(packageName,0)
         }catch(e : PackageManager.NameNotFoundException){
             e.printStackTrace()
         }
