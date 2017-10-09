@@ -19,8 +19,15 @@ class FileUtil {
         }
 
         fun createDirectory(directoryPath : String) {
-            val file = File(directoryPath)
-            file.mkdir()
+            val dirs : List<String> = directoryPath.split("/")
+            var filePath = getExternalStoragePath()
+            for (subFilePath in dirs.iterator()) {
+                filePath += "/" + subFilePath
+                val file = File(filePath)
+                if(!file.exists()) {
+                    file.mkdir()
+                }
+            }
         }
 
         fun createFile(filePath : String) {
