@@ -18,8 +18,8 @@ class FileUtil {
             bufferedOutput.close()
         }
 
-        fun createDirectory(directoryPath : String) {
-            val dirs : List<String> = directoryPath.split("/")
+        fun createDirectory(path : String) {
+            val dirs : List<String> = path.split("/")
             var filePath = getExternalStoragePath()
             for (subFilePath in dirs.iterator()) {
                 filePath += "/" + subFilePath
