@@ -30,9 +30,25 @@ class FileUtil {
             }
         }
 
-        fun createFile(filePath : String) {
-            val file = File(filePath)
-            file.createNewFile()
+        fun createFile(path : String) {
+            val dirs : List<String> = path.split("/")
+            var filePath = getExternalStoragePath()
+            var i = 0
+            for (subFilePath in dirs.iterator()) {
+                i++
+                filePath += "/" + subFilePath
+                val file = File(filePath)
+                if(i == dirs.size) {
+                    if(!file.exists()) {
+                        file.createNewFile()
+                    }
+                }
+                else {
+                    if(!file.exists()) {
+                        file.mkdir()
+                    }
+                }
+            }
         }
 
         fun getExternalStoragePath() : String {
