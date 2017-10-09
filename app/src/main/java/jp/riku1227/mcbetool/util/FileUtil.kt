@@ -2,6 +2,9 @@ package jp.riku1227.mcbetool.util
 
 import android.os.Environment
 import java.io.*
+import java.util.zip.ZipInputStream
+
+
 
 class FileUtil {
     companion object {
@@ -49,6 +52,32 @@ class FileUtil {
                     }
                 }
             }
+        }
+
+        fun unzip(inputPath : String, outputPath : String) {
+            val zipInputStream = ZipInputStream(FileInputStream(inputPath))
+
+            var entry = zipInputStream.nextEntry
+
+            while (entry != null) {
+                if(entry.isDirectory) {
+                    continue
+                }
+
+                createFile(outputPath+entry.name)
+
+                val bufferedOutputStream = BufferedOutputStream(FileOutputStream(getExternalStoragePath() + outputPath + entry.name))
+                var temp = 0
+                val byte = ByteArray(8192)
+                while ({temp = zipInputStream.read(byte); temp}() != -1) {
+                    bufferedOutputStream.write(byte,0,temp)
+                }
+                bufferedOutputStream.flush()
+                bufferedOutputStream.close()
+
+                entry = zipInputStream.nextEntry
+            }
+            zipInputStream.close()
         }
 
         fun getExternalStoragePath() : String {
