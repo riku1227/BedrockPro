@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">MCBETool</string>
+
+    <string name="app_version">アプリのバージョン: %1$s</string>
+    <string name="app_version_code">アプリのバージョンコード: %1$s</string>
+
+    <string name="about_title">このアプリについて</string>
+    <string name="about_author">Made by riku1227</string>
+    <string name="about_github">Github</string>
+    <string name="about_google_plus">Google+</string>
+    <string name="about_youtube">Youtube</string>
+    <string name="about_homepage">HomePage</string>
+
+    <string name="drawer_home">ホーム</string>
+    <string name="drawer_title_resource_pack">リソースパック</string>
+    <string name="drawer_resource_pack_gen">ResourcePackGen</string>
+
+    <string name="resource_pack_gen_name">名前</string>
+    <string name="resource_pack_gen_description">説明</string>
+    <string name="resource_pack_gen_header_uuid">ヘッダー UUID</string>
+    <string name="resource_pack_gen_module_uuid">モジュール UUID</string>
+    <string name="resource_pack_gen_resource_cache">MCPEのデフォルトリソースをストレージにキャッシュする</string>
+    <string name="resource_pack_gen_auto_gen_uuid">UUIDを自動生成する</string>
+    <string name="resource_pack_gen_custom_pack_icon">カスタムパックアイコン</string>
+    <string name="resource_pack_gen_generate">生成</string>
+    <string name="resource_pack_gen_pick_custom_icon">カスタムアイコンを選択する</string>
+    <string name="resource_pack_gen_delete_cache">キャッシュを削除する</string>
+    <string name="resource_pack_gen_icon">アイコン</string>
+
+    <string name="dialog_grant_permission">許可してください</string>
+    <string name="dialog_grant_external_storage_message">ストレージのアクセス許可が必要です</string>
+</resources>
