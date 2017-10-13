@@ -12,13 +12,15 @@ import jp.riku1227.mcbetool.R
 class PermissionDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val res = resources
-        return  AlertDialog.Builder(activity)
+        val dialog =
+                AlertDialog.Builder(activity)
                 .setTitle(res.getString(R.string.dialog_grant_permission))
                 .setMessage(res.getString(R.string.dialog_grant_external_storage_message))
                 .setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
                     ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
                 })
-                .create()
+        this.isCancelable = false
+        return dialog.create()
     }
 
     override fun onPause() {
