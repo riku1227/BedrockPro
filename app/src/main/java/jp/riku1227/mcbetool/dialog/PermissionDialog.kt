@@ -18,7 +18,6 @@ class PermissionDialog : DialogFragment() {
                 .setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
                     ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
                 })
-                .setNegativeButton("Cancel",null)
                 .create()
     }
 
