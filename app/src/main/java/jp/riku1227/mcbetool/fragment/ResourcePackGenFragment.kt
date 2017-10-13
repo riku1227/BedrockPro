@@ -1,14 +1,9 @@
 package jp.riku1227.mcbetool.fragment
 
 import android.Manifest
-import android.content.DialogInterface
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.DialogFragment
 import android.support.v4.content.PermissionChecker
-import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,13 +41,40 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() {
         resource_pack_gen_generate.setOnClickListener {
             generateResourcePack()
         }
+
+        resource_pack_gen_resource_cache.setOnClickListener {
+            resourcePackCache = resource_pack_gen_resource_cache.isChecked
+        }
+
+        resource_pack_gen_auto_gen_uuid.setOnClickListener {
+            if(resource_pack_gen_auto_gen_uuid.isChecked){
+                resource_pack_gen_header_uuid.visibility = View.GONE
+                resource_pack_gen_module_uuid.visibility = View.GONE
+                resourcePackAutoGenUUID = true
+            } else {
+                resource_pack_gen_header_uuid.visibility = View.VISIBLE
+                resource_pack_gen_module_uuid.visibility = View.VISIBLE
+                resourcePackAutoGenUUID = false
+            }
+        }
+
+        resource_pack_gen_custom_pack_icon.setOnClickListener {
+            if(resource_pack_gen_custom_pack_icon.isChecked) {
+                resource_pack_gen_pick_custom_icon.visibility = View.VISIBLE
+                resourcePackCustomIcon = true
+            } else {
+                resource_pack_gen_pick_custom_icon.visibility = View.GONE
+                resourcePackCustomIcon = false
+            }
+        }
     }
 
     private fun generateResourcePack() {
-        if(PermissionChecker.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
-
+        /*if(PermissionChecker.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
+            makeSnackBar(view!!,"権限が許可されていません")
         } else {
-
-        }
+            val progress = ProgressDialog()
+            progress.show(fragmentManager,"ProgressDialog")
+        }*/
     }
 }
