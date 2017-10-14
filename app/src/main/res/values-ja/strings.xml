@@ -28,6 +28,11 @@
     <string name="resource_pack_gen_pick_custom_icon">カスタムアイコンを選択する</string>
     <string name="resource_pack_gen_delete_cache">キャッシュを削除する</string>
     <string name="resource_pack_gen_icon">アイコン</string>
+    <string name="resource_pack_gen_dialog_is_it_ok">これでよろしいですか？</string>
+    <string name="resource_pack_gen_dialog_name">名前: %1$s</string>
+    <string name="resource_pack_gen_dialog_description">説明: %1$s</string>
+    <string name="resource_pack_gen_dialog_header_uuid">ヘッダー UUID: %1$s</string>
+    <string name="resource_pack_gen_dialog_module_uuid">モジュール UUID: %1$s</string>
 
     <string name="dialog_grant_permission">許可してください</string>
     <string name="dialog_grant_external_storage_message">ストレージのアクセス許可が必要です</string>
