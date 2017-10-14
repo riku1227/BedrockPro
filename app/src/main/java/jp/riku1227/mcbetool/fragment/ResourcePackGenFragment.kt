@@ -46,7 +46,30 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         }
 
         resource_pack_gen_generate.setOnClickListener {
-            generateResourcePack()
+            if(PermissionChecker.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
+                makeToast(context,resources.getString(R.string.permission_is_not_granted))
+                val intent = Intent()
+                intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                intent.data = Uri.fromParts("package", context.packageName, null)
+                startActivity(intent)
+            } else {
+                resourcePackName = resource_pack_gen_name.text.toString()
+                resourcePackDescription = resource_pack_gen_description.text.toString()
+                if(resourcePackAutoGenUUID) {
+                    resourcePackHeaderUUID = UUID.randomUUID().toString()
+                    resourcePackModuleUUID = UUID.randomUUID().toString()
+                } else {
+                    resourcePackHeaderUUID = resource_pack_gen_header_uuid.text.toString()
+                    resourcePackModuleUUID = resource_pack_gen_module_uuid.text.toString()
+                }
+                val resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
+                        resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
+                        resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
+                        resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
+                val dialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
+                dialog.setDialogListener(this)
+                dialog.show(fragmentManager,"SimpleDialog")
+            }
         }
 
         resource_pack_gen_resource_cache.setOnClickListener {
@@ -81,32 +104,5 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     }
 
     override fun onNegativeClick() {
-    }
-
-    private fun generateResourcePack() {
-        if(PermissionChecker.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
-            makeToast(context,resources.getString(R.string.permission_is_not_granted))
-            val intent = Intent()
-            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-            intent.data = Uri.fromParts("package", context.packageName, null)
-            startActivity(intent)
-        } else {
-            resourcePackName = resource_pack_gen_name.text.toString()
-            resourcePackDescription = resource_pack_gen_description.text.toString()
-            if(resourcePackAutoGenUUID) {
-                resourcePackHeaderUUID = UUID.randomUUID().toString()
-                resourcePackModuleUUID = UUID.randomUUID().toString()
-            } else {
-                resourcePackHeaderUUID = resource_pack_gen_header_uuid.text.toString()
-                resourcePackModuleUUID = resource_pack_gen_module_uuid.text.toString()
-            }
-            val resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
-                    resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
-                    resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
-                    resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
-            val dialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
-            dialog.setDialogListener(this)
-            dialog.show(fragmentManager,"SimpleDialog")
-        }
     }
 }
