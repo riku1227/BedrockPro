@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.support.v4.content.PermissionChecker
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,6 +79,8 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
         resource_pack_gen_auto_gen_uuid.setOnClickListener {
             if(resource_pack_gen_auto_gen_uuid.isChecked){
+                resource_pack_gen_header_uuid.text = SpannableStringBuilder("")
+                resource_pack_gen_module_uuid.text = SpannableStringBuilder("")
                 resource_pack_gen_header_uuid.visibility = View.GONE
                 resource_pack_gen_module_uuid.visibility = View.GONE
                 resourcePackAutoGenUUID = true
