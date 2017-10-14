@@ -9,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import jp.riku1227.mcbetool.R
 import jp.riku1227.mcbetool.dialog.PermissionDialog
+import jp.riku1227.mcbetool.dialog.ProgressDialog
+import jp.riku1227.mcbetool.makeSnackBar
+import jp.riku1227.mcbetool.makeToast
 import jp.riku1227.mcbetool.util.MCBEUtil
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
 
@@ -70,11 +73,11 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() {
     }
 
     private fun generateResourcePack() {
-        /*if(PermissionChecker.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
-            makeSnackBar(view!!,"権限が許可されていません")
+        if(PermissionChecker.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
+            makeToast(context,resources.getString(R.string.permission_is_not_granted))
         } else {
             val progress = ProgressDialog()
             progress.show(fragmentManager,"ProgressDialog")
-        }*/
+        }
     }
 }
