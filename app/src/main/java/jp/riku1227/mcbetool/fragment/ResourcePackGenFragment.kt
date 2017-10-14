@@ -1,8 +1,11 @@
 package jp.riku1227.mcbetool.fragment
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.support.v4.content.PermissionChecker
 import android.view.LayoutInflater
 import android.view.View
@@ -75,6 +78,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() {
     private fun generateResourcePack() {
         if(PermissionChecker.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
             makeToast(context,resources.getString(R.string.permission_is_not_granted))
+            val intent = Intent()
+            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+            intent.data = Uri.fromParts("package", context.packageName, null)
+            startActivity(intent)
         } else {
             val progress = ProgressDialog()
             progress.show(fragmentManager,"ProgressDialog")
