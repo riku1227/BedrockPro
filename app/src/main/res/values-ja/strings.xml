@@ -2,6 +2,7 @@
     <string name="app_name">MCBETool</string>
 
     <string name="permission_is_not_granted">ストレージアクセス権限が許可されていません</string>
+    <string name="mcpe_is_not_installed">Minecraft PE がインストールされていません</string>
 
     <string name="app_version">アプリのバージョン: %1$s</string>
     <string name="app_version_code">アプリのバージョンコード: %1$s</string>

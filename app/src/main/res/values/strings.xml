@@ -2,6 +2,7 @@
     <string name="app_name">MCBETool</string>
 
     <string name="permission_is_not_granted">External storage permission is not granted</string>
+    <string name="mcpe_is_not_installed">Minecraft PE is not installed</string>
 
     <string name="app_version">App version: %1$s</string>
     <string name="app_version_code">App version code: %1$s</string>
