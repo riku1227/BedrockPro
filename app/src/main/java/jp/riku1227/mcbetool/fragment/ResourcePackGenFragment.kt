@@ -107,9 +107,13 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     }
 
     override fun onPositiveClick() {
-        makeToast(context,"Positive")
+        generateResourcePack()
     }
 
     override fun onNegativeClick() {
+    }
+
+    private fun generateResourcePack() {
+        makeToast(context,"genRes")
     }
 }
