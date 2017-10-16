@@ -33,10 +33,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         navigationView.setNavigationItemSelectedListener(this)
 
-        val homeFragment = HomeFragment()
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.flameLayout,homeFragment)
-        fragmentTransaction.commit()
+        if(savedInstanceState == null) {
+            val homeFragment = HomeFragment()
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flameLayout,homeFragment)
+            fragmentTransaction.commit()
+        }
     }
 
     override fun onNavigationItemSelected(item : MenuItem) : Boolean {
