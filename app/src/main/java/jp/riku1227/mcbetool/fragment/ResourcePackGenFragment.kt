@@ -42,6 +42,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val pm : PackageManager = activity.packageManager
         val mcbeUtil = MCBEUtil(pm)
 
+        resourcePackCache = resource_pack_gen_resource_cache.isChecked
+        resourcePackAutoGenUUID = resource_pack_gen_auto_gen_uuid.isChecked
+        resourcePackCustomIcon = resource_pack_gen_custom_pack_icon.isChecked
+
         if(PermissionChecker.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
             PermissionDialog().show(fragmentManager,"PermissionDialog")
         }
