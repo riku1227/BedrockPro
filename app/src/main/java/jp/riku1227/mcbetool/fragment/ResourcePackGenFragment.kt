@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
 import android.support.v4.content.PermissionChecker
 import android.text.SpannableStringBuilder
@@ -14,12 +16,17 @@ import android.view.ViewGroup
 import jp.riku1227.mcbetool.R
 import jp.riku1227.mcbetool.dialog.DialogListener
 import jp.riku1227.mcbetool.dialog.PermissionDialog
+import jp.riku1227.mcbetool.dialog.ProgressDialog
 import jp.riku1227.mcbetool.dialog.SimpleDialog
 import jp.riku1227.mcbetool.makeSnackBar
+import jp.riku1227.mcbetool.makeThreadToast
 import jp.riku1227.mcbetool.makeToast
+import jp.riku1227.mcbetool.util.FileUtil
 import jp.riku1227.mcbetool.util.MCBEUtil
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
+import java.io.File
 import java.util.*
+import kotlin.concurrent.thread
 
 class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListener {
 
@@ -39,9 +46,6 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     override fun onStart() {
         super.onStart()
-
-        val pm : PackageManager = activity.packageManager
-        val mcbeUtil = MCBEUtil(pm)
 
         resourcePackCache = resource_pack_gen_resource_cache.isChecked
         resourcePackAutoGenUUID = resource_pack_gen_auto_gen_uuid.isChecked
@@ -119,6 +123,18 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     }
 
     private fun generateResourcePack() {
-        makeToast(context,"genRes")
+        val mcbeUtil = MCBEUtil(activity.packageManager)
+        val handler = Handler()
+        val cacheFolder = "MCBETool/cache/"
+        val resourceFolder = cacheFolder+"resource/"
+        FileUtil.createFile(cacheFolder+".nomedia")
+        val progress = ProgressDialog()
+        progress.show(fragmentManager,"ProgressDialog")
+        thread {
+            makeThreadToast(handler,context,"Start APK unzip...")
+            FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder)
+            makeThreadToast(handler,context,"End APK unzip...")
+            progress.dismiss()
+        }
     }
 }
