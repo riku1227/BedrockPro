@@ -15,6 +15,7 @@ import jp.riku1227.mcbetool.R
 import jp.riku1227.mcbetool.dialog.DialogListener
 import jp.riku1227.mcbetool.dialog.PermissionDialog
 import jp.riku1227.mcbetool.dialog.SimpleDialog
+import jp.riku1227.mcbetool.makeSnackBar
 import jp.riku1227.mcbetool.makeToast
 import jp.riku1227.mcbetool.util.MCBEUtil
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
@@ -58,22 +59,26 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 intent.data = Uri.fromParts("package", context.packageName, null)
                 startActivity(intent)
             } else {
-                resourcePackName = resource_pack_gen_name.text.toString()
-                resourcePackDescription = resource_pack_gen_description.text.toString()
-                if(resourcePackAutoGenUUID) {
-                    resourcePackHeaderUUID = UUID.randomUUID().toString()
-                    resourcePackModuleUUID = UUID.randomUUID().toString()
+                if(resource_pack_gen_name.text.toString() == "") {
+                    makeSnackBar(view!!,resources.getString(R.string.resource_pack_gen_not_input_name))
                 } else {
-                    resourcePackHeaderUUID = resource_pack_gen_header_uuid.text.toString()
-                    resourcePackModuleUUID = resource_pack_gen_module_uuid.text.toString()
+                    resourcePackName = resource_pack_gen_name.text.toString()
+                    resourcePackDescription = resource_pack_gen_description.text.toString()
+                    if(resourcePackAutoGenUUID) {
+                        resourcePackHeaderUUID = UUID.randomUUID().toString()
+                        resourcePackModuleUUID = UUID.randomUUID().toString()
+                    } else {
+                        resourcePackHeaderUUID = resource_pack_gen_header_uuid.text.toString()
+                        resourcePackModuleUUID = resource_pack_gen_module_uuid.text.toString()
+                    }
+                    val resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
+                            resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
+                            resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
+                            resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
+                    val dialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
+                    dialog.setDialogListener(this)
+                    dialog.show(fragmentManager,"SimpleDialog")
                 }
-                val resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
-                        resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
-                        resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
-                        resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
-                val dialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
-                dialog.setDialogListener(this)
-                dialog.show(fragmentManager,"SimpleDialog")
             }
         }
 
