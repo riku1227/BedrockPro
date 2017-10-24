@@ -2,11 +2,9 @@ package jp.riku1227.mcbetool.fragment
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.provider.Settings
 import android.support.v4.content.PermissionChecker
 import android.text.SpannableStringBuilder
@@ -136,8 +134,9 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         progress.show(fragmentManager,"ProgressDialog")
         thread {
             makeThreadToast(handler,context,"Start APK unzip...")
-            FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder)
+            FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
             makeThreadToast(handler,context,"End APK unzip...")
+            Thread.sleep(250)
             progress.dismiss()
         }
     }
