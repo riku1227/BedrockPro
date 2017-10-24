@@ -137,6 +137,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
             makeThreadToast(handler,context,"End APK unzip...")
             Thread.sleep(250)
+            makeThreadToast(handler,context,"Start move cache resource file")
+            File(FileUtil.getExternalStoragePath()+resourceFolder+"assets/resource_packs/vanilla/").copyRecursively(File(FileUtil.getExternalStoragePath()+resourceFolder))
+            FileUtil.deleteFile(FileUtil.getExternalStoragePath()+resourceFolder+"assets/")
+            makeThreadToast(handler,context,"End move cache resource file")
             progress.dismiss()
         }
     }
