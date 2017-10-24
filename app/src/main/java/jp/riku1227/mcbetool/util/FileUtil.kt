@@ -54,6 +54,28 @@ class FileUtil {
             }
         }
 
+        fun deleteFile(path : String) {
+            val file = File(path)
+            if(file.isDirectory) {
+                for (subFile in file.listFiles()) {
+                    deleteFile(subFile.absolutePath)
+                }
+            }
+            file.delete()
+        }
+
+        fun deleteFile(path : String, filter : String) {
+            val file = File(path)
+            if(!file.absolutePath.contains(filter)) {
+                if(file.isDirectory) {
+                    for (subFile in file.listFiles()) {
+                        deleteFile(subFile.absolutePath,filter)
+                    }
+                }
+                file.delete()
+            }
+        }
+
         fun unzip(inputPath : String, outputPath : String) {
             val zipInputStream = ZipInputStream(FileInputStream(inputPath))
 
