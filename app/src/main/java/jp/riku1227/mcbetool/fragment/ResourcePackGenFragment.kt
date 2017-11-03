@@ -36,7 +36,9 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     private var resourcePackCache = true
     private var resourcePackAutoGenUUID = true
     private var resourcePackCustomIcon = false
-    
+
+    private val deleteFileList = arrayOf("credits", "font", "materials", "texts", "blocks.json", "bug_pack_icon.png", "items_client.json", "items_offsets_client.json", "loading_messages.json", "manifest_publish.json", "splashes.json")
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater?.inflate(R.layout.fragment_resource_pack_gen,container,false)
@@ -141,6 +143,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             FileUtil.deleteFile(FileUtil.getExternalStoragePath()+resourceFolder+"assets/")
             makeThreadToast(handler,context,"Copy resource file to " + outDirectory)
             File(FileUtil.getExternalStoragePath()+resourceFolder).copyRecursively(File(outDirectory))
+            makeThreadToast(handler,context,"Delete unnecessary file")
+            for (i in 0 until deleteFileList.size) {
+                FileUtil.deleteFile(outDirectory+deleteFileList[i])
+            }
             progress.dismiss()
         }
     }
