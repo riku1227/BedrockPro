@@ -28,14 +28,14 @@ import kotlin.concurrent.thread
 
 class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListener {
 
-    var resourcePackName = ""
-    var resourcePackDescription = ""
-    var resourcePackHeaderUUID = ""
-    var resourcePackModuleUUID = ""
+    private var resourcePackName = ""
+    private var resourcePackDescription = ""
+    private var resourcePackHeaderUUID = ""
+    private var resourcePackModuleUUID = ""
 
-    var resourcePackCache = true
-    var resourcePackAutoGenUUID = true
-    var resourcePackCustomIcon = false
+    private var resourcePackCache = true
+    private var resourcePackAutoGenUUID = true
+    private var resourcePackCustomIcon = false
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
