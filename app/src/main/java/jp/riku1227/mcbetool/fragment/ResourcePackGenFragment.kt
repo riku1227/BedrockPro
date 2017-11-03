@@ -36,7 +36,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     private var resourcePackCache = true
     private var resourcePackAutoGenUUID = true
     private var resourcePackCustomIcon = false
-
+    
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater?.inflate(R.layout.fragment_resource_pack_gen,container,false)
@@ -134,18 +134,13 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val outDirectory = FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/"
         progress.show(fragmentManager,"ProgressDialog")
         thread {
-            makeThreadToast(handler,context,"Start APK unzip...")
+            makeThreadToast(handler,context,"APK unzip...")
             FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
-            makeThreadToast(handler,context,"End APK unzip...")
-            Thread.sleep(250)
-            makeThreadToast(handler,context,"Start move cache resource file")
+            makeThreadToast(handler,context,"Move cache resource file")
             File(FileUtil.getExternalStoragePath()+resourceFolder+"assets/resource_packs/vanilla/").copyRecursively(File(FileUtil.getExternalStoragePath()+resourceFolder))
             FileUtil.deleteFile(FileUtil.getExternalStoragePath()+resourceFolder+"assets/")
-            makeThreadToast(handler,context,"End move cache resource file")
-            Thread.sleep(250)
-            makeThreadToast(handler,context,"Start copy resource file to " + outDirectory)
+            makeThreadToast(handler,context,"Copy resource file to " + outDirectory)
             File(FileUtil.getExternalStoragePath()+resourceFolder).copyRecursively(File(outDirectory))
-            makeThreadToast(handler,context,"End copy resource file")
             progress.dismiss()
         }
     }
