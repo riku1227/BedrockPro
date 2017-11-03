@@ -131,6 +131,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val resourceFolder = cacheFolder+"resource/"
         FileUtil.createFile(cacheFolder+".nomedia")
         val progress = ProgressDialog()
+        val outDirectory = FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/"
         progress.show(fragmentManager,"ProgressDialog")
         thread {
             makeThreadToast(handler,context,"Start APK unzip...")
@@ -141,6 +142,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             File(FileUtil.getExternalStoragePath()+resourceFolder+"assets/resource_packs/vanilla/").copyRecursively(File(FileUtil.getExternalStoragePath()+resourceFolder))
             FileUtil.deleteFile(FileUtil.getExternalStoragePath()+resourceFolder+"assets/")
             makeThreadToast(handler,context,"End move cache resource file")
+            Thread.sleep(250)
+            makeThreadToast(handler,context,"Start copy resource file to " + outDirectory)
+            File(FileUtil.getExternalStoragePath()+resourceFolder).copyRecursively(File(outDirectory))
+            makeThreadToast(handler,context,"End copy resource file")
             progress.dismiss()
         }
     }
