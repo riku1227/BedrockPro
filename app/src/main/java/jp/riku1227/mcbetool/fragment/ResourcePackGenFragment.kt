@@ -147,6 +147,8 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             for (i in 0 until deleteFileList.size) {
                 FileUtil.deleteFile(outDirectory+deleteFileList[i])
             }
+            makeThreadToast(handler,context,"Edit manifest.json")
+            makeThreadToast(handler,context,MCBEUtil.editManifest(outDirectory+"manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID))
             progress.dismiss()
         }
     }
