@@ -117,6 +117,16 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 resourcePackCustomIcon = false
             }
         }
+
+        resource_pack_gen_delete_cache.setOnClickListener {
+            val file = File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/")
+            val progress = ProgressDialog()
+            progress.show(fragmentManager,"ProgressDialog")
+            thread {
+                file.deleteRecursively()
+                progress.dismiss()
+            }
+        }
     }
 
     override fun onPositiveClick() {
