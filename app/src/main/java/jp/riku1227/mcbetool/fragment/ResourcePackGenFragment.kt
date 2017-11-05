@@ -139,29 +139,27 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     private fun generateResourcePack() {
         val mcbeUtil = MCBEUtil(activity.packageManager)
         val handler = Handler()
-        val cacheFolder = "MCBETool/cache/"
+        val cacheFolder = FileUtil.getExternalStoragePath() + "MCBETool/cache/"
         val resourceFolder = cacheFolder+"resource/"
+        val assetsFolder = resourceFolder + "assets/resource_packs/vanilla/"
+        val outFolder = FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/"
         FileUtil.createFile(cacheFolder+".nomedia")
         val progress = ProgressDialog()
-        val outDirectory = FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/"
         progress.show(fragmentManager,"ProgressDialog")
         thread {
-            if(FileUtil.getFolderSize(FileUtil.getExternalStoragePath() + resourceFolder) <= 25000000) {
+            if(FileUtil.getFolderSize(assetsFolder) <= 25000000) {
                 File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
                 makeThreadToast(handler,context,"APK unzip...")
                 FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
-                makeThreadToast(handler,context,"Move cache resource file")
-                File(FileUtil.getExternalStoragePath()+resourceFolder+"assets/resource_packs/vanilla/").copyRecursively(File(FileUtil.getExternalStoragePath()+resourceFolder))
-                FileUtil.deleteFile(FileUtil.getExternalStoragePath()+resourceFolder+"assets/")
             }
-            makeThreadToast(handler,context,"Copy resource file to " + outDirectory)
-            File(FileUtil.getExternalStoragePath()+resourceFolder).copyRecursively(File(outDirectory))
+            makeThreadToast(handler,context,"Copy resource file to " + outFolder)
+            File(assetsFolder).copyRecursively(File(outFolder))
             makeThreadToast(handler,context,"Delete unnecessary file")
             for (i in 0 until deleteFileList.size) {
-                FileUtil.deleteFile(outDirectory+deleteFileList[i])
+                FileUtil.deleteFile(outFolder + deleteFileList[i])
             }
             makeThreadToast(handler,context,"Edit manifest.json")
-            MCBEUtil.editManifest(outDirectory+"manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
+            MCBEUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
             if(!resourcePackCache) {
                 makeThreadToast(handler,context,"Delete cache")
                 File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
