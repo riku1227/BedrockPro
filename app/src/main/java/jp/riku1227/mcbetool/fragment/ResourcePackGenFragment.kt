@@ -78,13 +78,18 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                             resourcePackHeaderUUID = resource_pack_gen_header_uuid.text.toString()
                             resourcePackModuleUUID = resource_pack_gen_module_uuid.text.toString()
                         }
-                        val resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
-                                resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
-                                resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
-                                resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
-                        val dialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
-                        dialog.setDialogListener(this)
-                        dialog.show(fragmentManager,"SimpleDialog")
+
+                        if(File(FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/").exists()) {
+                            makeSnackBar(view!!,resources.getString(R.string.resource_pack_is_exists))
+                        } else {
+                            val resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
+                                    resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
+                                    resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
+                                    resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
+                            val dialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
+                            dialog.setDialogListener(this)
+                            dialog.show(fragmentManager,"SimpleDialog")
+                        }
                     }
                 }
             }
