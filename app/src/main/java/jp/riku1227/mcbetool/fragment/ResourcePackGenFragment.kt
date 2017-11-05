@@ -162,6 +162,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             }
             makeThreadToast(handler,context,"Edit manifest.json")
             MCBEUtil.editManifest(outDirectory+"manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
+            if(!resourcePackCache) {
+                makeThreadToast(handler,context,"Delete cache")
+                File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
+            }
             progress.dismiss()
         }
     }
