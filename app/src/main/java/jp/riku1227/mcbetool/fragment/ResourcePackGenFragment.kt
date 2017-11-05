@@ -146,11 +146,14 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val outDirectory = FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/"
         progress.show(fragmentManager,"ProgressDialog")
         thread {
-            makeThreadToast(handler,context,"APK unzip...")
-            FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
-            makeThreadToast(handler,context,"Move cache resource file")
-            File(FileUtil.getExternalStoragePath()+resourceFolder+"assets/resource_packs/vanilla/").copyRecursively(File(FileUtil.getExternalStoragePath()+resourceFolder))
-            FileUtil.deleteFile(FileUtil.getExternalStoragePath()+resourceFolder+"assets/")
+            if(FileUtil.getFolderSize(FileUtil.getExternalStoragePath() + resourceFolder) <= 25000000) {
+                File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
+                makeThreadToast(handler,context,"APK unzip...")
+                FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
+                makeThreadToast(handler,context,"Move cache resource file")
+                File(FileUtil.getExternalStoragePath()+resourceFolder+"assets/resource_packs/vanilla/").copyRecursively(File(FileUtil.getExternalStoragePath()+resourceFolder))
+                FileUtil.deleteFile(FileUtil.getExternalStoragePath()+resourceFolder+"assets/")
+            }
             makeThreadToast(handler,context,"Copy resource file to " + outDirectory)
             File(FileUtil.getExternalStoragePath()+resourceFolder).copyRecursively(File(outDirectory))
             makeThreadToast(handler,context,"Delete unnecessary file")
