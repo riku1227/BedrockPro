@@ -23,7 +23,7 @@ class FileUtil {
 
         fun createDirectory(path : String) {
             val dirs : List<String> = path.split("/")
-            var filePath = getExternalStoragePath()
+            var filePath = ""
             for (subFilePath in dirs.iterator()) {
                 filePath += "/" + subFilePath
                 val file = File(filePath)
@@ -35,7 +35,7 @@ class FileUtil {
 
         fun createFile(path : String) {
             val dirs : List<String> = path.split("/")
-            var filePath = getExternalStoragePath()
+            var filePath = ""
             var i = 0
             for (subFilePath in dirs.iterator()) {
                 i++
@@ -88,7 +88,7 @@ class FileUtil {
 
                 createFile(outputPath+entry.name)
 
-                val bufferedOutputStream = BufferedOutputStream(FileOutputStream(getExternalStoragePath() + outputPath + entry.name))
+                val bufferedOutputStream = BufferedOutputStream(FileOutputStream(outputPath + entry.name))
                 var temp = 0
                 val byte = ByteArray(8192)
                 while ({temp = zipInputStream.read(byte); temp}() != -1) {
@@ -115,7 +115,7 @@ class FileUtil {
                 if(entry.name.contains(filter)) {
                     createFile(outputPath+entry.name)
 
-                    val bufferedOutputStream = BufferedOutputStream(FileOutputStream(getExternalStoragePath() + outputPath + entry.name))
+                    val bufferedOutputStream = BufferedOutputStream(FileOutputStream(outputPath + entry.name))
                     var temp = 0
                     val byte = ByteArray(8192)
                     while ({temp = zipInputStream.read(byte); temp}() != -1) {
