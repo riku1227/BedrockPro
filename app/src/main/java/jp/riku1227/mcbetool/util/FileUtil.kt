@@ -129,6 +129,26 @@ class FileUtil {
             zipInputStream.close()
         }
 
+        fun getFolderSize(path : String) : Int {
+            var fileSize = 0
+            val file = File(path)
+            if(!file.exists()) {
+                return fileSize
+            } else {
+                if(file.isDirectory) {
+                    val files = file.listFiles()
+                    if(files != null) {
+                        for (i in 0 until files.size) {
+                            fileSize += getFolderSize(files[i].absolutePath)
+                        }
+                    }
+                } else {
+                    fileSize = file.length().toInt()
+                }
+            }
+            return fileSize
+        }
+
         fun getExternalStoragePath() : String {
             return Environment.getExternalStorageDirectory().absolutePath+"/"
         }
