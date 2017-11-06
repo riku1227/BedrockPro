@@ -88,7 +88,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                                     resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
                             val dialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
                             dialog.setDialogListener(this)
-                            dialog.show(fragmentManager,"SimpleDialog")
+                            dialog.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
                         }
                     }
                 }
@@ -150,7 +150,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val outFolder = FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/"
         FileUtil.createFile(cacheFolder+".nomedia")
         val progress = ProgressDialog()
-        progress.show(fragmentManager,"ProgressDialog")
+        progress.show(fragmentManager,"generate_resource_pack_progress_dialog")
         thread {
             if(FileUtil.getFolderSize(assetsFolder) >= 25000000) {
                 File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
