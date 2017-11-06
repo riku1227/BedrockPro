@@ -129,6 +129,14 @@ class FileUtil {
             zipInputStream.close()
         }
 
+        fun createTxtFile(path : String,content : String) {
+            val txtFile = File(path)
+            if(!txtFile.exists()) {
+                txtFile.createNewFile()
+            }
+            txtFile.writeText(content)
+        }
+
         fun getFolderSize(path : String) : Int {
             var fileSize = 0
             val file = File(path)
