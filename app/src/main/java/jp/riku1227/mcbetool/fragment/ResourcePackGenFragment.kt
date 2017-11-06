@@ -39,6 +39,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     private val deleteFileList = arrayOf("credits", "font", "materials", "texts", "blocks.json", "bug_pack_icon.png", "items_client.json", "items_offsets_client.json", "loading_messages.json", "manifest_publish.json", "splashes.json")
 
+
+    private var resoluteDialogMessage = ""
+    private var resourcePackGenResoluteCheckDialog : SimpleDialog? = null
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater?.inflate(R.layout.fragment_resource_pack_gen,container,false)
@@ -82,13 +86,26 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                         if(File(FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/").exists()) {
                             makeSnackBar(view!!,resources.getString(R.string.resource_pack_is_exists))
                         } else {
-                            val resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
+                            resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
                                     resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
                                     resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
                                     resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
-                            val dialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
-                            dialog.setDialogListener(this)
-                            dialog.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
+                            resourcePackGenResoluteCheckDialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
+                            resourcePackGenResoluteCheckDialog!!.setDialogListener(this)
+                            val versionTxtFile = File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/version.txt")
+                            if (versionTxtFile.exists()) {
+                                if(versionTxtFile.readText() != MCBEUtil(activity.packageManager).getVersion()) {
+                                    val versionErrorDialog = SimpleDialog.newInstance("バージョンエラー",
+                                            "キャッシュのバージョンとMinecraft PEのバージョンが一致していません\nキャッシュを削除しますか？",
+                                            "はい","このまま生成する")
+                                    versionErrorDialog.setDialogListener(this)
+                                    versionErrorDialog.show(fragmentManager,"resource_pack_gen_cache_version_error")
+                                } else {
+                                    resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
+                                }
+                            } else {
+                                resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
+                            }
                         }
                     }
                 }
@@ -124,21 +141,34 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         }
 
         resource_pack_gen_delete_cache.setOnClickListener {
-            val file = File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/")
-            val progress = ProgressDialog()
-            progress.show(fragmentManager,"ProgressDialog")
-            thread {
-                file.deleteRecursively()
-                progress.dismiss()
-            }
+            deleteCache()
         }
     }
 
     override fun onPositiveClick(tag : String) {
-        generateResourcePack()
+        when (tag) {
+            "resource_pack_gen_resolute_check_dialog" -> generateResourcePack()
+            "resource_pack_gen_cache_version_error" -> deleteCache(true)
+        }
     }
 
     override fun onNegativeClick(tag : String) {
+        when (tag) {
+            "resource_pack_gen_cache_version_error" -> resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
+        }
+    }
+
+    private fun deleteCache(dialogShow : Boolean = false) {
+        val file = File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/")
+        val progress = ProgressDialog()
+        progress.show(fragmentManager,"ProgressDialog")
+        thread {
+            file.deleteRecursively()
+            progress.dismiss()
+            if(dialogShow) {
+                resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
+            }
+        }
     }
 
     private fun generateResourcePack() {
@@ -152,10 +182,11 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val progress = ProgressDialog()
         progress.show(fragmentManager,"generate_resource_pack_progress_dialog")
         thread {
-            if(FileUtil.getFolderSize(assetsFolder) >= 25000000) {
+            if(FileUtil.getFolderSize(assetsFolder) <= 25000000) {
                 File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
                 makeThreadToast(handler,context,"APK unzip...")
                 FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
+                FileUtil.createTxtFile(resourceFolder+"version.txt",mcbeUtil.getVersion()!!)
             }
             makeThreadToast(handler,context,"Copy resource file to " + outFolder)
             File(assetsFolder).copyRecursively(File(outFolder))
