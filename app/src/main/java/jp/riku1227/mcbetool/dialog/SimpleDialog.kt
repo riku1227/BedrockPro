@@ -11,11 +11,13 @@ class SimpleDialog : DialogFragment() {
     var listener : DialogListener? = null
 
     companion object {
-        fun newInstance(title : String,message : String) : SimpleDialog {
+        fun newInstance(title : String,message : String, positiveButtonName : String = "OK", negativeButtonName : String = "Cancel") : SimpleDialog {
             val simple = SimpleDialog()
             val bundle = Bundle()
             bundle.putString("title",title)
             bundle.putString("message", message)
+            bundle.putString("positiveButtonName", positiveButtonName)
+            bundle.putString("negativeButtonName", negativeButtonName)
             simple.arguments = bundle
             return simple
         }
@@ -25,11 +27,11 @@ class SimpleDialog : DialogFragment() {
         return AlertDialog.Builder(activity)
                 .setTitle(arguments.getString("title"))
                 .setMessage(arguments.getString("message"))
-                .setPositiveButton("OK",DialogInterface.OnClickListener { dialogInterface, i ->
+                .setPositiveButton(arguments.getString("positiveButtonName"),DialogInterface.OnClickListener { dialogInterface, i ->
                     listener?.onPositiveClick(tag)
                     dismiss()
                 })
-                .setNegativeButton("Cancel",DialogInterface.OnClickListener {dialogInterface, i ->
+                .setNegativeButton(arguments.getString("negativeButtonName"),DialogInterface.OnClickListener {dialogInterface, i ->
                     listener?.onNegativeClick(tag)
                     dismiss()
                 })
