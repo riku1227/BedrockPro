@@ -134,11 +134,11 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         }
     }
 
-    override fun onPositiveClick() {
+    override fun onPositiveClick(tag : String) {
         generateResourcePack()
     }
 
-    override fun onNegativeClick() {
+    override fun onNegativeClick(tag : String) {
     }
 
     private fun generateResourcePack() {
@@ -152,7 +152,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val progress = ProgressDialog()
         progress.show(fragmentManager,"ProgressDialog")
         thread {
-            if(FileUtil.getFolderSize(assetsFolder) <= 25000000) {
+            if(FileUtil.getFolderSize(assetsFolder) >= 25000000) {
                 File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
                 makeThreadToast(handler,context,"APK unzip...")
                 FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")

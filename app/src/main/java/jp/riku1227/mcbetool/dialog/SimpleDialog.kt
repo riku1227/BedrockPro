@@ -26,11 +26,11 @@ class SimpleDialog : DialogFragment() {
                 .setTitle(arguments.getString("title"))
                 .setMessage(arguments.getString("message"))
                 .setPositiveButton("OK",DialogInterface.OnClickListener { dialogInterface, i ->
-                    listener?.onPositiveClick()
+                    listener?.onPositiveClick(tag)
                     dismiss()
                 })
                 .setNegativeButton("Cancel",DialogInterface.OnClickListener {dialogInterface, i ->
-                    listener?.onNegativeClick()
+                    listener?.onNegativeClick(tag)
                     dismiss()
                 })
                 .create()

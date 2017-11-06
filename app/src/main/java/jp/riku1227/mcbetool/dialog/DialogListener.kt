@@ -4,7 +4,7 @@ import java.util.*
 
 interface DialogListener : EventListener {
 
-    fun onPositiveClick()
+    fun onPositiveClick(tag : String)
 
-    fun onNegativeClick()
+    fun onNegativeClick(tag : String)
 }
