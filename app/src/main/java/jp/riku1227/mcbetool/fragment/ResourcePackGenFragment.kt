@@ -3,6 +3,7 @@ package jp.riku1227.mcbetool.fragment
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -25,6 +26,7 @@ import jp.riku1227.mcbetool.util.MCBEUtil
 import jp.riku1227.mcbetool.util.UriUtil
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
 import java.io.File
+import java.io.FileOutputStream
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -38,6 +40,8 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     private var resourcePackCache = true
     private var resourcePackAutoGenUUID = true
     private var resourcePackCustomIcon = false
+
+    private var resourcePackCustomIconBitmap : Bitmap? = null
 
     private val deleteFileList = arrayOf("credits", "font", "materials", "texts", "blocks.json", "bug_pack_icon.png", "items_client.json", "items_offsets_client.json", "loading_messages.json", "manifest_publish.json", "splashes.json")
 
@@ -164,8 +168,8 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             val uri : Uri
             if (data != null) {
                 uri = data.data
-                makeToast(context,uri.toString())
-                resource_pack_gen_custom_pack_icon_iv.setImageBitmap(UriUtil.getBitmapFromUri(activity,uri))
+                resourcePackCustomIconBitmap = UriUtil.getBitmapFromUri(activity,uri)
+                resource_pack_gen_custom_pack_icon_iv.setImageBitmap(resourcePackCustomIconBitmap)
             }
         }
     }
@@ -221,6 +225,11 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             }
             makeThreadToast(handler,context,"Edit manifest.json")
             MCBEUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
+            if(resourcePackCustomIcon) {
+                File(outFolder+"pack_icon.png").delete()
+                val fileOutputStream = FileOutputStream(File(outFolder+"pack_icon.png"))
+                resourcePackCustomIconBitmap?.compress(Bitmap.CompressFormat.PNG,100,fileOutputStream)
+            }
             if(!resourcePackCache) {
                 makeThreadToast(handler,context,"Delete cache")
                 File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
