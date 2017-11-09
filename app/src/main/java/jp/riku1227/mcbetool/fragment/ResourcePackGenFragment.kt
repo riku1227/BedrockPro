@@ -1,6 +1,7 @@
 package jp.riku1227.mcbetool.fragment
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -21,6 +22,7 @@ import jp.riku1227.mcbetool.makeThreadToast
 import jp.riku1227.mcbetool.makeToast
 import jp.riku1227.mcbetool.util.FileUtil
 import jp.riku1227.mcbetool.util.MCBEUtil
+import jp.riku1227.mcbetool.util.UriUtil
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
 import java.io.File
 import java.util.*
@@ -42,6 +44,8 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     private var resoluteDialogMessage = ""
     private var resourcePackGenResoluteCheckDialog : SimpleDialog? = null
+
+    private var RESULT_PICK_IMAGEFILE = 0
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -133,15 +137,36 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         resource_pack_gen_custom_pack_icon.setOnClickListener {
             if(resource_pack_gen_custom_pack_icon.isChecked) {
                 resource_pack_gen_pick_custom_icon.visibility = View.VISIBLE
+                resource_pack_gen_custom_pack_icon_card.visibility = View.VISIBLE
                 resourcePackCustomIcon = true
             } else {
                 resource_pack_gen_pick_custom_icon.visibility = View.GONE
+                resource_pack_gen_custom_pack_icon_card.visibility = View.GONE
                 resourcePackCustomIcon = false
             }
         }
 
+        resource_pack_gen_pick_custom_icon.setOnClickListener {
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.type = "image/*"
+            startActivityForResult(intent,RESULT_PICK_IMAGEFILE)
+        }
+
         resource_pack_gen_delete_cache.setOnClickListener {
             deleteCache()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RESULT_PICK_IMAGEFILE && resultCode == Activity.RESULT_OK) {
+            val uri : Uri
+            if (data != null) {
+                uri = data.data
+                makeToast(context,uri.toString())
+                resource_pack_gen_custom_pack_icon_iv.setImageBitmap(UriUtil.getBitmapFromUri(activity,uri))
+            }
         }
     }
 

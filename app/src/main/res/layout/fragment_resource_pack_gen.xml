@@ -182,8 +182,10 @@
                 </TextView>
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:id="@+id/resource_pack_gen_custom_pack_icon_iv"
+                    android:layout_width="512px"
+                    android:layout_height="512px"
+                    android:layout_gravity="center"/>
 
             </LinearLayout>
 
