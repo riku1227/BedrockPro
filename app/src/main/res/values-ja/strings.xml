@@ -39,4 +39,8 @@
 
     <string name="dialog_grant_permission">許可してください</string>
     <string name="dialog_grant_external_storage_message">ストレージのアクセス許可が必要です</string>
+    <string name="dialog_version_error_title">バージョンエラー</string>
+    <string name="dialog_version_error_message">キャッシュのバージョンとMinecraft PEのバージョンが一致していません\nキャッシュを削除しますか？</string>
+    <string name="dialog_version_error_positive">はい</string>
+    <string name="dialog_version_error_negative">このまま生成する</string>
 </resources>

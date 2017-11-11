@@ -39,4 +39,9 @@
 
     <string name="dialog_grant_permission">Please grant permission</string>
     <string name="dialog_grant_external_storage_message">External storage permission is necessary</string>
+
+    <string name="dialog_version_error_title">Version Error</string>
+    <string name="dialog_version_error_message">Cache version and Minecraft PE version do not match\nDo you delete the cache?</string>
+    <string name="dialog_version_error_positive">Yes</string>
+    <string name="dialog_version_error_negative">Generate as it is</string>
 </resources>

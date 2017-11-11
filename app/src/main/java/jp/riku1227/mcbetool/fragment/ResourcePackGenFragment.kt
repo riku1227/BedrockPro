@@ -103,9 +103,9 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                             val versionTxtFile = File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/version.txt")
                             if (versionTxtFile.exists()) {
                                 if(versionTxtFile.readText() != MCBEUtil(activity.packageManager).getVersion()) {
-                                    val versionErrorDialog = SimpleDialog.newInstance("バージョンエラー",
-                                            "キャッシュのバージョンとMinecraft PEのバージョンが一致していません\nキャッシュを削除しますか？",
-                                            "はい","このまま生成する")
+                                    val versionErrorDialog = SimpleDialog.newInstance(resources.getString(R.string.dialog_version_error_title),
+                                            resources.getString(R.string.dialog_version_error_message),
+                                            resources.getString(R.string.dialog_version_error_positive),resources.getString(R.string.dialog_version_error_negative))
                                     versionErrorDialog.setDialogListener(this)
                                     versionErrorDialog.show(fragmentManager,"resource_pack_gen_cache_version_error")
                                 } else {
