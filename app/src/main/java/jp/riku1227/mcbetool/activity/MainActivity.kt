@@ -46,13 +46,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         when (id) {
             R.id.drawer_home -> replaceFragment(fragmentTransaction,HomeFragment())
-            R.id.drawer_resource_pack_gen -> replaceFragment(fragmentTransaction,ResourcePackGenFragment())
+            R.id.drawer_resource_pack_gen -> replaceFragment(fragmentTransaction,ResourcePackGenFragment(),"ResourcePackGen")
         }
         drawerLayout.closeDrawers()
         return true
     }
 
-    fun replaceFragment(fragmentTransaction : FragmentTransaction, fragment : Fragment) {
+    fun replaceFragment(fragmentTransaction : FragmentTransaction, fragment : Fragment, actionBarTitle : String = "MCBETools") {
+        title = actionBarTitle
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
         fragmentTransaction.replace(R.id.flameLayout,fragment)
         fragmentTransaction.addToBackStack(null)
