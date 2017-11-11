@@ -225,7 +225,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             }
             makeThreadToast(handler,context,"Edit manifest.json")
             MCBEUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
-            if(resourcePackCustomIcon) {
+            if(resourcePackCustomIcon && resourcePackCustomIconBitmap != null) {
                 File(outFolder+"pack_icon.png").delete()
                 val fileOutputStream = FileOutputStream(File(outFolder+"pack_icon.png"))
                 resourcePackCustomIconBitmap?.compress(Bitmap.CompressFormat.PNG,100,fileOutputStream)
