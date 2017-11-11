@@ -158,7 +158,11 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         }
 
         resource_pack_gen_delete_cache.setOnClickListener {
-            deleteCache()
+            if(File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").exists()) {
+                val deleteCacheDialog = SimpleDialog.newInstance("キャッシュを削除","キャッシュを削除しますか？")
+                deleteCacheDialog.setDialogListener(this)
+                deleteCacheDialog.show(fragmentManager,"delete_cache_dialog")
+            }
         }
     }
 
@@ -178,6 +182,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         when (tag) {
             "resource_pack_gen_resolute_check_dialog" -> generateResourcePack()
             "resource_pack_gen_cache_version_error" -> deleteCache(true)
+            "delete_cache_dialog" -> deleteCache()
         }
     }
 
