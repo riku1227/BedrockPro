@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
-    fun replaceFragment(fragmentTransaction : FragmentTransaction, fragment : Fragment, actionBarTitle : String = "MCBETools") {
+    private fun replaceFragment(fragmentTransaction : FragmentTransaction, fragment : Fragment, actionBarTitle : String = "MCBETools") {
         title = actionBarTitle
         fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
         fragmentTransaction.replace(R.id.flameLayout,fragment)
