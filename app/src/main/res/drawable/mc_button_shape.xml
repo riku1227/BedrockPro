@@ -4,7 +4,6 @@
     <item>
         <shape>
             <solid android:color="@color/mc_button_color" />
-            <stroke android:width="2.5dp" android:color="#26272a"/>
             <padding android:bottom="8dp" android:left="8dp"
                 android:right="8dp" android:top="8dp" />
         </shape>
