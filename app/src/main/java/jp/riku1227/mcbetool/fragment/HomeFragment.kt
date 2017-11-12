@@ -24,6 +24,7 @@ class HomeFragment : android.support.v4.app.Fragment() {
 
     override fun onStart() {
         super.onStart()
+        activity.title = "MCBETools"
 
         pm = activity.packageManager
         packageInfo = pm?.getPackageInfo(activity.applicationContext.packageName,0)

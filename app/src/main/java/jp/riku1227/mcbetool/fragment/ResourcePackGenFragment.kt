@@ -58,6 +58,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     override fun onStart() {
         super.onStart()
+        activity.title = "ResourcePackGen"
 
         resourcePackCache = resource_pack_gen_resource_cache.isChecked
         resourcePackAutoGenUUID = resource_pack_gen_auto_gen_uuid.isChecked
