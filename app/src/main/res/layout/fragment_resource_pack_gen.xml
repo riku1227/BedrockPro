@@ -2,7 +2,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/color_white_background">
 
     <LinearLayout
@@ -11,9 +10,7 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardUseCompatPadding="true">
+            style="@style/BaseCardView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,9 +73,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardUseCompatPadding="true">
+            style="@style/BaseCardView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -115,9 +110,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardUseCompatPadding="true">
+            style="@style/BaseCardView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -158,10 +151,8 @@
 
         <android.support.v7.widget.CardView
             android:id="@+id/resource_pack_gen_custom_pack_icon_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardUseCompatPadding="true"
-            android:visibility="gone">
+            android:visibility="gone"
+            style="@style/BaseCardView">
 
             <LinearLayout
                 android:layout_width="match_parent"
