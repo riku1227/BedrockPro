@@ -11,4 +11,12 @@
                 android:title="@string/drawer_resource_pack_gen" />
         </menu>
     </item>
+
+    <item android:title="@string/drawer_title_other">
+        <menu>
+            <item
+                android:id="@+id/drawer_util_backup_apk"
+                android:title="@string/drawer_util_backup_apk" />
+        </menu>
+    </item>
 </menu>

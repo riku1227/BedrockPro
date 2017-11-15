@@ -17,6 +17,8 @@
     <string name="drawer_home">ホーム</string>
     <string name="drawer_title_resource_pack">リソースパック</string>
     <string name="drawer_resource_pack_gen">ResourcePackGen</string>
+    <string name="drawer_title_other">その他</string>
+    <string name="drawer_util_backup_apk">APKをバックアップする</string>
 
     <string name="resource_pack_gen_name">名前</string>
     <string name="resource_pack_gen_description">説明</string>
