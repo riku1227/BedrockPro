@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (id) {
             R.id.drawer_home -> replaceFragment(fragmentTransaction,HomeFragment())
             R.id.drawer_resource_pack_gen -> replaceFragment(fragmentTransaction,ResourcePackGenFragment())
+            R.id.drawer_util_backup_apk -> makeToast(baseContext,"TEST")
         }
         drawerLayout.closeDrawers()
         return true
