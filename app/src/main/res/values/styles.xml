@@ -8,6 +8,7 @@
         <item name="text_color">#000000</item>
         <item name="card_background_color">#FFFFFF</item>
         <item name="card_text_color">#000000</item>
+        <item name="button_base_color">@color/colorAccent</item>
         <item name="button_text_color">#FFFFFF</item>
     </style>
 
@@ -17,6 +18,7 @@
         <item name="text_color">#FFFFFF</item>
         <item name="card_background_color">#424242</item>
         <item name="card_text_color">#FFFFFF</item>
+        <item name="button_base_color">@color/colorAccent</item>
         <item name="button_text_color">#FFFFFF</item>
     </style>
 

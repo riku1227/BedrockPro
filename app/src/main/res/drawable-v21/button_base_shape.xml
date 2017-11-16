@@ -4,7 +4,7 @@
     android:color="@color/colorWhite.focused">
     <item>
         <shape>
-            <solid android:color="@color/mc_button_color" />
+            <solid android:color="?attr/button_base_color" />
             <padding android:bottom="8dp" android:left="8dp"
                 android:right="8dp" android:top="8dp" />
         </shape>
