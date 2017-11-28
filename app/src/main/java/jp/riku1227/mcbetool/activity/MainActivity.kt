@@ -1,5 +1,6 @@
 package jp.riku1227.mcbetool.activity
 
+import android.Manifest
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -8,9 +9,11 @@ import android.support.annotation.RequiresApi
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
+import android.support.v4.content.PermissionChecker
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import jp.riku1227.mcbetool.*
+import jp.riku1227.mcbetool.dialog.PermissionDialog
 import jp.riku1227.mcbetool.fragment.HomeFragment
 import jp.riku1227.mcbetool.fragment.ResourcePackGenFragment
 import jp.riku1227.mcbetool.util.FileUtil
@@ -67,14 +70,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun backupAPK() {
         val mcutil = MCBEUtil(packageManager)
-        val handler = Handler()
-        val outFolder = FileUtil.getExternalStoragePath() + "MCBETool/apk/"
-        val outFile = outFolder + "["+mcutil.getVersion()+"]"+"Minecraft.apk"
-        File(outFolder).mkdirs()
-        makeToast(baseContext,"Start")
-        thread {
-            FileUtil.copyFile(mcutil.getinstallLocation()!!,outFile)
-            makeThreadToast(handler,baseContext,"End")
+        if(PermissionChecker.checkSelfPermission(baseContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
+            PermissionDialog().show(supportFragmentManager,"PermissionDialog")
+        } else {
+            if(mcutil.isInstalled()) {
+                val handler = Handler()
+                val outFolder = FileUtil.getExternalStoragePath() + "MCBETool/apk/"
+                val outFile = outFolder + "["+mcutil.getVersion()+"]"+"Minecraft.apk"
+                File(outFolder).mkdirs()
+                makeToast(baseContext,"Start")
+                thread {
+                    FileUtil.copyFile(mcutil.getinstallLocation()!!,outFile)
+                    makeThreadToast(handler,baseContext,"End")
+                }
+            } else {
+                makeSnackBar(findViewById(R.id.flameLayout),resources.getString(R.string.mcpe_is_not_installed))
+            }
         }
     }
 }
