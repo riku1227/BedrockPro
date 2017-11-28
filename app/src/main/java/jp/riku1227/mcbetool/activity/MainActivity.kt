@@ -82,6 +82,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 thread {
                     FileUtil.copyFile(mcutil.getinstallLocation()!!,outFile)
                     makeThreadToast(handler,baseContext,resources.getString(R.string.backup_apk_end))
+                    Thread.sleep(3000)
+                    makeThreadToast(handler,baseContext,resources.getString(R.string.backup_apk_to).format(outFile))
                 }
             } else {
                 makeSnackBar(findViewById(R.id.flameLayout),resources.getString(R.string.mcpe_is_not_installed))
