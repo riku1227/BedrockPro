@@ -78,10 +78,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val outFolder = FileUtil.getExternalStoragePath() + "MCBETool/apk/"
                 val outFile = outFolder + "["+mcutil.getVersion()+"]"+"Minecraft.apk"
                 File(outFolder).mkdirs()
-                makeToast(baseContext,"Start")
+                makeToast(baseContext,resources.getString(R.string.backup_apk_start))
                 thread {
                     FileUtil.copyFile(mcutil.getinstallLocation()!!,outFile)
-                    makeThreadToast(handler,baseContext,"End")
+                    makeThreadToast(handler,baseContext,resources.getString(R.string.backup_apk_end))
                 }
             } else {
                 makeSnackBar(findViewById(R.id.flameLayout),resources.getString(R.string.mcpe_is_not_installed))

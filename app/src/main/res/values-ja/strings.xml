@@ -20,6 +20,10 @@
     <string name="drawer_title_other">その他</string>
     <string name="drawer_util_backup_apk">APKをバックアップする</string>
 
+    <string name="backup_apk_start">バックアップ開始</string>
+    <string name="backup_apk_end">バックアップ終了</string>
+    <string name="backup_apk_to">バックアップを %1$s に保存しました</string>
+
     <string name="resource_pack_gen_name">名前</string>
     <string name="resource_pack_gen_description">説明</string>
     <string name="resource_pack_gen_header_uuid">ヘッダー UUID</string>

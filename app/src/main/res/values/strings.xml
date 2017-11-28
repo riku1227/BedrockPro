@@ -20,6 +20,10 @@
     <string name="drawer_title_other">Other</string>
     <string name="drawer_util_backup_apk">Backup APK</string>
 
+    <string name="backup_apk_start">Backup start</string>
+    <string name="backup_apk_end">Backup end</string>
+    <string name="backup_apk_to">Backup save to %1$s</string>
+
     <string name="resource_pack_gen_name">Name</string>
     <string name="resource_pack_gen_description">Description</string>
     <string name="resource_pack_gen_header_uuid">Header UUID</string>
