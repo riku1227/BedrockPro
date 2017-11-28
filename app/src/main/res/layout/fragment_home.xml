@@ -64,9 +64,17 @@
                     style="@style/CardViewText"/>
 
                 <Button
+                    android:id="@+id/about_website_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_website"
+                    style="@style/ButtonBase"/>
+
+                <Button
                     android:id="@+id/about_github_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="@string/about_github"
                     style="@style/ButtonBase"/>
 
@@ -84,14 +92,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="@string/about_youtube"
-                    style="@style/ButtonBase"/>
-
-                <Button
-                    android:id="@+id/about_homepage_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="@string/about_homepage"
                     style="@style/ButtonBase"/>
             </LinearLayout>
 

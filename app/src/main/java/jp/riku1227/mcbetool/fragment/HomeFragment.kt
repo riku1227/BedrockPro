@@ -36,6 +36,6 @@ class HomeFragment : android.support.v4.app.Fragment() {
         about_github_button.setOnClickListener { webIntent(activity, "https://github.com/riku1227/MCBETool") }
         about_google_plus_button.setOnClickListener { webIntent(activity, "https://plus.google.com/103470090583882439463") }
         about_youtube_button.setOnClickListener { webIntent(activity, "https://www.youtube.com/channel/UCIhk2bb4Y8kPCnjCeiEVtmA") }
-        about_homepage_button.setOnClickListener { webIntent(activity, "https://riku1227.github.io") }
+        about_website_button.setOnClickListener { webIntent(activity, "https://riku1227.github.io") }
     }
 }
