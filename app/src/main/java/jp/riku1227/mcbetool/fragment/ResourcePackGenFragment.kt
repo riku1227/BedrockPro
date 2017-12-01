@@ -5,9 +5,11 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
+import android.support.annotation.RequiresApi
 import android.support.v4.content.PermissionChecker
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
@@ -55,6 +57,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         return inflater?.inflate(R.layout.fragment_resource_pack_gen,container,false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onStart() {
         super.onStart()
         activity.title = "ResourcePackGen"
