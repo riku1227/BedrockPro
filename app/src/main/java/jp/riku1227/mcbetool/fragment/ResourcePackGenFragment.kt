@@ -19,7 +19,6 @@ import jp.riku1227.mcbetool.dialog.PermissionDialog
 import jp.riku1227.mcbetool.dialog.ProgressDialog
 import jp.riku1227.mcbetool.dialog.SimpleDialog
 import jp.riku1227.mcbetool.makeSnackBar
-import jp.riku1227.mcbetool.makeThreadToast
 import jp.riku1227.mcbetool.makeToast
 import jp.riku1227.mcbetool.util.FileUtil
 import jp.riku1227.mcbetool.util.MCBEUtil
@@ -208,7 +207,6 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     private fun generateResourcePack() {
         val mcbeUtil = MCBEUtil(activity.packageManager)
-        val handler = Handler()
         val cacheFolder = FileUtil.getExternalStoragePath() + "MCBETool/cache/"
         val resourceFolder = cacheFolder+"resource/"
         val assetsFolder = resourceFolder + "assets/resource_packs/vanilla/"
@@ -219,17 +217,13 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         thread {
             if(FileUtil.getFolderSize(assetsFolder) <= 25000000) {
                 File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
-                makeThreadToast(handler,context,"APK unzip...")
                 FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
                 FileUtil.createTxtFile(resourceFolder+"version.txt",mcbeUtil.getVersion()!!)
             }
-            makeThreadToast(handler,context,"Copy resource file to " + outFolder)
             File(assetsFolder).copyRecursively(File(outFolder))
-            makeThreadToast(handler,context,"Delete unnecessary file")
             for (i in 0 until deleteFileList.size) {
                 FileUtil.deleteFile(outFolder + deleteFileList[i])
             }
-            makeThreadToast(handler,context,"Edit manifest.json")
             MCBEUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
             if(resourcePackCustomIcon && resourcePackCustomIconBitmap != null) {
                 File(outFolder+"pack_icon.png").delete()
@@ -237,7 +231,6 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 resourcePackCustomIconBitmap?.compress(Bitmap.CompressFormat.PNG,100,fileOutputStream)
             }
             if(!resourcePackCache) {
-                makeThreadToast(handler,context,"Delete cache")
                 File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
             }
             progress.dismiss()
