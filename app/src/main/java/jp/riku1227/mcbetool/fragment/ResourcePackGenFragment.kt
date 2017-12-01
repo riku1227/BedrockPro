@@ -197,6 +197,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val progress = ProgressDialog()
         progress.show(fragmentManager,"ProgressDialog")
         thread {
+            progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_delete_cache)
             file.deleteRecursively()
             progress.dismiss()
             if(dialogShow) {
