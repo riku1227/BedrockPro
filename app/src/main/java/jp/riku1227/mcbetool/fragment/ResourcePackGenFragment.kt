@@ -215,15 +215,20 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val progress = ProgressDialog()
         progress.show(fragmentManager,"generate_resource_pack_progress_dialog")
         thread {
+            progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_message_initial)
             if(FileUtil.getFolderSize(assetsFolder) <= 25000000) {
+                progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_message_unzip)
                 File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
                 FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
                 FileUtil.createTxtFile(resourceFolder+"version.txt",mcbeUtil.getVersion()!!)
             }
+            progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_copy_resource).format(outFolder)
             File(assetsFolder).copyRecursively(File(outFolder))
+            progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_delete_file)
             for (i in 0 until deleteFileList.size) {
                 FileUtil.deleteFile(outFolder + deleteFileList[i])
             }
+            progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_edit_manifest)
             MCBEUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
             if(resourcePackCustomIcon && resourcePackCustomIconBitmap != null) {
                 File(outFolder+"pack_icon.png").delete()
@@ -231,6 +236,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 resourcePackCustomIconBitmap?.compress(Bitmap.CompressFormat.PNG,100,fileOutputStream)
             }
             if(!resourcePackCache) {
+                progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_delete_cache)
                 File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
             }
             progress.dismiss()
