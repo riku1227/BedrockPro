@@ -6,6 +6,7 @@ import android.os.Handler
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.TextView
 import jp.riku1227.bedrockpro.R
 import kotlin.concurrent.thread
@@ -15,6 +16,7 @@ class ProgressDialog : DialogFragment() {
     var finished = false
     var message = ""
     var subMessage = ""
+    var subMessageVisible = false
 
     private var handler : Handler? = null
 
@@ -35,6 +37,11 @@ class ProgressDialog : DialogFragment() {
             while (!finished) {
                 handler?.post {
                     progressText.text = message
+                    if (subMessageVisible) {
+                        progressSubText.visibility = View.VISIBLE
+                    } else {
+                        progressSubText.visibility = View.GONE
+                    }
                     progressSubText.text = subMessage
                 }
                 Thread.sleep(10)
