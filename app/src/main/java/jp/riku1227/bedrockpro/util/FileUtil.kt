@@ -1,6 +1,7 @@
 package jp.riku1227.bedrockpro.util
 
 import android.os.Environment
+import jp.riku1227.bedrockpro.dialog.ProgressDialog
 import java.io.*
 import java.util.zip.ZipInputStream
 
@@ -76,7 +77,7 @@ class FileUtil {
             }
         }
 
-        fun unzip(inputPath : String, outputPath : String, filter : String) {
+        fun unzip(inputPath : String, outputPath : String, filter : String, progressDialog : ProgressDialog? = null) {
             val zipInputStream = ZipInputStream(FileInputStream(inputPath))
 
             var entry = zipInputStream.nextEntry
@@ -88,6 +89,7 @@ class FileUtil {
 
                 if(entry.name.contains(filter)) {
                     createFile(outputPath+entry.name)
+                    progressDialog?.subMessage = outputPath+entry.name
 
                     val bufferedOutputStream = BufferedOutputStream(FileOutputStream(outputPath + entry.name))
                     var temp = 0
