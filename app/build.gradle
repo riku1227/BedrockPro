@@ -8,7 +8,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "jp.riku1227.mcbetool"
+        applicationId "jp.riku1227.bedrockpro"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1

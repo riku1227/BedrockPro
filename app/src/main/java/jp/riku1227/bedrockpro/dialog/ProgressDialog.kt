@@ -1,4 +1,4 @@
-package jp.riku1227.mcbetool.dialog
+package jp.riku1227.bedrockpro.dialog
 
 import android.app.Dialog
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.widget.TextView
-import jp.riku1227.mcbetool.R
+import jp.riku1227.bedrockpro.R
 import kotlin.concurrent.thread
 
 class ProgressDialog : DialogFragment() {

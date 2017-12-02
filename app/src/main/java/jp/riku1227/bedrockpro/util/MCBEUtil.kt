@@ -1,4 +1,4 @@
-package jp.riku1227.mcbetool.util
+package jp.riku1227.bedrockpro.util
 
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo

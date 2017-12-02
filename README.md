@@ -1,4 +1,4 @@
-# MCBETool
+# BedrockPro
 ## これなに
 Minecraft BedrockEditionのリソースパックとかを簡単に生成できるようになる(予定)
 そんな感じのツールになればいいなぁ...

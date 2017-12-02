@@ -1,4 +1,4 @@
-package jp.riku1227.mcbetool.dialog
+package jp.riku1227.bedrockpro.dialog
 
 import android.Manifest
 import android.app.Dialog
@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
-import jp.riku1227.mcbetool.R
+import jp.riku1227.bedrockpro.R
 
 class PermissionDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

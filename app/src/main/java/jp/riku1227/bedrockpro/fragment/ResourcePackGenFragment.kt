@@ -1,4 +1,4 @@
-package jp.riku1227.mcbetool.fragment
+package jp.riku1227.bedrockpro.fragment
 
 import android.Manifest
 import android.app.Activity
@@ -14,16 +14,16 @@ import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import jp.riku1227.mcbetool.R
-import jp.riku1227.mcbetool.dialog.DialogListener
-import jp.riku1227.mcbetool.dialog.PermissionDialog
-import jp.riku1227.mcbetool.dialog.ProgressDialog
-import jp.riku1227.mcbetool.dialog.SimpleDialog
-import jp.riku1227.mcbetool.makeSnackBar
-import jp.riku1227.mcbetool.makeToast
-import jp.riku1227.mcbetool.util.FileUtil
-import jp.riku1227.mcbetool.util.MCBEUtil
-import jp.riku1227.mcbetool.util.UriUtil
+import jp.riku1227.bedrockpro.R
+import jp.riku1227.bedrockpro.dialog.DialogListener
+import jp.riku1227.bedrockpro.dialog.PermissionDialog
+import jp.riku1227.bedrockpro.dialog.ProgressDialog
+import jp.riku1227.bedrockpro.dialog.SimpleDialog
+import jp.riku1227.bedrockpro.makeSnackBar
+import jp.riku1227.bedrockpro.makeToast
+import jp.riku1227.bedrockpro.util.FileUtil
+import jp.riku1227.bedrockpro.util.MCBEUtil
+import jp.riku1227.bedrockpro.util.UriUtil
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
 import java.io.File
 import java.io.FileOutputStream
@@ -102,7 +102,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                                     resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
                             resourcePackGenResoluteCheckDialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
                             resourcePackGenResoluteCheckDialog!!.setDialogListener(this)
-                            val versionTxtFile = File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/version.txt")
+                            val versionTxtFile = File(FileUtil.getExternalStoragePath()+"BedrockPeo/cache/resource/version.txt")
                             if (versionTxtFile.exists()) {
                                 if(versionTxtFile.readText() != MCBEUtil(activity.packageManager).getVersion()) {
                                     val versionErrorDialog = SimpleDialog.newInstance(resources.getString(R.string.dialog_version_error_title),
@@ -160,7 +160,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         }
 
         resource_pack_gen_delete_cache.setOnClickListener {
-            if(File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").exists()) {
+            if(File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/").exists()) {
                 val deleteCacheDialog = SimpleDialog.newInstance("キャッシュを削除","キャッシュを削除しますか？")
                 deleteCacheDialog.setDialogListener(this)
                 deleteCacheDialog.show(fragmentManager,"delete_cache_dialog")
@@ -195,7 +195,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     }
 
     private fun deleteCache(dialogShow : Boolean = false) {
-        val file = File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/")
+        val file = File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/")
         val progress = ProgressDialog()
         progress.show(fragmentManager,"ProgressDialog")
         thread {
@@ -210,7 +210,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     private fun generateResourcePack() {
         val mcbeUtil = MCBEUtil(activity.packageManager)
-        val cacheFolder = FileUtil.getExternalStoragePath() + "MCBETool/cache/"
+        val cacheFolder = FileUtil.getExternalStoragePath() + "BedrockPro/cache/"
         val resourceFolder = cacheFolder+"resource/"
         val assetsFolder = resourceFolder + "assets/resource_packs/vanilla/"
         val outFolder = FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/"
@@ -221,7 +221,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_message_initial)
             if(FileUtil.getFolderSize(assetsFolder) <= 25000000) {
                 progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_message_unzip)
-                File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
+                File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/").deleteRecursively()
                 FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
                 FileUtil.createTxtFile(resourceFolder+"version.txt",mcbeUtil.getVersion()!!)
             }
@@ -240,7 +240,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             }
             if(!resourcePackCache) {
                 progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_delete_cache)
-                File(FileUtil.getExternalStoragePath()+"MCBETool/cache/resource/").deleteRecursively()
+                File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/").deleteRecursively()
             }
             progress.dismiss()
         }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MCBETool</string>
+    <string name="app_name">BedrockPro</string>
 
     <string name="permission_is_not_granted">External storage permission is not granted</string>
     <string name="mcpe_is_not_installed">Minecraft PE is not installed</string>

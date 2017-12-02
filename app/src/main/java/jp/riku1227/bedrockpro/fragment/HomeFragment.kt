@@ -1,4 +1,4 @@
-package jp.riku1227.mcbetool.fragment
+package jp.riku1227.bedrockpro.fragment
 
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import jp.riku1227.mcbetool.R
-import jp.riku1227.mcbetool.webIntent
+import jp.riku1227.bedrockpro.R
+import jp.riku1227.bedrockpro.webIntent
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : android.support.v4.app.Fragment() {
@@ -24,7 +24,7 @@ class HomeFragment : android.support.v4.app.Fragment() {
 
     override fun onStart() {
         super.onStart()
-        activity.title = "MCBETools"
+        activity.title = "BedrockPro"
 
         pm = activity.packageManager
         packageInfo = pm?.getPackageInfo(activity.applicationContext.packageName,0)
@@ -33,7 +33,7 @@ class HomeFragment : android.support.v4.app.Fragment() {
         app_version_text_view.text = res?.getString(R.string.app_version)?.format(packageInfo?.versionName)
         app_version_code_text_view.text = res?.getString(R.string.app_version_code)?.format(packageInfo?.versionCode)
 
-        about_github_button.setOnClickListener { webIntent(activity, "https://github.com/riku1227/MCBETool") }
+        about_github_button.setOnClickListener { webIntent(activity, "https://github.com/riku1227/BedrockPro") }
         about_google_plus_button.setOnClickListener { webIntent(activity, "https://plus.google.com/103470090583882439463") }
         about_youtube_button.setOnClickListener { webIntent(activity, "https://www.youtube.com/channel/UCIhk2bb4Y8kPCnjCeiEVtmA") }
         about_website_button.setOnClickListener { webIntent(activity, "https://riku1227.github.io") }

@@ -1,4 +1,4 @@
-package jp.riku1227.mcbetool.activity
+package jp.riku1227.bedrockpro.activity
 
 import android.Manifest
 import android.os.Build
@@ -12,12 +12,12 @@ import android.support.v4.app.FragmentTransaction
 import android.support.v4.content.PermissionChecker
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
-import jp.riku1227.mcbetool.*
-import jp.riku1227.mcbetool.dialog.PermissionDialog
-import jp.riku1227.mcbetool.fragment.HomeFragment
-import jp.riku1227.mcbetool.fragment.ResourcePackGenFragment
-import jp.riku1227.mcbetool.util.FileUtil
-import jp.riku1227.mcbetool.util.MCBEUtil
+import jp.riku1227.bedrockpro.*
+import jp.riku1227.bedrockpro.dialog.PermissionDialog
+import jp.riku1227.bedrockpro.fragment.HomeFragment
+import jp.riku1227.bedrockpro.fragment.ResourcePackGenFragment
+import jp.riku1227.bedrockpro.util.FileUtil
+import jp.riku1227.bedrockpro.util.MCBEUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import kotlin.concurrent.thread
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             if(mcutil.isInstalled()) {
                 val handler = Handler()
-                val outFolder = FileUtil.getExternalStoragePath() + "MCBETool/apk/"
+                val outFolder = FileUtil.getExternalStoragePath() + "BedrockPro/apk/"
                 val outFile = outFolder + "["+mcutil.getVersion()+"]"+"Minecraft.apk"
                 File(outFolder).mkdirs()
                 makeToast(baseContext,resources.getString(R.string.backup_apk_start))

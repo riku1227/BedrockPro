@@ -1,4 +1,4 @@
-package jp.riku1227.mcbetool.dialog
+package jp.riku1227.bedrockpro.dialog
 
 import android.app.Dialog
 import android.support.v4.app.DialogFragment
