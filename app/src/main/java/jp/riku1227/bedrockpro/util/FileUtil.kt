@@ -78,6 +78,7 @@ class FileUtil {
         }
 
         fun unzip(inputPath : String, outputPath : String, filter : String, progressDialog : ProgressDialog? = null) {
+            progressDialog?.subMessageVisible = true
             val zipInputStream = ZipInputStream(FileInputStream(inputPath))
 
             var entry = zipInputStream.nextEntry
@@ -103,6 +104,7 @@ class FileUtil {
                 entry = zipInputStream.nextEntry
             }
             zipInputStream.close()
+            progressDialog?.subMessageVisible = false
         }
 
         fun createTxtFile(path : String,content : String) {
