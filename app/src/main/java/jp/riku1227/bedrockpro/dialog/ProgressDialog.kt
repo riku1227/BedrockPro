@@ -14,6 +14,7 @@ class ProgressDialog : DialogFragment() {
 
     var finished = false
     var message = ""
+    var subMessage = ""
 
     private var handler : Handler? = null
 
@@ -29,12 +30,14 @@ class ProgressDialog : DialogFragment() {
     override fun onResume() {
         super.onResume()
         val progressText = dialog.findViewById<TextView>(R.id.progress_text)
+        val progressSubText = dialog.findViewById<TextView>(R.id.progress_text_sub)
         thread {
             while (!finished) {
                 handler?.post {
                     progressText.text = message
+                    progressSubText.text = subMessage
                 }
-                Thread.sleep(100)
+                Thread.sleep(10)
             }
         }
     }
