@@ -222,7 +222,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             if(FileUtil.getFolderSize(assetsFolder) <= 25000000) {
                 progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_message_unzip)
                 File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/").deleteRecursively()
-                FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/")
+                FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/",progress)
                 FileUtil.createTxtFile(resourceFolder+"version.txt",mcbeUtil.getVersion()!!)
             }
             progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_copy_resource).format(outFolder)
