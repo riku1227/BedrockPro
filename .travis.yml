@@ -21,15 +21,4 @@ script:
   - ./gradlew assembleDebug
 
 after_success:
-  - ls
-  - cd app
-  - ls
-  - cd build
-  - ls
-  - cd outputs
-  - ls
-  - cd apk
-  - ls
-  - cd debug
-  - ls
   - curl -F "file=@${TRAVIS_BUILD_DIR}/app/build/outputs/apk/debug/app-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" https://deploygate.com/api/users/riku1227/apps 

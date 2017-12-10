@@ -1,4 +1,5 @@
 # BedrockPro
+[![Build Status](https://travis-ci.org/riku1227/BedrockPro.svg?branch=master)](https://travis-ci.org/riku1227/BedrockPro)
 ## これなに
 Minecraft BedrockEditionのリソースパックとかを簡単に生成できるようになる(予定)
 そんな感じのツールになればいいなぁ...
