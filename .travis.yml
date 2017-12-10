@@ -30,4 +30,6 @@ after_success:
   - ls
   - cd apk
   - ls
-  - curl -F "file=@${TRAVIS_BUILD_DIR}/app/build/outputs/apk/app-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" https://deploygate.com/api/users/riku1227/apps 
+  - cd debug
+  - ls
+  - curl -F "file=@${TRAVIS_BUILD_DIR}/app/build/outputs/apk/debug/app-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" https://deploygate.com/api/users/riku1227/apps 
