@@ -1,0 +1,21 @@
+language: android
+android:
+  components:
+    - tools
+    - build-tools-26.0.2
+    - platform-tools
+    - extra-android-m2repository
+    - extra-google-android-support
+    - android-26
+    - sys-img-armeabi-v7a-android-25
+
+script:
+  - ./gradlew assembleDebug
+
+env:
+  global:
+    - DEPLOYGATE_USER=riku1227
+    - secure: S4M0EHMDEd1jXfii+WRZyiBDXhH+/31A8lz7z0nH5iOtzZc1IEtdaZdlF2Q8qYjRFC8b/d+QedYilIEUJSFsjwTshmBAWWrJOczfK2ur2fdJOPAiUaFgGd+bXsBJ0OeYtXd8Mpj1n0hiRvDr3Il5nXunOgX4ebSQq+W0/VfoV+C+jfcFiTuKOFTWdllN/Le/lwFOYTSQDQ93EX/Y3Pep0OV8ONx9VvKFOyr+jLFZD2C/xCsChDxvMNL+y8+GgLS6iacVv2xMXotl4t5ez0/Xkhcb2xDYbflWXimzhKzvw1hiYkFuJsym5al7064Ln41kWd+Pfol+Ew3C6ZZfcS9N+siowp4Jt/cQBUGsJ2FRSXaTo1i+EifcabgrrhV4bgaPAx5oaRPlKsf8R7Dme2Lf8J/ABfdJKTlF8HaKE1POih4SgnnjV3szUVDpcnds571zwbKW684B/XA/jCeFCiVMsULefHYLwgnVXHZkXavqWqj3o5XfUcKf8uCFribwoioSD1F+wWDX9MCRxSEpQfmeWw16ZMz4ZWZSpUKeCEncxQ/gB7WJDMa7VDZ+irt1hpqH0CAisY2ORW8SktQ5cdlvPL1RIBped/3ju0kmXCci/2WhHL/zhNzOxRtgIfjf0caQixUZnMPH6S+4Gv3U14WVoxubpwUBq1xLFAzweeRFoFs=
+
+after_success:
+  - curl -F "file=@${TRAVIS_BUILD_DIR}/app/build/outputs/apk/app-debug.apk" -F "token=${DEPLOYGATE_TOKEN}" https://deploygate.com/api/users/riku1227/apps 
