@@ -17,6 +17,8 @@
     <string name="drawer_home">Home</string>
     <string name="drawer_title_resource_pack">ResourcePack</string>
     <string name="drawer_resource_pack_gen">ResourcePackGen</string>
+    <string name="drawer_title_behavior_pack">BehaviorPack</string>
+    <string name="drawer_behavior_pack_gen">BehaviorPackGen</string>
     <string name="drawer_title_other">Other</string>
     <string name="drawer_util_backup_apk">Backup APK</string>
 

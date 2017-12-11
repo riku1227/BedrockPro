@@ -12,6 +12,14 @@
         </menu>
     </item>
 
+    <item android:title="@string/drawer_title_behavior_pack">
+        <menu>
+            <item
+                android:id="@+id/drawer_behavior_pack_gen"
+                android:title="@string/drawer_behavior_pack_gen" />
+        </menu>
+    </item>
+
     <item android:title="@string/drawer_title_other">
         <menu>
             <item
