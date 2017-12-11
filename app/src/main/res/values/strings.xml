@@ -35,8 +35,12 @@
     <string name="resource_pack_gen_custom_pack_icon">Custom pack icon</string>
     <string name="resource_pack_gen_generate">Generate</string>
     <string name="resource_pack_gen_pick_custom_icon">Pick custom icon</string>
+    <string name="resource_pack_gen_add_sub_pack">Add sub pack</string>
     <string name="resource_pack_gen_delete_cache">Delete Cache</string>
     <string name="resource_pack_gen_icon">Icon</string>
+    <string name="resource_pack_gen_sub_pack_name">Sub pack name</string>
+    <string name="resource_pack_gen_sub_pack_directory">Sub pack directory</string>
+    <string name="resource_pack_gen_sub_pack_memory_tier">Sub pack memory tier</string>
     <string name="resource_pack_gen_not_input_name">Please input resource pack name</string>
     <string name="resource_pack_is_exists">Same name resource pack is exists</string>
     <string name="resource_pack_gen_dialog_is_it_ok">Is it OK?</string>

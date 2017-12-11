@@ -29,6 +29,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 import kotlin.concurrent.thread
+import android.content.Context.LAYOUT_INFLATER_SERVICE
 
 class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListener {
 
@@ -44,6 +45,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     private var resourcePackCustomIconBitmap : Bitmap? = null
 
     private val deleteFileList = arrayOf("credits", "font", "materials", "texts", "blocks.json", "bug_pack_icon.png", "items_client.json", "items_offsets_client.json", "loading_messages.json", "manifest_publish.json", "splashes.json")
+    private val subPackCard = arrayListOf<View>()
 
 
     private var resoluteDialogMessage = ""
@@ -157,6 +159,14 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             intent.addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = "image/*"
             startActivityForResult(intent,RESULT_PICK_IMAGEFILE)
+        }
+
+        resource_pack_gen_add_sub_pack.setOnClickListener {
+            val layout = resource_pack_gen_root_layout
+            val inflater = activity.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val card = inflater.inflate(R.layout.card_subpack,null)
+            subPackCard.add(card)
+            layout.addView(card)
         }
 
         resource_pack_gen_delete_cache.setOnClickListener {

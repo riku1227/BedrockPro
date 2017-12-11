@@ -5,6 +5,7 @@
     android:background="?attr/background_color">
 
     <LinearLayout
+        android:id="@+id/resource_pack_gen_root_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -133,6 +134,14 @@
                     style="@style/ButtonBase"
                     android:layout_marginTop="10dp"
                     android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/resource_pack_gen_add_sub_pack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/resource_pack_gen_add_sub_pack"
+                    style="@style/ButtonBase"
+                    android:layout_marginTop="10dp" />
 
                 <Button
                     android:id="@+id/resource_pack_gen_delete_cache"
