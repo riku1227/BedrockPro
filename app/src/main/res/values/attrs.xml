@@ -7,5 +7,6 @@
         <attr name="card_text_color" format="color"/>
         <attr name="button_base_color" format="color"/>
         <attr name="button_text_color" format="color"/>
+        <attr name="card_button_color" format="color"/>
     </declare-styleable>
 </resources>
