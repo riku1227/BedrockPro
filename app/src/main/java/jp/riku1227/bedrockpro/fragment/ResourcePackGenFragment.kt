@@ -53,7 +53,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     private var RESULT_PICK_IMAGEFILE = 0
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         return inflater?.inflate(R.layout.fragment_resource_pack_gen,container,false)
     }
@@ -61,25 +61,25 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onStart() {
         super.onStart()
-        activity.title = "ResourcePackGen"
+        activity?.title = "ResourcePackGen"
 
         resourcePackCache = resource_pack_gen_resource_cache.isChecked
         resourcePackAutoGenUUID = resource_pack_gen_auto_gen_uuid.isChecked
         resourcePackCustomIcon = resource_pack_gen_custom_pack_icon.isChecked
 
-        if(PermissionChecker.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
+        if(PermissionChecker.checkSelfPermission(context!!,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
             PermissionDialog().show(fragmentManager,"PermissionDialog")
         }
 
         resource_pack_gen_generate.setOnClickListener {
-            if(PermissionChecker.checkSelfPermission(context,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
-                makeToast(context,resources.getString(R.string.permission_is_not_granted))
+            if(PermissionChecker.checkSelfPermission(context!!,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
+                makeToast(context!!,resources.getString(R.string.permission_is_not_granted))
                 val intent = Intent()
                 intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                intent.data = Uri.fromParts("package", context.packageName, null)
+                intent.data = Uri.fromParts("package", context?.packageName, null)
                 startActivity(intent)
             } else {
-                if(!MCBEUtil(activity.packageManager).isInstalled()) {
+                if(!MCBEUtil(activity!!.packageManager).isInstalled()) {
                     makeSnackBar(view!!,resources.getString(R.string.mcpe_is_not_installed))
                 } else {
                     if(resource_pack_gen_name.text.toString() == "") {
@@ -106,7 +106,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                             resourcePackGenResoluteCheckDialog!!.setDialogListener(this)
                             val versionTxtFile = File(FileUtil.getExternalStoragePath()+"BedrockPeo/cache/resource/version.txt")
                             if (versionTxtFile.exists()) {
-                                if(versionTxtFile.readText() != MCBEUtil(activity.packageManager).getVersion()) {
+                                if(versionTxtFile.readText() != MCBEUtil(activity!!.packageManager).getVersion()) {
                                     val versionErrorDialog = SimpleDialog.newInstance(resources.getString(R.string.dialog_version_error_title),
                                             resources.getString(R.string.dialog_version_error_message),
                                             resources.getString(R.string.dialog_version_error_positive),resources.getString(R.string.dialog_version_error_negative))
@@ -163,7 +163,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
         resource_pack_gen_add_sub_pack.setOnClickListener {
             val layout = resource_pack_gen_root_layout
-            val inflater = activity.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val inflater = activity?.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val card = inflater.inflate(R.layout.card_subpack,null)
             subPackCard.add(card)
             layout.addView(card)
@@ -184,7 +184,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             val uri : Uri
             if (data != null) {
                 uri = data.data
-                resourcePackCustomIconBitmap = UriUtil.getBitmapFromUri(activity,uri)
+                resourcePackCustomIconBitmap = UriUtil.getBitmapFromUri(activity!!,uri)
                 resource_pack_gen_custom_pack_icon_iv.setImageBitmap(resourcePackCustomIconBitmap)
             }
         }
@@ -219,7 +219,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     }
 
     private fun generateResourcePack() {
-        val mcbeUtil = MCBEUtil(activity.packageManager)
+        val mcbeUtil = MCBEUtil(activity!!.packageManager)
         val cacheFolder = FileUtil.getExternalStoragePath() + "BedrockPro/cache/"
         val resourceFolder = cacheFolder+"resource/"
         val assetsFolder = resourceFolder + "assets/resource_packs/vanilla/"

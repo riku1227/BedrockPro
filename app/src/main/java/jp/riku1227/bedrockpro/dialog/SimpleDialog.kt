@@ -24,15 +24,15 @@ class SimpleDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?) : Dialog {
-        return AlertDialog.Builder(activity)
-                .setTitle(arguments.getString("title"))
-                .setMessage(arguments.getString("message"))
-                .setPositiveButton(arguments.getString("positiveButtonName"),DialogInterface.OnClickListener { dialogInterface, i ->
-                    listener?.onPositiveClick(tag)
+        return AlertDialog.Builder(activity!!.baseContext)
+                .setTitle(arguments?.getString("title"))
+                .setMessage(arguments?.getString("message"))
+                .setPositiveButton(arguments?.getString("positiveButtonName"),DialogInterface.OnClickListener { dialogInterface, i ->
+                    listener?.onPositiveClick(tag!!)
                     dismiss()
                 })
-                .setNegativeButton(arguments.getString("negativeButtonName"),DialogInterface.OnClickListener {dialogInterface, i ->
-                    listener?.onNegativeClick(tag)
+                .setNegativeButton(arguments?.getString("negativeButtonName"),DialogInterface.OnClickListener {dialogInterface, i ->
+                    listener?.onNegativeClick(tag!!)
                     dismiss()
                 })
                 .create()
