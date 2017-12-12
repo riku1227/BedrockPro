@@ -53,15 +53,17 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+               <Button
+                    android:text="削除"
+                    style="@style/CardViewButton"/>
 
                 <Button
                     android:text="追加"
                     style="@style/CardViewButton"/>
 
-                <Button
-                    android:text="削除"
-                    style="@style/CardViewButton"/>
             </LinearLayout>
 
         </LinearLayout>
