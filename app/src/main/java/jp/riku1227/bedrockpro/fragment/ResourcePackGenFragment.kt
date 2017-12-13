@@ -162,11 +162,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         }
 
         resource_pack_gen_add_sub_pack.setOnClickListener {
-            val layout = resource_pack_gen_root_layout
-            val inflater = activity?.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val card = inflater.inflate(R.layout.card_subpack,null)
-            subPackCard.add(card)
-            layout.addView(card)
+            addSubPack()
         }
 
         resource_pack_gen_delete_cache.setOnClickListener {
@@ -216,6 +212,15 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
             }
         }
+    }
+    
+    private fun addSubPack() {
+        val layout = resource_pack_gen_root_layout
+        val inflater = activity?.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val card = inflater.inflate(R.layout.card_subpack,null)
+        subPackCard.add(card)
+        card.setTag(subPackCard.size - 1)
+        layout.addView(card)
     }
 
     private fun generateResourcePack() {
