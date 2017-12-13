@@ -41,6 +41,8 @@
     <string name="resource_pack_gen_sub_pack_name">サブパックの名前</string>
     <string name="resource_pack_gen_sub_pack_directory">サブパックのディレクトリ</string>
     <string name="resource_pack_gen_sub_pack_memory_tier">サブパックのメモリティアー</string>
+    <string name="resource_pack_gen_sub_pack_add">追加</string>
+    <string name="resource_pack_gen_sub_pack_delete">削除</string>
     <string name="resource_pack_gen_not_input_name">リソースパックの名前を入力してください</string>
     <string name="resource_pack_is_exists">同じ名前のリソースパックが既に存在しています</string>
     <string name="resource_pack_gen_dialog_is_it_ok">これでよろしいですか？</string>
