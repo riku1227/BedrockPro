@@ -30,6 +30,7 @@ import java.io.FileOutputStream
 import java.util.*
 import kotlin.concurrent.thread
 import android.content.Context.LAYOUT_INFLATER_SERVICE
+import android.widget.Button
 
 class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListener {
 
@@ -218,6 +219,9 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val layout = resource_pack_gen_root_layout
         val inflater = activity?.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val card = inflater.inflate(R.layout.card_subpack,null)
+        card.findViewById<Button>(R.id.resource_pack_gen_sub_pack_add).setOnClickListener {
+            addSubPack()
+        }
         subPackCard.add(card)
         card.setTag(subPackCard.size - 1)
         layout.addView(card)
