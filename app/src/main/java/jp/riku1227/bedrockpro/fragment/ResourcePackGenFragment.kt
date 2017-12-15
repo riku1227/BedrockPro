@@ -222,8 +222,8 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         card.findViewById<Button>(R.id.resource_pack_gen_sub_pack_add).setOnClickListener {
             addSubPack()
         }
+        card.tag = subPackCard.size + 1
         subPackCard.add(card)
-        card.setTag(subPackCard.size - 1)
         layout.addView(card)
     }
 
