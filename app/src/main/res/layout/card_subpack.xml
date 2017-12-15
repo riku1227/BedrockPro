@@ -57,10 +57,12 @@
                 android:gravity="right">
 
                <Button
+                   android:id="@+id/resource_pack_gen_sub_pack_delete"
                     android:text="@string/resource_pack_gen_sub_pack_delete"
                     style="@style/CardViewButton"/>
 
                 <Button
+                    android:id="@+id/resource_pack_gen_sub_pack_add"
                     android:text="@string/resource_pack_gen_sub_pack_add"
                     style="@style/CardViewButton"/>
 
