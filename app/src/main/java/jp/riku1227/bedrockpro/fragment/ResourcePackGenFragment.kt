@@ -46,7 +46,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     private var resourcePackCustomIconBitmap : Bitmap? = null
 
     private val deleteFileList = arrayOf("credits", "font", "materials", "texts", "blocks.json", "bug_pack_icon.png", "items_client.json", "items_offsets_client.json", "loading_messages.json", "manifest_publish.json", "splashes.json")
-    private val subPackCard = arrayListOf<View>()
+    private val subPackCard = arrayListOf<View?>()
 
 
     private var resoluteDialogMessage = ""
@@ -221,6 +221,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         val card = inflater.inflate(R.layout.card_subpack,null)
         card.findViewById<Button>(R.id.resource_pack_gen_sub_pack_add).setOnClickListener {
             addSubPack()
+        }
+        card.findViewById<Button>(R.id.resource_pack_gen_sub_pack_delete).setOnClickListener {
+            card.visibility = View.GONE
+            subPackCard[card.tag as Int - 1] = null
         }
         card.tag = subPackCard.size + 1
         subPackCard.add(card)
