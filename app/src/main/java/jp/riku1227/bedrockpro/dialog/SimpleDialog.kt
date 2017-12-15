@@ -24,7 +24,7 @@ class SimpleDialog : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?) : Dialog {
-        return AlertDialog.Builder(activity!!.baseContext)
+        return AlertDialog.Builder(activity!!)
                 .setTitle(arguments?.getString("title"))
                 .setMessage(arguments?.getString("message"))
                 .setPositiveButton(arguments?.getString("positiveButtonName"),DialogInterface.OnClickListener { dialogInterface, i ->

@@ -21,7 +21,7 @@ class ProgressDialog : DialogFragment() {
     private var handler : Handler? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = AlertDialog.Builder(activity!!.baseContext)
+        val dialog = AlertDialog.Builder(activity!!)
         val view = LayoutInflater.from(context).inflate(R.layout.progress_dialog, null)
         handler = Handler()
         this.isCancelable = false

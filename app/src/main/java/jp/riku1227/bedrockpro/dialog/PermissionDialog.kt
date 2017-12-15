@@ -13,7 +13,7 @@ class PermissionDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val res = resources
         val dialog =
-                AlertDialog.Builder(activity!!.baseContext)
+                AlertDialog.Builder(activity!!)
                 .setTitle(res.getString(R.string.dialog_grant_permission))
                 .setMessage(res.getString(R.string.dialog_grant_external_storage_message))
                 .setPositiveButton("OK", DialogInterface.OnClickListener { dialogInterface, i ->
