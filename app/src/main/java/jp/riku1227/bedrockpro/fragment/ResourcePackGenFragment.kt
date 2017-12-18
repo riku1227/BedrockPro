@@ -30,6 +30,7 @@ import java.io.FileOutputStream
 import java.util.*
 import kotlin.concurrent.thread
 import android.content.Context.LAYOUT_INFLATER_SERVICE
+import android.support.design.widget.TextInputEditText
 import android.widget.Button
 
 class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListener {
@@ -261,6 +262,17 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 val fileOutputStream = FileOutputStream(File(outFolder+"pack_icon.png"))
                 resourcePackCustomIconBitmap?.compress(Bitmap.CompressFormat.PNG,100,fileOutputStream)
             }
+
+            if(subPackCard.size != 0) {
+                FileUtil.createDirectory(outFolder+"subpacks")
+                subPackCard.forEach {
+                    if(it != null) {
+                        val directoryName = it.findViewById<TextInputEditText>(R.id.resource_pack_gen_sub_pack_directory)?.text.toString()
+                        FileUtil.createDirectory(outFolder+"subpacks/"+directoryName)
+                    }
+                }
+            }
+
             if(!resourcePackCache) {
                 progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_delete_cache)
                 File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/").deleteRecursively()
