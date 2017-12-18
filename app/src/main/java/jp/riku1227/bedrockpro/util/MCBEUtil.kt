@@ -3,6 +3,9 @@ package jp.riku1227.bedrockpro.util
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.support.design.widget.TextInputEditText
+import android.view.View
+import jp.riku1227.bedrockpro.R
 import java.io.*
 
 class MCBEUtil(pm : PackageManager) {
@@ -37,15 +40,16 @@ class MCBEUtil(pm : PackageManager) {
     }
 
     companion object {
-        fun editManifest(filePath : String, packName : String, packDescription : String, packHeaderUUID : String, packModuleUUID : String) : String {
+        fun editManifest(filePath : String, packName : String, packDescription : String, packHeaderUUID : String, packModuleUUID : String,arrayList : ArrayList<View?>? = null) : String {
             val manifestFile = File(filePath)
             if(!manifestFile.exists()) {
                 manifestFile.createNewFile()
             }
             var fileContents = ""
             var mode = 0
+            var subpack = false
             manifestFile.forEachLine {
-                val str : String
+                var str : String
                 when {
                     it.indexOf("\"header\"") != -1 -> {
                         mode = 0
@@ -68,6 +72,53 @@ class MCBEUtil(pm : PackageManager) {
                             str = "        \"uuid\": \"$packHeaderUUID\","
                         } else {
                             str = "            \"uuid\": \"$packModuleUUID\","
+                        }
+                    }
+                    it.indexOf("\"version\"") != -1 -> {
+                        if(mode == 0) {
+                            str = it
+                        } else {
+                            str = it
+                            subpack = true
+                        }
+                    }
+                    it.indexOf("]") != -1 -> {
+                        if(subpack) {
+                            if(arrayList != null) {
+                                str = "    ],\n    \"subpacks\": [\n"
+                                var num = 0
+                                val subPackCard = arrayListOf<View>()
+                                arrayList.forEach {
+                                    if(it != null) {
+                                        subPackCard.add(it)
+                                    }
+                                }
+
+                                subPackCard.forEach {
+                                    num++
+                                    val folderName = it?.findViewById<TextInputEditText>(R.id.resource_pack_gen_sub_pack_directory)?.text.toString()
+                                    val name = it?.findViewById<TextInputEditText>(R.id.resource_pack_gen_sub_pack_name)?.text.toString()
+                                    val memoryTier = it?.findViewById<TextInputEditText>(R.id.resource_pack_gen_sub_pack_memory_tier)?.text.toString()
+                                    if(subPackCard.size == num) {
+                                        str += "        {\n"+
+                                                "            \"folder_name\": \"$folderName\",\n"+
+                                                "            \"name\": \"$name,\"\n"+
+                                                "            \"memory_tier\": \"$memoryTier\"\n"+
+                                                "        }\n"+
+                                                "    ]"
+                                    } else {
+                                        str += "        {\n"+
+                                                "            \"folder_name\": \"$folderName\",\n"+
+                                                "            \"name\": \"$name,\"\n"+
+                                                "            \"memory_tier\": \"$memoryTier\"\n"+
+                                                "        },\n"
+                                    }
+                                }
+                            } else {
+                                str = it
+                            }
+                        } else {
+                            str = it
                         }
                     }
                     else -> str = it
