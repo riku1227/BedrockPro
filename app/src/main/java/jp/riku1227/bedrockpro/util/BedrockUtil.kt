@@ -8,7 +8,7 @@ import android.view.View
 import jp.riku1227.bedrockpro.R
 import java.io.*
 
-class MCBEUtil(pm : PackageManager) {
+class BedrockUtil(pm : PackageManager) {
 
     private val packageName = "com.mojang.minecraftpe"
     private var packageInfo : PackageInfo? = null

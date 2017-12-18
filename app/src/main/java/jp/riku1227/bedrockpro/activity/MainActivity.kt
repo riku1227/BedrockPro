@@ -17,7 +17,7 @@ import jp.riku1227.bedrockpro.dialog.PermissionDialog
 import jp.riku1227.bedrockpro.fragment.HomeFragment
 import jp.riku1227.bedrockpro.fragment.ResourcePackGenFragment
 import jp.riku1227.bedrockpro.util.FileUtil
-import jp.riku1227.bedrockpro.util.MCBEUtil
+import jp.riku1227.bedrockpro.util.BedrockUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 import kotlin.concurrent.thread
@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun backupAPK() {
-        val mcutil = MCBEUtil(packageManager)
+        val mcutil = BedrockUtil(packageManager)
         if(PermissionChecker.checkSelfPermission(baseContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
             PermissionDialog().show(supportFragmentManager,"PermissionDialog")
         } else {

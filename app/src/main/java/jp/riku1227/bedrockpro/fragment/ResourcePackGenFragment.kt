@@ -22,7 +22,7 @@ import jp.riku1227.bedrockpro.dialog.SimpleDialog
 import jp.riku1227.bedrockpro.makeSnackBar
 import jp.riku1227.bedrockpro.makeToast
 import jp.riku1227.bedrockpro.util.FileUtil
-import jp.riku1227.bedrockpro.util.MCBEUtil
+import jp.riku1227.bedrockpro.util.BedrockUtil
 import jp.riku1227.bedrockpro.util.UriUtil
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
 import java.io.File
@@ -81,7 +81,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 intent.data = Uri.fromParts("package", context?.packageName, null)
                 startActivity(intent)
             } else {
-                if(!MCBEUtil(activity!!.packageManager).isInstalled()) {
+                if(!BedrockUtil(activity!!.packageManager).isInstalled()) {
                     makeSnackBar(view!!,resources.getString(R.string.mcpe_is_not_installed))
                 } else {
                     if(resource_pack_gen_name.text.toString() == "") {
@@ -108,7 +108,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                             resourcePackGenResoluteCheckDialog!!.setDialogListener(this)
                             val versionTxtFile = File(FileUtil.getExternalStoragePath()+"BedrockPeo/cache/resource/version.txt")
                             if (versionTxtFile.exists()) {
-                                if(versionTxtFile.readText() != MCBEUtil(activity!!.packageManager).getVersion()) {
+                                if(versionTxtFile.readText() != BedrockUtil(activity!!.packageManager).getVersion()) {
                                     val versionErrorDialog = SimpleDialog.newInstance(resources.getString(R.string.dialog_version_error_title),
                                             resources.getString(R.string.dialog_version_error_message),
                                             resources.getString(R.string.dialog_version_error_positive),resources.getString(R.string.dialog_version_error_negative))
@@ -233,7 +233,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     }
 
     private fun generateResourcePack() {
-        val mcbeUtil = MCBEUtil(activity!!.packageManager)
+        val mcbeUtil = BedrockUtil(activity!!.packageManager)
         val cacheFolder = FileUtil.getExternalStoragePath() + "BedrockPro/cache/"
         val resourceFolder = cacheFolder+"resource/"
         val assetsFolder = resourceFolder + "assets/resource_packs/vanilla/"
@@ -264,9 +264,9 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                         FileUtil.createDirectory(outFolder+"subpacks/"+directoryName)
                     }
                 }
-                MCBEUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID,subPackCard)
+                BedrockUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID,subPackCard)
             } else {
-                MCBEUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
+                BedrockUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
             }
             if(resourcePackCustomIcon && resourcePackCustomIconBitmap != null) {
                 File(outFolder+"pack_icon.png").delete()
