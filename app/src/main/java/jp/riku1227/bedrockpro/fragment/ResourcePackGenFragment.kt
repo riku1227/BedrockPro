@@ -256,13 +256,6 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 FileUtil.deleteFile(outFolder + deleteFileList[i])
             }
             progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_edit_manifest)
-            MCBEUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
-            if(resourcePackCustomIcon && resourcePackCustomIconBitmap != null) {
-                File(outFolder+"pack_icon.png").delete()
-                val fileOutputStream = FileOutputStream(File(outFolder+"pack_icon.png"))
-                resourcePackCustomIconBitmap?.compress(Bitmap.CompressFormat.PNG,100,fileOutputStream)
-            }
-
             if(subPackCard.size != 0) {
                 FileUtil.createDirectory(outFolder+"subpacks")
                 subPackCard.forEach {
@@ -271,6 +264,14 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                         FileUtil.createDirectory(outFolder+"subpacks/"+directoryName)
                     }
                 }
+                MCBEUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID,subPackCard)
+            } else {
+                MCBEUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
+            }
+            if(resourcePackCustomIcon && resourcePackCustomIconBitmap != null) {
+                File(outFolder+"pack_icon.png").delete()
+                val fileOutputStream = FileOutputStream(File(outFolder+"pack_icon.png"))
+                resourcePackCustomIconBitmap?.compress(Bitmap.CompressFormat.PNG,100,fileOutputStream)
             }
 
             if(!resourcePackCache) {
