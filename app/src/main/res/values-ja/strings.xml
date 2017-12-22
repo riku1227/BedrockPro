@@ -45,6 +45,7 @@
     <string name="resource_pack_gen_sub_pack_delete">削除</string>
     <string name="resource_pack_gen_not_input_name">リソースパックの名前を入力してください</string>
     <string name="resource_pack_is_exists">同じ名前のリソースパックが既に存在しています</string>
+    <string name="resource_pack_sub_pack_not_input">サブパックに情報を入力してください</string>
     <string name="resource_pack_gen_dialog_is_it_ok">これでよろしいですか？</string>
     <string name="resource_pack_gen_dialog_name">名前: %1$s</string>
     <string name="resource_pack_gen_dialog_description">説明: %1$s</string>

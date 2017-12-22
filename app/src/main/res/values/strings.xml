@@ -45,6 +45,7 @@
     <string name="resource_pack_gen_sub_pack_delete">Delete</string>
     <string name="resource_pack_gen_not_input_name">Please input resource pack name</string>
     <string name="resource_pack_is_exists">Same name resource pack is exists</string>
+    <string name="resource_pack_sub_pack_not_input">Please input sub pack</string>
     <string name="resource_pack_gen_dialog_is_it_ok">Is it OK?</string>
     <string name="resource_pack_gen_dialog_name">Name: %1$s</string>
     <string name="resource_pack_gen_dialog_description">Description: %1$s</string>

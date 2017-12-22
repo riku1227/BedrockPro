@@ -29,7 +29,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 import kotlin.concurrent.thread
-import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.support.design.widget.TextInputEditText
 import android.widget.Button
 
@@ -87,38 +86,58 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                     if(resourcePackGenName.text.toString() == "") {
                         makeSnackBar(view!!,resources.getString(R.string.resource_pack_gen_not_input_name))
                     } else {
-                        resourcePackName = resourcePackGenName.text.toString()
-                        resourcePackDescription = resourcePackGenDescription.text.toString()
-                        if(resourcePackAutoGenUUID) {
-                            resourcePackHeaderUUID = UUID.randomUUID().toString()
-                            resourcePackModuleUUID = UUID.randomUUID().toString()
-                        } else {
-                            resourcePackHeaderUUID = resourcePackGenHeaderUuid.text.toString()
-                            resourcePackModuleUUID = resourcePackGenModuleUuid.text.toString()
-                        }
+                        var subPackNoInput = false
+                        subPackCard.forEach {
+                            if(it != null) {
+                                if(it.findViewById<TextInputEditText>(R.id.subPackCardName).text.toString() == "") {
+                                    subPackNoInput = true
+                                }
 
-                        if(File(FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/").exists()) {
-                            makeSnackBar(view!!,resources.getString(R.string.resource_pack_is_exists))
+                                if(it.findViewById<TextInputEditText>(R.id.subPackCardDirectory).text.toString() == "") {
+                                    subPackNoInput = true
+                                }
+
+                                if(it.findViewById<TextInputEditText>(R.id.subPackCardMemoryTier).text.toString() == "") {
+                                    subPackNoInput = true
+                                }
+                            }
+                        }
+                        if(subPackNoInput) {
+                            makeSnackBar(view!!,resources.getString(R.string.resource_pack_sub_pack_not_input))
                         } else {
-                            resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
-                                    resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
-                                    resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
-                                    resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
-                            resourcePackGenResoluteCheckDialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
-                            resourcePackGenResoluteCheckDialog!!.setDialogListener(this)
-                            val versionTxtFile = File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/version.txt")
-                            if (versionTxtFile.exists()) {
-                                if(versionTxtFile.readText() != BedrockUtil(activity!!.packageManager).getVersion()) {
-                                    val versionErrorDialog = SimpleDialog.newInstance(resources.getString(R.string.dialog_version_error_title),
-                                            resources.getString(R.string.dialog_version_error_message),
-                                            resources.getString(R.string.dialog_version_error_positive),resources.getString(R.string.dialog_version_error_negative))
-                                    versionErrorDialog.setDialogListener(this)
-                                    versionErrorDialog.show(fragmentManager,"resource_pack_gen_cache_version_error")
+                            resourcePackName = resourcePackGenName.text.toString()
+                            resourcePackDescription = resourcePackGenDescription.text.toString()
+                            if(resourcePackAutoGenUUID) {
+                                resourcePackHeaderUUID = UUID.randomUUID().toString()
+                                resourcePackModuleUUID = UUID.randomUUID().toString()
+                            } else {
+                                resourcePackHeaderUUID = resourcePackGenHeaderUuid.text.toString()
+                                resourcePackModuleUUID = resourcePackGenModuleUuid.text.toString()
+                            }
+
+                            if(File(FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/").exists()) {
+                                makeSnackBar(view!!,resources.getString(R.string.resource_pack_is_exists))
+                            } else {
+                                resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
+                                        resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
+                                        resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
+                                        resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
+                                resourcePackGenResoluteCheckDialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
+                                resourcePackGenResoluteCheckDialog!!.setDialogListener(this)
+                                val versionTxtFile = File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/version.txt")
+                                if (versionTxtFile.exists()) {
+                                    if(versionTxtFile.readText() != BedrockUtil(activity!!.packageManager).getVersion()) {
+                                        val versionErrorDialog = SimpleDialog.newInstance(resources.getString(R.string.dialog_version_error_title),
+                                                resources.getString(R.string.dialog_version_error_message),
+                                                resources.getString(R.string.dialog_version_error_positive),resources.getString(R.string.dialog_version_error_negative))
+                                        versionErrorDialog.setDialogListener(this)
+                                        versionErrorDialog.show(fragmentManager,"resource_pack_gen_cache_version_error")
+                                    } else {
+                                        resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
+                                    }
                                 } else {
                                     resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
                                 }
-                            } else {
-                                resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
                             }
                         }
                     }
