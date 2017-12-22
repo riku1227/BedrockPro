@@ -7,6 +7,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
 import android.support.annotation.RequiresApi
 import android.support.v4.content.PermissionChecker
@@ -242,8 +243,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             addSubPack()
         }
         card.findViewById<Button>(R.id.subPackDelete).setOnClickListener {
-            card.visibility = View.GONE
-            subPackCard[card.tag as Int - 1] = null
+            Handler().postDelayed({
+                card.visibility = View.GONE
+                subPackCard[card.tag as Int - 1] = null
+            }, 250)
         }
         card.tag = subPackCard.size + 1
         subPackCard.add(card)
