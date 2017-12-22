@@ -53,11 +53,11 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     private var resoluteDialogMessage = ""
     private var resourcePackGenResoluteCheckDialog : SimpleDialog? = null
 
-    private var RESULT_PICK_IMAGEFILE = 0
+    private var resultPickImageFile = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater?.inflate(R.layout.fragment_resource_pack_gen,container,false)
+        return inflater.inflate(R.layout.fragment_resource_pack_gen,container,false)
     }
 
     @RequiresApi(Build.VERSION_CODES.KITKAT)
@@ -160,7 +160,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
             intent.addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = "image/*"
-            startActivityForResult(intent,RESULT_PICK_IMAGEFILE)
+            startActivityForResult(intent, resultPickImageFile)
         }
 
         resourcePackGenAddSubPack.setOnClickListener {
@@ -178,7 +178,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RESULT_PICK_IMAGEFILE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == resultPickImageFile && resultCode == Activity.RESULT_OK) {
             val uri : Uri
             if (data != null) {
                 uri = data.data
@@ -215,11 +215,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             }
         }
     }
-    
+
     private fun addSubPack() {
         val layout = resourcePackGenRootLayout
-        val inflater = activity?.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val card = inflater.inflate(R.layout.card_subpack,null)
+        val card = View.inflate(context,R.layout.card_subpack,null)
         card.findViewById<Button>(R.id.subPackCardAdd).setOnClickListener {
             addSubPack()
         }
