@@ -96,9 +96,9 @@ class BedrockUtil(pm : PackageManager) {
 
                                 subPackCard.forEach {
                                     num++
-                                    val folderName = it?.findViewById<TextInputEditText>(R.id.resource_pack_gen_sub_pack_directory)?.text.toString()
-                                    val name = it?.findViewById<TextInputEditText>(R.id.resource_pack_gen_sub_pack_name)?.text.toString()
-                                    val memoryTier = it?.findViewById<TextInputEditText>(R.id.resource_pack_gen_sub_pack_memory_tier)?.text.toString()
+                                    val folderName = it?.findViewById<TextInputEditText>(R.id.subPackCardDirectory)?.text.toString()
+                                    val name = it?.findViewById<TextInputEditText>(R.id.subPackCardName)?.text.toString()
+                                    val memoryTier = it?.findViewById<TextInputEditText>(R.id.subPackCardMemoryTier)?.text.toString()
                                     if(subPackCard.size == num) {
                                         str += "        {\n"+
                                                 "            \"folder_name\": \"$folderName\",\n"+

@@ -65,15 +65,15 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         super.onStart()
         activity?.title = "ResourcePackGen"
 
-        resourcePackCache = resource_pack_gen_resource_cache.isChecked
-        resourcePackAutoGenUUID = resource_pack_gen_auto_gen_uuid.isChecked
-        resourcePackCustomIcon = resource_pack_gen_custom_pack_icon.isChecked
+        resourcePackCache = resourcePackGenResourceCache.isChecked
+        resourcePackAutoGenUUID = resourcePackGenAutoGenUuid.isChecked
+        resourcePackCustomIcon = resourcePackGenCustomPackIcon.isChecked
 
         if(PermissionChecker.checkSelfPermission(context!!,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
             PermissionDialog().show(fragmentManager,"PermissionDialog")
         }
 
-        resource_pack_gen_generate.setOnClickListener {
+        resourcePackGenGenerate.setOnClickListener {
             if(PermissionChecker.checkSelfPermission(context!!,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
                 makeToast(context!!,resources.getString(R.string.permission_is_not_granted))
                 val intent = Intent()
@@ -84,17 +84,17 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 if(!BedrockUtil(activity!!.packageManager).isInstalled()) {
                     makeSnackBar(view!!,resources.getString(R.string.mcpe_is_not_installed))
                 } else {
-                    if(resource_pack_gen_name.text.toString() == "") {
+                    if(resourcePackGenName.text.toString() == "") {
                         makeSnackBar(view!!,resources.getString(R.string.resource_pack_gen_not_input_name))
                     } else {
-                        resourcePackName = resource_pack_gen_name.text.toString()
-                        resourcePackDescription = resource_pack_gen_description.text.toString()
+                        resourcePackName = resourcePackGenName.text.toString()
+                        resourcePackDescription = resourcePackGenDescription.text.toString()
                         if(resourcePackAutoGenUUID) {
                             resourcePackHeaderUUID = UUID.randomUUID().toString()
                             resourcePackModuleUUID = UUID.randomUUID().toString()
                         } else {
-                            resourcePackHeaderUUID = resource_pack_gen_header_uuid.text.toString()
-                            resourcePackModuleUUID = resource_pack_gen_module_uuid.text.toString()
+                            resourcePackHeaderUUID = resourcePackGenHeaderUuid.text.toString()
+                            resourcePackModuleUUID = resourcePackGenModuleUuid.text.toString()
                         }
 
                         if(File(FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/").exists()) {
@@ -126,48 +126,48 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             }
         }
 
-        resource_pack_gen_resource_cache.setOnClickListener {
-            resourcePackCache = resource_pack_gen_resource_cache.isChecked
+        resourcePackGenResourceCache.setOnClickListener {
+            resourcePackCache = resourcePackGenResourceCache.isChecked
         }
 
-        resource_pack_gen_auto_gen_uuid.setOnClickListener {
-            if(resource_pack_gen_auto_gen_uuid.isChecked){
-                resource_pack_gen_header_uuid.text = SpannableStringBuilder("")
-                resource_pack_gen_module_uuid.text = SpannableStringBuilder("")
-                resource_pack_gen_header_uuid.visibility = View.GONE
-                resource_pack_gen_module_uuid.visibility = View.GONE
+        resourcePackGenAutoGenUuid.setOnClickListener {
+            if(resourcePackGenAutoGenUuid.isChecked){
+                resourcePackGenHeaderUuid.text = SpannableStringBuilder("")
+                resourcePackGenModuleUuid.text = SpannableStringBuilder("")
+                resourcePackGenHeaderUuid.visibility = View.GONE
+                resourcePackGenModuleUuid.visibility = View.GONE
                 resourcePackAutoGenUUID = true
             } else {
-                resource_pack_gen_header_uuid.visibility = View.VISIBLE
-                resource_pack_gen_module_uuid.visibility = View.VISIBLE
+                resourcePackGenHeaderUuid.visibility = View.VISIBLE
+                resourcePackGenModuleUuid.visibility = View.VISIBLE
                 resourcePackAutoGenUUID = false
             }
         }
 
-        resource_pack_gen_custom_pack_icon.setOnClickListener {
-            if(resource_pack_gen_custom_pack_icon.isChecked) {
-                resource_pack_gen_pick_custom_icon.visibility = View.VISIBLE
-                resource_pack_gen_custom_pack_icon_card.visibility = View.VISIBLE
+        resourcePackGenCustomPackIcon.setOnClickListener {
+            if(resourcePackGenCustomPackIcon.isChecked) {
+                resourcePackGenPickCustomIcon.visibility = View.VISIBLE
+                resourcePackGenCustomPackIconCard.visibility = View.VISIBLE
                 resourcePackCustomIcon = true
             } else {
-                resource_pack_gen_pick_custom_icon.visibility = View.GONE
-                resource_pack_gen_custom_pack_icon_card.visibility = View.GONE
+                resourcePackGenPickCustomIcon.visibility = View.GONE
+                resourcePackGenCustomPackIconCard.visibility = View.GONE
                 resourcePackCustomIcon = false
             }
         }
 
-        resource_pack_gen_pick_custom_icon.setOnClickListener {
+        resourcePackGenPickCustomIcon.setOnClickListener {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
             intent.addCategory(Intent.CATEGORY_OPENABLE)
             intent.type = "image/*"
             startActivityForResult(intent,RESULT_PICK_IMAGEFILE)
         }
 
-        resource_pack_gen_add_sub_pack.setOnClickListener {
+        resourcePackGenAddSubPack.setOnClickListener {
             addSubPack()
         }
 
-        resource_pack_gen_delete_cache.setOnClickListener {
+        resourcePackGenDeleteCache.setOnClickListener {
             if(File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/").exists()) {
                 val deleteCacheDialog = SimpleDialog.newInstance("キャッシュを削除","キャッシュを削除しますか？")
                 deleteCacheDialog.setDialogListener(this)
@@ -183,7 +183,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             if (data != null) {
                 uri = data.data
                 resourcePackCustomIconBitmap = UriUtil.getBitmapFromUri(activity!!,uri)
-                resource_pack_gen_custom_pack_icon_iv.setImageBitmap(resourcePackCustomIconBitmap)
+                resourcePackGenCustomPackIconImageView.setImageBitmap(resourcePackCustomIconBitmap)
             }
         }
     }
@@ -217,13 +217,13 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     }
     
     private fun addSubPack() {
-        val layout = resource_pack_gen_root_layout
+        val layout = resourcePackGenRootLayout
         val inflater = activity?.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val card = inflater.inflate(R.layout.card_subpack,null)
-        card.findViewById<Button>(R.id.resource_pack_gen_sub_pack_add).setOnClickListener {
+        card.findViewById<Button>(R.id.subPackCardAdd).setOnClickListener {
             addSubPack()
         }
-        card.findViewById<Button>(R.id.resource_pack_gen_sub_pack_delete).setOnClickListener {
+        card.findViewById<Button>(R.id.subPackDelete).setOnClickListener {
             card.visibility = View.GONE
             subPackCard[card.tag as Int - 1] = null
         }
@@ -260,7 +260,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 FileUtil.createDirectory(outFolder+"subpacks")
                 subPackCard.forEach {
                     if(it != null) {
-                        val directoryName = it.findViewById<TextInputEditText>(R.id.resource_pack_gen_sub_pack_directory)?.text.toString()
+                        val directoryName = it.findViewById<TextInputEditText>(R.id.subPackCardDirectory)?.text.toString()
                         FileUtil.createDirectory(outFolder+"subpacks/"+directoryName)
                     }
                 }

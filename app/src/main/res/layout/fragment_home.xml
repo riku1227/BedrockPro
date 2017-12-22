@@ -25,14 +25,14 @@
                     style="@style/CardViewTitle"/>
 
                 <TextView
-                    android:id="@+id/app_version_text_view"
+                    android:id="@+id/appVersionTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_version"
                     style="@style/CardViewText" />
 
                 <TextView
-                    android:id="@+id/app_version_code_text_view"
+                    android:id="@+id/appVersionCodeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_version_code"
@@ -64,14 +64,14 @@
                     style="@style/CardViewText"/>
 
                 <Button
-                    android:id="@+id/about_website_button"
+                    android:id="@+id/aboutWebsiteButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/about_website"
                     style="@style/ButtonBase"/>
 
                 <Button
-                    android:id="@+id/about_github_button"
+                    android:id="@+id/aboutGithubButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -79,7 +79,7 @@
                     style="@style/ButtonBase"/>
 
                 <Button
-                    android:id="@+id/about_google_plus_button"
+                    android:id="@+id/aboutGooglePlusButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -87,7 +87,7 @@
                     style="@style/ButtonBase"/>
 
                 <Button
-                    android:id="@+id/about_youtube_button"
+                    android:id="@+id/aboutYoutubeButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"

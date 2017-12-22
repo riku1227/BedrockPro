@@ -30,12 +30,12 @@ class HomeFragment : android.support.v4.app.Fragment() {
         packageInfo = pm?.getPackageInfo(activity?.applicationContext?.packageName,0)
         res = activity?.baseContext?.resources
 
-        app_version_text_view.text = res?.getString(R.string.app_version)?.format(packageInfo?.versionName)
-        app_version_code_text_view.text = res?.getString(R.string.app_version_code)?.format(packageInfo?.versionCode)
+        appVersionTextView.text = res?.getString(R.string.app_version)?.format(packageInfo?.versionName)
+        appVersionCodeTextView.text = res?.getString(R.string.app_version_code)?.format(packageInfo?.versionCode)
 
-        about_github_button.setOnClickListener { webIntent(activity!!, "https://github.com/riku1227/BedrockPro") }
-        about_google_plus_button.setOnClickListener { webIntent(activity!!, "https://plus.google.com/103470090583882439463") }
-        about_youtube_button.setOnClickListener { webIntent(activity!!, "https://www.youtube.com/channel/UCIhk2bb4Y8kPCnjCeiEVtmA") }
-        about_website_button.setOnClickListener { webIntent(activity!!, "https://riku1227.github.io") }
+        aboutGithubButton.setOnClickListener { webIntent(activity!!, "https://github.com/riku1227/BedrockPro") }
+        aboutGooglePlusButton.setOnClickListener { webIntent(activity!!, "https://plus.google.com/103470090583882439463") }
+        aboutYoutubeButton.setOnClickListener { webIntent(activity!!, "https://www.youtube.com/channel/UCIhk2bb4Y8kPCnjCeiEVtmA") }
+        aboutWebsiteButton.setOnClickListener { webIntent(activity!!, "https://riku1227.github.io") }
     }
 }

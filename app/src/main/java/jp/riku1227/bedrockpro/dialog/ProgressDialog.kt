@@ -31,8 +31,8 @@ class ProgressDialog : DialogFragment() {
 
     override fun onResume() {
         super.onResume()
-        val progressText = dialog.findViewById<TextView>(R.id.progress_text)
-        val progressSubText = dialog.findViewById<TextView>(R.id.progress_text_sub)
+        val progressText = dialog.findViewById<TextView>(R.id.progressText)
+        val progressSubText = dialog.findViewById<TextView>(R.id.progressTextSub)
         thread {
             while (!finished) {
                 handler?.post {
