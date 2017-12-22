@@ -10,6 +10,7 @@ Minecraft BedrockEditionのリソースパックとかを簡単に生成でき�
     - UUIDの自動生成
     - カスタムアイコン
     - デフォルトリソースをキャッシュ
+    - サブパックの自動生成
 - BackupAPK
   - MCPEのapkをバックアップする
 ## 絵文字
