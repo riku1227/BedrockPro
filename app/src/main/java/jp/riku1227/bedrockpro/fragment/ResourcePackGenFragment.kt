@@ -106,7 +106,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                                     resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
                             resourcePackGenResoluteCheckDialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
                             resourcePackGenResoluteCheckDialog!!.setDialogListener(this)
-                            val versionTxtFile = File(FileUtil.getExternalStoragePath()+"BedrockPeo/cache/resource/version.txt")
+                            val versionTxtFile = File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/version.txt")
                             if (versionTxtFile.exists()) {
                                 if(versionTxtFile.readText() != BedrockUtil(activity!!.packageManager).getVersion()) {
                                     val versionErrorDialog = SimpleDialog.newInstance(resources.getString(R.string.dialog_version_error_title),
