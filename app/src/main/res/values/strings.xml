@@ -58,6 +58,21 @@
     <string name="resource_pack_gen_dialog_progress_edit_manifest">Edit manifest.json</string>
     <string name="resource_pack_gen_dialog_progress_delete_cache">Delete cache</string>
 
+    <string name="behavior_pack_gen_name">Name</string>
+    <string name="behavior_gen_description">Description</string>
+    <string name="behavior_pack_gen_header_uuid">Header UUID</string>
+    <string name="behavior_pack_gen_module_uuid">Module UUID</string>
+    <string name="behavior_pack_gen_dependencies">Dependencies</string>
+    <string name="behavior_pack_gen_behavior_cache">Cache default behavior of MCBE in storage</string>
+    <string name="behavior_pack_gen_auto_gen_uuid">Automatically generate UUID</string>
+    <string name="behavior_pack_gen_custom_pack_icon">Custom pack icon</string>
+    <string name="behavior_pack_gen_enable_dependencies">Enable Dependencies</string>
+    <string name="behavior_pack_gen_generate">Generate</string>
+    <string name="behavior_pack_gen_pick_custom_icon">Pick custom icon</string>
+    <string name="behavior_pack_gen_add_sub_pack">Add sub pack</string>
+    <string name="behavior_pack_gen_delete_cache">Delete Cache</string>
+    <string name="behavior_pack_gen_icon">Icon</string>
+
     <string name="dialog_grant_permission">Please grant permission</string>
     <string name="dialog_grant_external_storage_message">External storage permission is necessary</string>
 

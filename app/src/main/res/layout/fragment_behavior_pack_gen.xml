@@ -1,0 +1,212 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/background_color">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            style="@style/CardViewBase">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/behaviorPackGenName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/behavior_pack_gen_name"
+                        android:textSize="25sp"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/behaviorPackGenDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/behavior_gen_description"
+                        android:textSize="25sp"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/behaviorPackGenHeaderUuid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/behavior_pack_gen_header_uuid"
+                        android:textSize="25sp"
+                        android:visibility="gone"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/behaviorPackGenModuleUuid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/behavior_pack_gen_module_uuid"
+                        android:textSize="25sp"
+                        android:visibility="gone"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/behaviorPackGenDependencies"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/behavior_pack_gen_dependencies"
+                        android:textSize="25sp"
+                        android:visibility="gone"/>
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            style="@style/CardViewBase">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <CheckBox
+                    android:id="@+id/behaviorPackGenResourceCache"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/behavior_pack_gen_behavior_cache"
+                    android:textSize="15sp"
+                    android:checked="true"/>
+
+                <CheckBox
+                    android:id="@+id/behaviorPackGenAutoGenUuid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/behavior_pack_gen_auto_gen_uuid"
+                    android:textSize="15sp"
+                    android:checked="true"/>
+
+                <CheckBox
+                    android:id="@+id/behaviorPackGenCustomPackIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/behavior_pack_gen_custom_pack_icon"
+                    android:textSize="15sp"
+                    android:checked="false"/>
+
+                <CheckBox
+                    android:id="@+id/behaviorPackGenEnableDependencies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/behavior_pack_gen_enable_dependencies"
+                    android:textSize="15sp"
+                    android:checked="false"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            style="@style/CardViewBase">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <Button
+                    android:id="@+id/behaviorPackGenGenerate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/behavior_pack_gen_generate"
+                    style="@style/ButtonBase"/>
+
+                <Button
+                    android:id="@+id/behaviorPackGenPickCustomIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/behavior_pack_gen_pick_custom_icon"
+                    style="@style/ButtonBase"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/behaviorPackGenAddSubPack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/behavior_pack_gen_add_sub_pack"
+                    style="@style/ButtonBase"
+                    android:layout_marginTop="10dp" />
+
+                <Button
+                    android:id="@+id/behaviorPackGenDeleteCache"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/behavior_pack_gen_delete_cache"
+                    style="@style/ButtonBase"
+                    android:layout_marginTop="10dp" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/behaviorPackGenCustomPackIconCard"
+            android:visibility="gone"
+            style="@style/CardViewBase">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/behavior_pack_gen_icon"
+                    style="@style/CardViewText"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+                    <requestFocus />
+
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/behaviorPackGenCustomPackIconImageView"
+                    android:layout_width="512px"
+                    android:layout_height="512px"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+</ScrollView>

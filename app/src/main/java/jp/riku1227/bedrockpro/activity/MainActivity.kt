@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import jp.riku1227.bedrockpro.*
 import jp.riku1227.bedrockpro.dialog.PermissionDialog
+import jp.riku1227.bedrockpro.fragment.BehaviorPackGenFragment
 import jp.riku1227.bedrockpro.fragment.HomeFragment
 import jp.riku1227.bedrockpro.fragment.ResourcePackGenFragment
 import jp.riku1227.bedrockpro.util.FileUtil
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.drawer_home -> replaceFragment(fragmentTransaction,HomeFragment())
             R.id.drawer_resource_pack_gen -> replaceFragment(fragmentTransaction,ResourcePackGenFragment())
             R.id.drawer_util_backup_apk -> backupAPK()
-            R.id.drawer_behavior_pack_gen -> makeToast(baseContext,"Unimplemented")
+            R.id.drawer_behavior_pack_gen -> replaceFragment(fragmentTransaction,BehaviorPackGenFragment())
         }
         drawerLayout.closeDrawers()
         return true

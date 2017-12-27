@@ -58,6 +58,21 @@
     <string name="resource_pack_gen_dialog_progress_edit_manifest">manifest.jsonを編集中</string>
     <string name="resource_pack_gen_dialog_progress_delete_cache">キャッシュを削除中</string>
 
+    <string name="behavior_pack_gen_name">名前</string>
+    <string name="behavior_gen_description">説明</string>
+    <string name="behavior_pack_gen_header_uuid">ヘッダー UUID</string>
+    <string name="behavior_pack_gen_module_uuid">モジュール UUID</string>
+    <string name="behavior_pack_gen_dependencies">依存関係</string>
+    <string name="behavior_pack_gen_behavior_cache">MCPEのデフォルトビヘイビアーをストレージにキャッシュする</string>
+    <string name="behavior_pack_gen_auto_gen_uuid">UUIDを自動生成する</string>
+    <string name="behavior_pack_gen_custom_pack_icon">カスタムパックアイコン</string>
+    <string name="behavior_pack_gen_enable_dependencies">依存関係を有効化</string>
+    <string name="behavior_pack_gen_generate">生成</string>
+    <string name="behavior_pack_gen_pick_custom_icon">カスタムアイコンを選択する</string>
+    <string name="behavior_pack_gen_add_sub_pack">サブパックを追加</string>
+    <string name="behavior_pack_gen_delete_cache">キャッシュを削除</string>
+    <string name="behavior_pack_gen_icon">アイコン</string>
+
     <string name="dialog_grant_permission">許可してください</string>
     <string name="dialog_grant_external_storage_message">ストレージのアクセス許可が必要です</string>
     <string name="dialog_version_error_title">バージョンエラー</string>
