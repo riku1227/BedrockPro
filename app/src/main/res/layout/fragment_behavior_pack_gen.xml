@@ -199,8 +199,8 @@
 
                 <ImageView
                     android:id="@+id/behaviorPackGenCustomPackIconImageView"
-                    android:layout_width="512px"
-                    android:layout_height="512px"
+                    android:layout_width="256dp"
+                    android:layout_height="256dp"
                     android:layout_gravity="center"/>
 
             </LinearLayout>
