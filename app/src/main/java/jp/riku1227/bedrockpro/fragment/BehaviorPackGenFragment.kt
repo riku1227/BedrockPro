@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import jp.riku1227.bedrockpro.R
-import kotlinx.android.synthetic.main.fragment_behavior_pack_gen.xml.*
+import kotlinx.android.synthetic.main.fragment_behavior_pack_gen.*
 
 
 class BehaviorPackGenFragment : android.support.v4.app.Fragment() {
