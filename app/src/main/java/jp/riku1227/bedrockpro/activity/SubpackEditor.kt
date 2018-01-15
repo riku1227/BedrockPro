@@ -8,7 +8,9 @@ import jp.riku1227.bedrockpro.adapter.SubpackEditAdapter
 import kotlinx.android.synthetic.main.activity_sub_pack_editor.*
 import android.content.Intent
 import android.support.design.widget.TextInputEditText
+import android.support.v7.widget.LinearLayoutManager
 import android.view.KeyEvent
+import jp.riku1227.bedrockpro.makeToast
 
 
 class SubpackEditor : AppCompatActivity() {
@@ -33,10 +35,14 @@ class SubpackEditor : AppCompatActivity() {
         subPackCardDirectory = intent.getStringArrayListExtra("subPackCardDirectory")
         subPackCardMemoryTier = intent.getStringArrayListExtra("subPackCardMemoryTier")
 
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.isItemPrefetchEnabled = true
+
         subPackCardAdapter = SubpackEditAdapter(layoutInflater,subPackCardName,subPackCardDirectory,subPackCardMemoryTier)
 
         subPackEditorList.setHasFixedSize(true)
         subPackEditorList.adapter = subPackCardAdapter
+        subPackEditorList.layoutManager = layoutManager
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -48,20 +54,25 @@ class SubpackEditor : AppCompatActivity() {
     }
 
     private fun activityFinish() {
-        for (i in 0 until subPackCardAdapter?.itemCount!!) {
-            val subPackCardViewHolder = subPackCardAdapter?.getViewHolderList()!![i]
-            if(subPackCardViewHolder != null) {
-                subPackCardName[i] = subPackCardViewHolder.itemView.findViewById<TextInputEditText>(R.id.subPackCardName).text.toString()
-                subPackCardDirectory[i] = subPackCardViewHolder.itemView.findViewById<TextInputEditText>(R.id.subPackCardDirectory).text.toString()
-                subPackCardMemoryTier[i] = subPackCardViewHolder.itemView.findViewById<TextInputEditText>(R.id.subPackCardMemoryTier).text.toString()
+        //subPackEditorList.layoutManager.collectInitialPrefetchPositions(subPackCardAdapter?.itemCount!!,)
+        if(subPackCardAdapter?.getOnBindViewHolderCallCount() == subPackCardAdapter?.itemCount) {
+            for (i in 0 until subPackCardAdapter?.itemCount!!) {
+                val subPackCardViewHolder = subPackCardAdapter?.getViewHolderList()!![i]
+                if(subPackCardViewHolder != null) {
+                    subPackCardName[i] = subPackCardViewHolder.itemView.findViewById<TextInputEditText>(R.id.subPackCardName).text.toString()
+                    subPackCardDirectory[i] = subPackCardViewHolder.itemView.findViewById<TextInputEditText>(R.id.subPackCardDirectory).text.toString()
+                    subPackCardMemoryTier[i] = subPackCardViewHolder.itemView.findViewById<TextInputEditText>(R.id.subPackCardMemoryTier).text.toString()
+                }
             }
+            val intent = Intent()
+            intent.putExtra("subPackCardName", subPackCardName)
+            intent.putExtra("subPackCardDirectory", subPackCardDirectory)
+            intent.putExtra("subPackCardMemoryTier", subPackCardMemoryTier)
+            setResult(9543, intent)
+            finish()
+        } else {
+            makeToast(baseContext,"一度一番下までスライドしてください")
         }
-        val intent = Intent()
-        intent.putExtra("subPackCardName", subPackCardName)
-        intent.putExtra("subPackCardDirectory", subPackCardDirectory)
-        intent.putExtra("subPackCardMemoryTier", subPackCardMemoryTier)
-        setResult(9543, intent)
-        finish()
     }
 
 }

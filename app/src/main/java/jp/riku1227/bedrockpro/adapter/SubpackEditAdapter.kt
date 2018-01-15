@@ -1,6 +1,8 @@
 package jp.riku1227.bedrockpro.adapter
 
+import android.content.Context
 import android.support.design.widget.TextInputEditText
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,18 +12,19 @@ import android.widget.Button
 import jp.riku1227.bedrockpro.R
 
 
-class SubpackEditAdapter(inflater: LayoutInflater, subPackNameList : ArrayList<String>, subPackDirectoryList : ArrayList<String>, subPackMemoryTier : ArrayList<String>) : RecyclerView.Adapter<SubpackEditAdapter.ViewHolder>() {
+class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : ArrayList<String>, subPackDirectoryList : ArrayList<String>, subPackMemoryTier : ArrayList<String>) : RecyclerView.Adapter<SubpackEditAdapter.ViewHolder>() {
 
     private var subPackCardNameList = arrayListOf<String>()
     private var subPackCardDirectoryList = arrayListOf<String>()
     private var subPackCardMemoryTier = arrayListOf<String>()
-
-    private var mInflater : LayoutInflater? = null
-
     private val viewHolderList = arrayListOf<ViewHolder>()
 
+    private var mInflater : LayoutInflater? = null
+    private var mRecyclerView : RecyclerView? = null
+    private var mOnBindViewHolderCallCount = 0
+
     init {
-        mInflater = inflater
+        mInflater = layoutInflater
         subPackCardNameList = subPackNameList
         subPackCardDirectoryList = subPackDirectoryList
         subPackCardMemoryTier = subPackMemoryTier
@@ -44,22 +47,30 @@ class SubpackEditAdapter(inflater: LayoutInflater, subPackNameList : ArrayList<S
         }
     }
 
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+        mRecyclerView = recyclerView
+        super.onAttachedToRecyclerView(recyclerView)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) : ViewHolder {
-        val viewHolder = ViewHolder(mInflater!!.inflate(R.layout.card_subpack, parent, false))
-        viewHolderList.add(viewHolder)
-        return viewHolder
+        return ViewHolder(mInflater!!.inflate(R.layout.card_subpack, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+        mOnBindViewHolderCallCount++
+        viewHolderList.add(holder!!)
         holder?.subPackName?.setText(subPackCardNameList[position])
         holder?.subPackDirectory?.setText(subPackCardDirectoryList[position])
         holder?.subPackMemoryTier?.setText(subPackCardMemoryTier[position])
+
+        holder?.subPackName.requestFocus()
 
         holder?.subPackAddButton?.setOnClickListener {
             subPackCardNameList.add("")
             subPackCardDirectoryList.add("")
             subPackCardMemoryTier.add("")
             notifyItemInserted(itemCount)
+            mRecyclerView?.scrollToPosition(itemCount - 1)
             Log.e("Test",subPackCardNameList.size.toString())
         }
 
@@ -79,5 +90,9 @@ class SubpackEditAdapter(inflater: LayoutInflater, subPackNameList : ArrayList<S
 
     fun getViewHolderList() : ArrayList<ViewHolder> {
         return viewHolderList
+    }
+
+    fun getOnBindViewHolderCallCount(): Int {
+        return mOnBindViewHolderCallCount
     }
 }
