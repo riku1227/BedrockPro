@@ -5,11 +5,8 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.provider.Settings
-import android.support.annotation.RequiresApi
 import android.support.v4.content.PermissionChecker
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
@@ -30,8 +27,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.*
 import kotlin.concurrent.thread
-import android.support.design.widget.TextInputEditText
-import android.widget.Button
+import jp.riku1227.bedrockpro.activity.SubpackEditor
 
 class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListener {
 
@@ -47,7 +43,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     private var resourcePackCustomIconBitmap : Bitmap? = null
 
     private val deleteFileList = arrayOf("credits", "font", "materials", "texts", "blocks.json", "bug_pack_icon.png", "items_client.json", "items_offsets_client.json", "loading_messages.json", "manifest_publish.json", "splashes.json")
-    private val subPackCard = arrayListOf<View?>()
+
+    private var subPackCardName = arrayListOf("")
+    private var subPackCardDirectory = arrayListOf("")
+    private var subPackCardMemoryTier = arrayListOf("")
 
 
     private var resoluteDialogMessage = ""
@@ -60,7 +59,6 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         return inflater.inflate(R.layout.fragment_resource_pack_gen,container,false)
     }
 
-    @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onStart() {
         super.onStart()
         activity?.title = "ResourcePackGen"
@@ -87,58 +85,38 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                     if(resourcePackGenName.text.toString() == "") {
                         makeSnackBar(view!!,resources.getString(R.string.resource_pack_gen_not_input_name))
                     } else {
-                        var subPackNoInput = false
-                        subPackCard.forEach {
-                            if(it != null) {
-                                if(it.findViewById<TextInputEditText>(R.id.subPackCardName).text.toString() == "") {
-                                    subPackNoInput = true
-                                }
-
-                                if(it.findViewById<TextInputEditText>(R.id.subPackCardDirectory).text.toString() == "") {
-                                    subPackNoInput = true
-                                }
-
-                                if(it.findViewById<TextInputEditText>(R.id.subPackCardMemoryTier).text.toString() == "") {
-                                    subPackNoInput = true
-                                }
-                            }
-                        }
-                        if(subPackNoInput) {
-                            makeSnackBar(view!!,resources.getString(R.string.resource_pack_sub_pack_not_input))
+                        resourcePackName = resourcePackGenName.text.toString()
+                        resourcePackDescription = resourcePackGenDescription.text.toString()
+                        if(resourcePackAutoGenUUID) {
+                            resourcePackHeaderUUID = UUID.randomUUID().toString()
+                            resourcePackModuleUUID = UUID.randomUUID().toString()
                         } else {
-                            resourcePackName = resourcePackGenName.text.toString()
-                            resourcePackDescription = resourcePackGenDescription.text.toString()
-                            if(resourcePackAutoGenUUID) {
-                                resourcePackHeaderUUID = UUID.randomUUID().toString()
-                                resourcePackModuleUUID = UUID.randomUUID().toString()
-                            } else {
-                                resourcePackHeaderUUID = resourcePackGenHeaderUuid.text.toString()
-                                resourcePackModuleUUID = resourcePackGenModuleUuid.text.toString()
-                            }
+                            resourcePackHeaderUUID = resourcePackGenHeaderUuid.text.toString()
+                            resourcePackModuleUUID = resourcePackGenModuleUuid.text.toString()
+                        }
 
-                            if(File(FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/").exists()) {
-                                makeSnackBar(view!!,resources.getString(R.string.resource_pack_is_exists))
-                            } else {
-                                resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
-                                        resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
-                                        resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
-                                        resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
-                                resourcePackGenResoluteCheckDialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
-                                resourcePackGenResoluteCheckDialog!!.setDialogListener(this)
-                                val versionTxtFile = File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/version.txt")
-                                if (versionTxtFile.exists()) {
-                                    if(versionTxtFile.readText() != BedrockUtil(activity!!.packageManager).getVersion()) {
-                                        val versionErrorDialog = SimpleDialog.newInstance(resources.getString(R.string.dialog_version_error_title),
-                                                resources.getString(R.string.dialog_version_error_message),
-                                                resources.getString(R.string.dialog_version_error_positive),resources.getString(R.string.dialog_version_error_negative))
-                                        versionErrorDialog.setDialogListener(this)
-                                        versionErrorDialog.show(fragmentManager,"resource_pack_gen_cache_version_error")
-                                    } else {
-                                        resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
-                                    }
+                        if(File(FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/").exists()) {
+                            makeSnackBar(view!!,resources.getString(R.string.resource_pack_is_exists))
+                        } else {
+                            resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
+                                    resources.getString(R.string.resource_pack_gen_dialog_description).format(resourcePackDescription) + "\n" +
+                                    resources.getString(R.string.resource_pack_gen_dialog_header_uuid).format(resourcePackHeaderUUID) + "\n" +
+                                    resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
+                            resourcePackGenResoluteCheckDialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
+                            resourcePackGenResoluteCheckDialog!!.setDialogListener(this)
+                            val versionTxtFile = File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/version.txt")
+                            if (versionTxtFile.exists()) {
+                                if(versionTxtFile.readText() != BedrockUtil(activity!!.packageManager).getVersion()) {
+                                    val versionErrorDialog = SimpleDialog.newInstance(resources.getString(R.string.dialog_version_error_title),
+                                            resources.getString(R.string.dialog_version_error_message),
+                                            resources.getString(R.string.dialog_version_error_positive),resources.getString(R.string.dialog_version_error_negative))
+                                    versionErrorDialog.setDialogListener(this)
+                                    versionErrorDialog.show(fragmentManager,"resource_pack_gen_cache_version_error")
                                 } else {
                                     resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
                                 }
+                            } else {
+                                resourcePackGenResoluteCheckDialog!!.show(fragmentManager,"resource_pack_gen_resolute_check_dialog")
                             }
                         }
                     }
@@ -184,7 +162,11 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         }
 
         resourcePackGenAddSubPack.setOnClickListener {
-            addSubPack()
+            val intent = Intent(context, SubpackEditor::class.java)
+            intent.putExtra("subPackCardName",subPackCardName)
+            intent.putExtra("subPackCardDirectory",subPackCardDirectory)
+            intent.putExtra("subPackCardMemoryTier",subPackCardMemoryTier)
+            startActivityForResult(intent,9543)
         }
 
         resourcePackGenDeleteCache.setOnClickListener {
@@ -204,6 +186,12 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 uri = data.data
                 resourcePackCustomIconBitmap = UriUtil.getBitmapFromUri(activity!!,uri)
                 resourcePackGenCustomPackIconImageView.setImageBitmap(resourcePackCustomIconBitmap)
+            }
+        } else if(resultCode == 9543) {
+            if (data != null) {
+                subPackCardName = data.getStringArrayListExtra("subPackCardName")
+                subPackCardDirectory = data.getStringArrayListExtra("subPackCardDirectory")
+                subPackCardMemoryTier = data.getStringArrayListExtra("subPackCardMemoryTier")
             }
         }
     }
@@ -236,23 +224,6 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         }
     }
 
-    private fun addSubPack() {
-        val layout = resourcePackGenRootLayout
-        val card = View.inflate(context,R.layout.card_subpack,null)
-        card.findViewById<Button>(R.id.subPackCardAdd).setOnClickListener {
-            addSubPack()
-        }
-        card.findViewById<Button>(R.id.subPackDelete).setOnClickListener {
-            Handler().postDelayed({
-                card.visibility = View.GONE
-                subPackCard[card.tag as Int - 1] = null
-            }, 250)
-        }
-        card.tag = subPackCard.size + 1
-        subPackCard.add(card)
-        layout.addView(card)
-    }
-
     private fun generateResourcePack() {
         val mcbeUtil = BedrockUtil(activity!!.packageManager)
         val cacheFolder = FileUtil.getExternalStoragePath() + "BedrockPro/cache/"
@@ -277,15 +248,13 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 FileUtil.deleteFile(outFolder + deleteFileList[i])
             }
             progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_edit_manifest)
-            if(subPackCard.size != 0) {
+            if(subPackCardName.size != 0) {
                 FileUtil.createDirectory(outFolder+"subpacks")
-                subPackCard.forEach {
-                    if(it != null) {
-                        val directoryName = it.findViewById<TextInputEditText>(R.id.subPackCardDirectory)?.text.toString()
-                        FileUtil.createDirectory(outFolder+"subpacks/"+directoryName)
-                    }
+
+                for(i in 0 until subPackCardDirectory.size) {
+                    FileUtil.createDirectory(outFolder+"subpacks/"+subPackCardDirectory[i])
                 }
-                BedrockUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID,subPackCard)
+                BedrockUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID,subPackCardName,subPackCardDirectory,subPackCardMemoryTier)
             } else {
                 BedrockUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
             }

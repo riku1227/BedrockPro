@@ -3,9 +3,6 @@ package jp.riku1227.bedrockpro.util
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.support.design.widget.TextInputEditText
-import android.view.View
-import jp.riku1227.bedrockpro.R
 import java.io.*
 
 class BedrockUtil(pm : PackageManager) {
@@ -40,7 +37,7 @@ class BedrockUtil(pm : PackageManager) {
     }
 
     companion object {
-        fun editManifest(filePath : String, packName : String, packDescription : String, packHeaderUUID : String, packModuleUUID : String,arrayList : ArrayList<View?>? = null) : String {
+        fun editManifest(filePath : String, packName : String, packDescription : String, packHeaderUUID : String, packModuleUUID : String,subPackCardNameList : ArrayList<String>? = null, subPackCardDirectoryList : ArrayList<String>? = null, subPackCardMemoryTierList : ArrayList<String>? = null) : String {
             val manifestFile = File(filePath)
             if(!manifestFile.exists()) {
                 manifestFile.createNewFile()
@@ -84,22 +81,16 @@ class BedrockUtil(pm : PackageManager) {
                     }
                     it.indexOf("]") != -1 -> {
                         if(subpack) {
-                            if(arrayList != null) {
+                            if(subPackCardNameList != null) {
                                 str = "    ],\n    \"subpacks\": [\n"
                                 var num = 0
-                                val subPackCard = arrayListOf<View>()
-                                arrayList.forEach {
-                                    if(it != null) {
-                                        subPackCard.add(it)
-                                    }
-                                }
 
-                                subPackCard.forEach {
-                                    num++
-                                    val folderName = it?.findViewById<TextInputEditText>(R.id.subPackCardDirectory)?.text.toString()
-                                    val name = it?.findViewById<TextInputEditText>(R.id.subPackCardName)?.text.toString()
-                                    val memoryTier = it?.findViewById<TextInputEditText>(R.id.subPackCardMemoryTier)?.text.toString()
-                                    if(subPackCard.size == num) {
+                                for(i in 0 until subPackCardNameList.size) {
+                                    val folderName = subPackCardDirectoryList!![i]
+                                    val name = subPackCardNameList!![i]
+                                    val memoryTier = subPackCardMemoryTierList!![i]
+
+                                    if(subPackCardNameList.size - 1 == i) {
                                         str += "        {\n"+
                                                 "            \"folder_name\": \"$folderName\",\n"+
                                                 "            \"name\": \"$name,\"\n"+

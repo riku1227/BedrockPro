@@ -80,4 +80,5 @@
     <string name="dialog_version_error_message">Cache version and Minecraft PE version do not match\nDo you delete the cache?</string>
     <string name="dialog_version_error_positive">Yes</string>
     <string name="dialog_version_error_negative">Generate as it is</string>
+    <string name="title_activity_sub_pack_editor">SubPackEditor</string>
 </resources>
