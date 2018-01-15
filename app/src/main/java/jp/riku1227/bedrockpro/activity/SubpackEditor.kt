@@ -54,7 +54,6 @@ class SubpackEditor : AppCompatActivity() {
     }
 
     private fun activityFinish() {
-        //subPackEditorList.layoutManager.collectInitialPrefetchPositions(subPackCardAdapter?.itemCount!!,)
         if(subPackCardAdapter?.getOnBindViewHolderCallCount() == subPackCardAdapter?.itemCount) {
             for (i in 0 until subPackCardAdapter?.itemCount!!) {
                 val subPackCardViewHolder = subPackCardAdapter?.getViewHolderList()!![i]
