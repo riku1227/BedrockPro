@@ -155,10 +155,10 @@
                     android:visibility="gone"/>
 
                 <Button
-                    android:id="@+id/behaviorPackGenAddSubPack"
+                    android:id="@+id/behaviorPackGenSubPackEditor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/behavior_pack_gen_add_sub_pack"
+                    android:text="@string/resource_pack_gen_sub_pack_editor"
                     style="@style/ButtonBase"
                     android:layout_marginTop="10dp" />
 

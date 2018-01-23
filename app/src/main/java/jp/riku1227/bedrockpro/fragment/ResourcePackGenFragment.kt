@@ -161,7 +161,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             startActivityForResult(intent, resultPickImageFile)
         }
 
-        resourcePackGenAddSubPack.setOnClickListener {
+        resourcePackGenSubPackEditor.setOnClickListener {
             val intent = Intent(context, SubpackEditor::class.java)
             intent.putExtra("subPackData",subPackData)
             startActivityForResult(intent,9543)

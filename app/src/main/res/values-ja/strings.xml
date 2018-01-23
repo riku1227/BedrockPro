@@ -35,7 +35,7 @@
     <string name="resource_pack_gen_custom_pack_icon">カスタムパックアイコン</string>
     <string name="resource_pack_gen_generate">生成</string>
     <string name="resource_pack_gen_pick_custom_icon">カスタムアイコンを選択する</string>
-    <string name="resource_pack_gen_add_sub_pack">サブパックエディター</string>
+    <string name="resource_pack_gen_sub_pack_editor">サブパックエディター</string>
     <string name="resource_pack_gen_delete_cache">キャッシュを削除する</string>
     <string name="resource_pack_gen_icon">アイコン</string>
     <string name="resource_pack_gen_sub_pack_name">サブパックの名前</string>
