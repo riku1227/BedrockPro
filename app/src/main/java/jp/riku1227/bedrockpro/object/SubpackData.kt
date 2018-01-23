@@ -1,6 +1,5 @@
 package jp.riku1227.bedrockpro.`object`
 
-import jp.riku1227.bedrockpro.adapter.SubpackEditAdapter
 import java.io.Serializable
 
 data class SubpackData(
