@@ -26,8 +26,6 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
-    var centerFragmentName : String = ""
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +47,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.flameLayout,homeFragment,"HomeFragment")
             fragmentTransaction.commit()
-            centerFragmentName = "HomeFragment"
         }
     }
 
@@ -67,13 +64,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun replaceFragment(fragmentTransaction : FragmentTransaction, fragment : Fragment, name : String) {
-        if(centerFragmentName != name) {
-            fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
-            fragmentTransaction.replace(R.id.flameLayout,fragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-            centerFragmentName = name
-        }
+        fragmentTransaction.setCustomAnimations(R.anim.fade_in,R.anim.fade_out,R.anim.fade_in,R.anim.fade_out)
+        fragmentTransaction.replace(R.id.flameLayout,fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
     private fun backupAPK() {
