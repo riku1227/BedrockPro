@@ -1,6 +1,8 @@
 package jp.riku1227.bedrockpro.adapter
 
 import android.content.Context
+import android.os.Parcel
+import android.os.Parcelable
 import android.support.design.widget.TextInputEditText
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -17,21 +19,24 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
     private var subPackCardNameList = arrayListOf<String>()
     private var subPackCardDirectoryList = arrayListOf<String>()
     private var subPackCardMemoryTier = arrayListOf<String>()
-    private val viewHolderList = arrayListOf<ViewHolder>()
+    private var viewHolderList = arrayListOf<ViewHolder?>()
+    private var deletePositionList = arrayListOf<Int>()
+    var deleteCount = 0
 
     private var mInflater : LayoutInflater? = null
     private var mRecyclerView : RecyclerView? = null
-    private var mOnBindViewHolderCallCount = 0
 
     init {
         mInflater = layoutInflater
         subPackCardNameList = subPackNameList
         subPackCardDirectoryList = subPackDirectoryList
         subPackCardMemoryTier = subPackMemoryTier
+        for(i in 0 until itemCount) {
+            viewHolderList.add(null)
+        }
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-
         var subPackName : TextInputEditText
         var subPackDirectory : TextInputEditText
         var subPackMemoryTier : TextInputEditText
@@ -57,13 +62,20 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        mOnBindViewHolderCallCount++
-        viewHolderList.add(holder!!)
+        Log.e("MCBE","Position: "+position.toString())
+        Log.e("MCBE","Size: "+viewHolderList.size.toString())
+        if(viewHolderList.size > position) {
+            viewHolderList[position] = holder
+        } else {
+            viewHolderList.add(holder)
+        }
+        Log.e("MCBE","NewPosition: "+position.toString())
+        Log.e("MCBE","NewSize: "+viewHolderList.size.toString())
         holder?.subPackName?.setText(subPackCardNameList[position])
         holder?.subPackDirectory?.setText(subPackCardDirectoryList[position])
         holder?.subPackMemoryTier?.setText(subPackCardMemoryTier[position])
 
-        holder?.subPackName.requestFocus()
+        holder?.subPackName!!.requestFocus()
 
         holder?.subPackAddButton?.setOnClickListener {
             subPackCardNameList.add("")
@@ -75,9 +87,12 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
         }
 
         holder?.subPackDeleteButton?.setOnClickListener {
+            deletePositionList.add(position)
+            deleteCount++
             subPackCardNameList.removeAt(holder?.layoutPosition)
             subPackCardDirectoryList.removeAt(holder?.layoutPosition)
             subPackCardMemoryTier.removeAt(holder?.layoutPosition)
+            viewHolderList.removeAt(holder?.layoutPosition)
             Log.e("Tag",holder?.layoutPosition.toString())
             Log.e("Tag",itemCount.toString())
             notifyItemRemoved(holder?.layoutPosition)
@@ -88,11 +103,11 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
         return subPackCardNameList.size
     }
 
-    fun getViewHolderList() : ArrayList<ViewHolder> {
+    fun getViewHolderList() : ArrayList<ViewHolder?> {
         return viewHolderList
     }
 
-    fun getOnBindViewHolderCallCount(): Int {
-        return mOnBindViewHolderCallCount
+    fun getDeletePositionList() : ArrayList<Int> {
+        return deletePositionList
     }
 }

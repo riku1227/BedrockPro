@@ -8,11 +8,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.support.v4.content.PermissionChecker
+import android.support.v7.widget.RecyclerView
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import jp.riku1227.bedrockpro.R
+import jp.riku1227.bedrockpro.`object`.SubpackData
 import jp.riku1227.bedrockpro.dialog.DialogListener
 import jp.riku1227.bedrockpro.dialog.PermissionDialog
 import jp.riku1227.bedrockpro.dialog.ProgressDialog
@@ -28,6 +30,8 @@ import java.io.FileOutputStream
 import java.util.*
 import kotlin.concurrent.thread
 import jp.riku1227.bedrockpro.activity.SubpackEditor
+import jp.riku1227.bedrockpro.adapter.SubpackEditAdapter
+import kotlin.collections.ArrayList
 
 class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListener {
 
@@ -44,9 +48,12 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     private val deleteFileList = arrayOf("credits", "font", "materials", "texts", "blocks.json", "bug_pack_icon.png", "items_client.json", "items_offsets_client.json", "loading_messages.json", "manifest_publish.json", "splashes.json")
 
-    private var subPackCardName = arrayListOf("")
+    /*private var subPackCardName = arrayListOf("")
     private var subPackCardDirectory = arrayListOf("")
     private var subPackCardMemoryTier = arrayListOf("")
+    private var subPackCaraViewHolderList : ArrayList<RecyclerView.ViewHolder>? = null*/
+
+    private var subPackData : SubpackData? = SubpackData(arrayListOf(""),arrayListOf(""),arrayListOf(""), arrayListOf<SubpackEditAdapter.ViewHolder>())
 
 
     private var resoluteDialogMessage = ""
@@ -163,9 +170,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
         resourcePackGenAddSubPack.setOnClickListener {
             val intent = Intent(context, SubpackEditor::class.java)
-            intent.putExtra("subPackCardName",subPackCardName)
+            /* intent.putExtra("subPackCardName",subPackCardName)
             intent.putExtra("subPackCardDirectory",subPackCardDirectory)
-            intent.putExtra("subPackCardMemoryTier",subPackCardMemoryTier)
+            intent.putExtra("subPackCardMemoryTier",subPackCardMemoryTier) */
+            intent.putExtra("subPackData",subPackData)
             startActivityForResult(intent,9543)
         }
 
@@ -189,9 +197,10 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             }
         } else if(resultCode == 9543) {
             if (data != null) {
-                subPackCardName = data.getStringArrayListExtra("subPackCardName")
+                /* subPackCardName = data.getStringArrayListExtra("subPackCardName")
                 subPackCardDirectory = data.getStringArrayListExtra("subPackCardDirectory")
-                subPackCardMemoryTier = data.getStringArrayListExtra("subPackCardMemoryTier")
+                subPackCardMemoryTier = data.getStringArrayListExtra("subPackCardMemoryTier") */
+                subPackData = data.getSerializableExtra("subPackData") as SubpackData?
             }
         }
     }
@@ -248,13 +257,13 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 FileUtil.deleteFile(outFolder + deleteFileList[i])
             }
             progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_edit_manifest)
-            if(subPackCardName.size != 0) {
+            if(subPackData?.name?.size != 0) {
                 FileUtil.createDirectory(outFolder+"subpacks")
 
-                for(i in 0 until subPackCardDirectory.size) {
-                    FileUtil.createDirectory(outFolder+"subpacks/"+subPackCardDirectory[i])
+                for(i in 0 until subPackData?.directory!!.size) {
+                    FileUtil.createDirectory(outFolder+"subpacks/"+subPackData?.directory!![i])
                 }
-                BedrockUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID,subPackCardName,subPackCardDirectory,subPackCardMemoryTier)
+                BedrockUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID,subPackData?.name,subPackData?.directory,subPackData?.memoryTier)
             } else {
                 BedrockUtil.editManifest(outFolder + "manifest.json",resourcePackName,resourcePackDescription,resourcePackHeaderUUID,resourcePackModuleUUID)
             }
