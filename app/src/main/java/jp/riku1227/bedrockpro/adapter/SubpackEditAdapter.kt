@@ -1,12 +1,7 @@
 package jp.riku1227.bedrockpro.adapter
 
-import android.content.Context
-import android.os.Parcel
-import android.os.Parcelable
 import android.support.design.widget.TextInputEditText
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,8 +15,6 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
     private var subPackCardDirectoryList = arrayListOf<String>()
     private var subPackCardMemoryTier = arrayListOf<String>()
     private var viewHolderList = arrayListOf<ViewHolder?>()
-    private var deletePositionList = arrayListOf<Int>()
-    var deleteCount = 0
 
     private var mInflater : LayoutInflater? = null
     private var mRecyclerView : RecyclerView? = null
@@ -37,19 +30,12 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        var subPackName : TextInputEditText
-        var subPackDirectory : TextInputEditText
-        var subPackMemoryTier : TextInputEditText
-        var subPackAddButton : Button
-        var subPackDeleteButton : Button
+        var subPackName : TextInputEditText = v.findViewById(R.id.subPackCardName)
+        var subPackDirectory : TextInputEditText = v.findViewById(R.id.subPackCardDirectory)
+        var subPackMemoryTier : TextInputEditText = v.findViewById(R.id.subPackCardMemoryTier)
+        var subPackAddButton : Button = v.findViewById(R.id.subPackCardAdd)
+        var subPackDeleteButton : Button = v.findViewById(R.id.subPackDelete)
 
-        init {
-            subPackName = v.findViewById(R.id.subPackCardName)
-            subPackDirectory = v.findViewById(R.id.subPackCardDirectory)
-            subPackMemoryTier = v.findViewById(R.id.subPackCardMemoryTier)
-            subPackAddButton = v.findViewById(R.id.subPackCardAdd)
-            subPackDeleteButton = v.findViewById(R.id.subPackDelete)
-        }
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
@@ -62,40 +48,31 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        Log.e("MCBE","Position: "+position.toString())
-        Log.e("MCBE","Size: "+viewHolderList.size.toString())
         if(viewHolderList.size > position) {
             viewHolderList[position] = holder
         } else {
             viewHolderList.add(holder)
         }
-        Log.e("MCBE","NewPosition: "+position.toString())
-        Log.e("MCBE","NewSize: "+viewHolderList.size.toString())
         holder?.subPackName?.setText(subPackCardNameList[position])
         holder?.subPackDirectory?.setText(subPackCardDirectoryList[position])
         holder?.subPackMemoryTier?.setText(subPackCardMemoryTier[position])
 
         holder?.subPackName!!.requestFocus()
 
-        holder?.subPackAddButton?.setOnClickListener {
+        holder.subPackAddButton.setOnClickListener {
             subPackCardNameList.add("")
             subPackCardDirectoryList.add("")
             subPackCardMemoryTier.add("")
             notifyItemInserted(itemCount)
             mRecyclerView?.scrollToPosition(itemCount - 1)
-            Log.e("Test",subPackCardNameList.size.toString())
         }
 
-        holder?.subPackDeleteButton?.setOnClickListener {
-            deletePositionList.add(position)
-            deleteCount++
-            subPackCardNameList.removeAt(holder?.layoutPosition)
-            subPackCardDirectoryList.removeAt(holder?.layoutPosition)
-            subPackCardMemoryTier.removeAt(holder?.layoutPosition)
-            viewHolderList.removeAt(holder?.layoutPosition)
-            Log.e("Tag",holder?.layoutPosition.toString())
-            Log.e("Tag",itemCount.toString())
-            notifyItemRemoved(holder?.layoutPosition)
+        holder.subPackDeleteButton.setOnClickListener {
+            subPackCardNameList.removeAt(holder.layoutPosition)
+            subPackCardDirectoryList.removeAt(holder.layoutPosition)
+            subPackCardMemoryTier.removeAt(holder.layoutPosition)
+            viewHolderList.removeAt(holder.layoutPosition)
+            notifyItemRemoved(holder.layoutPosition)
         }
     }
 
@@ -105,9 +82,5 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
 
     fun getViewHolderList() : ArrayList<ViewHolder?> {
         return viewHolderList
-    }
-
-    fun getDeletePositionList() : ArrayList<Int> {
-        return deletePositionList
     }
 }

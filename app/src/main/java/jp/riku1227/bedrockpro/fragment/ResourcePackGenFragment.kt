@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.support.v4.content.PermissionChecker
-import android.support.v7.widget.RecyclerView
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +30,6 @@ import java.util.*
 import kotlin.concurrent.thread
 import jp.riku1227.bedrockpro.activity.SubpackEditor
 import jp.riku1227.bedrockpro.adapter.SubpackEditAdapter
-import kotlin.collections.ArrayList
 
 class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListener {
 
@@ -47,11 +45,6 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     private var resourcePackCustomIconBitmap : Bitmap? = null
 
     private val deleteFileList = arrayOf("credits", "font", "materials", "texts", "blocks.json", "bug_pack_icon.png", "items_client.json", "items_offsets_client.json", "loading_messages.json", "manifest_publish.json", "splashes.json")
-
-    /*private var subPackCardName = arrayListOf("")
-    private var subPackCardDirectory = arrayListOf("")
-    private var subPackCardMemoryTier = arrayListOf("")
-    private var subPackCaraViewHolderList : ArrayList<RecyclerView.ViewHolder>? = null*/
 
     private var subPackData : SubpackData? = SubpackData(arrayListOf(""),arrayListOf(""),arrayListOf(""), arrayListOf<SubpackEditAdapter.ViewHolder>())
 
@@ -170,9 +163,6 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
         resourcePackGenAddSubPack.setOnClickListener {
             val intent = Intent(context, SubpackEditor::class.java)
-            /* intent.putExtra("subPackCardName",subPackCardName)
-            intent.putExtra("subPackCardDirectory",subPackCardDirectory)
-            intent.putExtra("subPackCardMemoryTier",subPackCardMemoryTier) */
             intent.putExtra("subPackData",subPackData)
             startActivityForResult(intent,9543)
         }
@@ -197,9 +187,6 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
             }
         } else if(resultCode == 9543) {
             if (data != null) {
-                /* subPackCardName = data.getStringArrayListExtra("subPackCardName")
-                subPackCardDirectory = data.getStringArrayListExtra("subPackCardDirectory")
-                subPackCardMemoryTier = data.getStringArrayListExtra("subPackCardMemoryTier") */
                 subPackData = data.getSerializableExtra("subPackData") as SubpackData?
             }
         }
