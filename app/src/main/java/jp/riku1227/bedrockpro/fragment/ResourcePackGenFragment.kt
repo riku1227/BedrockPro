@@ -46,7 +46,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     private val deleteFileList = arrayOf("credits", "font", "materials", "texts", "blocks.json", "bug_pack_icon.png", "items_client.json", "items_offsets_client.json", "loading_messages.json", "manifest_publish.json", "splashes.json")
 
-    private var subPackData : SubpackData? = SubpackData(arrayListOf(""),arrayListOf(""),arrayListOf(""), arrayListOf<SubpackEditAdapter.ViewHolder>())
+    private var subPackData : SubpackData? = SubpackData(arrayListOf(""),arrayListOf(""),arrayListOf(""))
 
 
     private var resoluteDialogMessage = ""
