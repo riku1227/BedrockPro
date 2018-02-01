@@ -51,7 +51,7 @@
     <string name="resource_pack_gen_dialog_description">説明: %1$s</string>
     <string name="resource_pack_gen_dialog_header_uuid">ヘッダー UUID: %1$s</string>
     <string name="resource_pack_gen_dialog_module_uuid">モジュール UUID: %1$s</string>
-    <string name="resource_pack_gen_dialog_progress_message_initial">...</string>
+    <string name="resource_pack_gen_dialog_progress_message_initial">…</string>
     <string name="resource_pack_gen_dialog_progress_message_unzip">APKを解凍中</string>
     <string name="resource_pack_gen_dialog_progress_copy_resource">%1$s にファイルをコピー</string>
     <string name="resource_pack_gen_dialog_progress_delete_file">不要なファイルを削除中</string>

@@ -51,7 +51,7 @@
     <string name="resource_pack_gen_dialog_description">Description: %1$s</string>
     <string name="resource_pack_gen_dialog_header_uuid">Header UUID: %1$s</string>
     <string name="resource_pack_gen_dialog_module_uuid">Module UUID: %1$s</string>
-    <string name="resource_pack_gen_dialog_progress_message_initial">...</string>
+    <string name="resource_pack_gen_dialog_progress_message_initial">…</string>
     <string name="resource_pack_gen_dialog_progress_message_unzip">Extracting APK</string>
     <string name="resource_pack_gen_dialog_progress_copy_resource">Copying resource to %1$s</string>
     <string name="resource_pack_gen_dialog_progress_delete_file">Deleting unnecessary file</string>
