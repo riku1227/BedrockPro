@@ -57,6 +57,8 @@
     <string name="resource_pack_gen_dialog_progress_delete_file">Delete unnecessary file</string>
     <string name="resource_pack_gen_dialog_progress_edit_manifest">Edit manifest.json</string>
     <string name="resource_pack_gen_dialog_progress_delete_cache">Delete cache</string>
+    <string name="resource_pack_gen_dialog_delete_cache">Delete cache</string>
+    <string name="resource_pack_gen_dialog_delete_cache_description">Do you want to delete the cache?</string>
 
     <string name="behavior_pack_gen_name">Name</string>
     <string name="behavior_gen_description">Description</string>

@@ -168,7 +168,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
         resourcePackGenDeleteCache.setOnClickListener {
             if(File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/").exists()) {
-                val deleteCacheDialog = SimpleDialog.newInstance("キャッシュを削除","キャッシュを削除しますか？")
+                val deleteCacheDialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_delete_cache),resources.getString(R.string.resource_pack_gen_dialog_delete_cache_description))
                 deleteCacheDialog.setDialogListener(this)
                 deleteCacheDialog.show(fragmentManager,"delete_cache_dialog")
             }

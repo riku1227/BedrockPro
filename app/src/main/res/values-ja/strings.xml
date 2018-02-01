@@ -57,6 +57,8 @@
     <string name="resource_pack_gen_dialog_progress_delete_file">不要なファイルを削除中</string>
     <string name="resource_pack_gen_dialog_progress_edit_manifest">manifest.jsonを編集中</string>
     <string name="resource_pack_gen_dialog_progress_delete_cache">キャッシュを削除中</string>
+    <string name="resource_pack_gen_dialog_delete_cache">キャッシュを削除</string>
+    <string name="resource_pack_gen_dialog_delete_cache_description">キャッシュを削除しますか？</string>
 
     <string name="behavior_pack_gen_name">名前</string>
     <string name="behavior_gen_description">説明</string>
