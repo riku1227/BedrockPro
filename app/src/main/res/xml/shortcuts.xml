@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="shortcut_resource_pack_gen"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_background"
+        android:shortcutShortLabel="@string/drawer_resource_pack_gen"
+        android:shortcutLongLabel="@string/drawer_resource_pack_gen"
+        android:shortcutDisabledMessage="@string/drawer_resource_pack_gen">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="jp.riku1227.bedrockpro"
+            android:targetClass="jp.riku1227.bedrockpro.activity.MainActivity">
+        </intent>
+
+    </shortcut>
+</shortcuts>
