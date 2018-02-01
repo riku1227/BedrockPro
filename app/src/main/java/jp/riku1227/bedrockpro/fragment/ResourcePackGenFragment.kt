@@ -29,7 +29,6 @@ import java.io.FileOutputStream
 import java.util.*
 import kotlin.concurrent.thread
 import jp.riku1227.bedrockpro.activity.SubpackEditor
-import jp.riku1227.bedrockpro.adapter.SubpackEditAdapter
 
 class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListener {
 
@@ -244,7 +243,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                 FileUtil.deleteFile(outFolder + deleteFileList[i])
             }
             progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_edit_manifest)
-            if(subPackData?.name!!.size <= 1 && subPackData?.name!![0] == "") {
+            if(subPackData?.name!!.size <= 1 && subPackData?.name!![0] != "") {
                 FileUtil.createDirectory(outFolder+"subpacks")
 
                 for(i in 0 until subPackData?.directory!!.size) {
