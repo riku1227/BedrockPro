@@ -48,6 +48,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             fragmentTransaction.replace(R.id.flameLayout,homeFragment,"HomeFragment")
             fragmentTransaction.commit()
         }
+
+        shortcutAction()
     }
 
     override fun onNavigationItemSelected(item : MenuItem) : Boolean {
@@ -68,6 +70,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fragmentTransaction.replace(R.id.flameLayout,fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
+    }
+
+    private fun shortcutAction() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val hasExtra = intent.hasExtra("shortcut_id")
+        if(!hasExtra) {
+            return
+        }
+
+        val shortcutId = intent.getStringExtra("shortcut_id")
+        when(shortcutId) {
+            "ResourcePackGenFragment" -> replaceFragment(fragmentTransaction,ResourcePackGenFragment(),"ResourcePackGenFragment")
+            "BehaviorPackGenFragment" -> replaceFragment(fragmentTransaction,BehaviorPackGenFragment(),"BehaviorPackGenFragment")
+        }
     }
 
     private fun backupAPK() {
