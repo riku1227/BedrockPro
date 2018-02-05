@@ -68,7 +68,6 @@
     <string name="behavior_pack_gen_behavior_cache">Cache default behavior of MCBE in storage</string>
     <string name="behavior_pack_gen_auto_gen_uuid">Automatically generate UUID</string>
     <string name="behavior_pack_gen_custom_pack_icon">Custom pack icon</string>
-    <string name="behavior_pack_gen_enable_dependencies">Enable Dependencies</string>
     <string name="behavior_pack_gen_generate">Generate</string>
     <string name="behavior_pack_gen_pick_custom_icon">Pick custom icon</string>
     <string name="behavior_pack_gen_add_sub_pack">Add sub pack</string>
