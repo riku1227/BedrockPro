@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import jp.riku1227.bedrockpro.*
 import jp.riku1227.bedrockpro.dialog.PermissionDialog
+import jp.riku1227.bedrockpro.dialog.ProgressDialog
 import jp.riku1227.bedrockpro.fragment.BehaviorPackGenFragment
 import jp.riku1227.bedrockpro.fragment.HomeFragment
 import jp.riku1227.bedrockpro.fragment.ResourcePackGenFragment
@@ -83,15 +84,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(shortcutId) {
             "ResourcePackGenFragment" -> replaceFragment(fragmentTransaction,ResourcePackGenFragment(),"ResourcePackGenFragment")
             "BehaviorPackGenFragment" -> replaceFragment(fragmentTransaction,BehaviorPackGenFragment(),"BehaviorPackGenFragment")
+            "BackupApk" -> backupAPK(true)
         }
     }
 
-    private fun backupAPK() {
+    private fun backupAPK(fromShortcut : Boolean = false) {
         val mcutil = BedrockUtil(packageManager)
+        val progressDialog = ProgressDialog()
         if(PermissionChecker.checkSelfPermission(baseContext, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
             PermissionDialog().show(supportFragmentManager,"PermissionDialog")
         } else {
             if(mcutil.isInstalled()) {
+                if(fromShortcut) {
+                    progressDialog.show(supportFragmentManager,"ProgressDialog")
+                    progressDialog.message = "Backuping..."
+                }
                 val handler = Handler()
                 val outFolder = FileUtil.getExternalStoragePath() + "BedrockPro/apk/"
                 val outFile = outFolder + "["+mcutil.getVersion()+"]"+"Minecraft.apk"
@@ -102,6 +109,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     makeThreadToast(handler,baseContext,resources.getString(R.string.backup_apk_end))
                     Thread.sleep(3000)
                     makeThreadToast(handler,baseContext,resources.getString(R.string.backup_apk_to).format(outFile))
+                    if(fromShortcut) {
+                        progressDialog.dismiss()
+                    }
                 }
             } else {
                 makeSnackBar(findViewById(R.id.flameLayout),resources.getString(R.string.mcpe_is_not_installed))

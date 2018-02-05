@@ -43,4 +43,26 @@
         </intent>
 
     </shortcut>
+
+    <shortcut
+        android:shortcutId="shortcut_backup_apk"
+        android:enabled="true"
+        android:icon="@drawable/ic_launcher_background"
+        android:shortcutShortLabel="@string/drawer_util_backup_apk"
+        android:shortcutLongLabel="@string/drawer_util_backup_apk"
+        android:shortcutDisabledMessage="@string/drawer_util_backup_apk">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="jp.riku1227.bedrockpro"
+            android:targetClass="jp.riku1227.bedrockpro.activity.MainActivity">
+
+            <extra
+                android:name="shortcut_id"
+                android:value="BackupApk"
+                />
+
+        </intent>
+
+    </shortcut>
 </shortcuts>
