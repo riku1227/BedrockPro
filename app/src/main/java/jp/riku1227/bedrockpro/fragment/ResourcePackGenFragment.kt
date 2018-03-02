@@ -12,6 +12,7 @@ import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import jp.riku1227.bedrockpro.BedrockPro
 import jp.riku1227.bedrockpro.R
 import jp.riku1227.bedrockpro.`object`.SubpackData
 import jp.riku1227.bedrockpro.dialog.DialogListener
@@ -94,7 +95,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                             resourcePackModuleUUID = resourcePackGenModuleUuid.text.toString()
                         }
 
-                        if(File(FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/").exists()) {
+                        if(File(BedrockPro.getResourcePacksPath() + resourcePackName + "/").exists()) {
                             makeSnackBar(view!!,resources.getString(R.string.resource_pack_is_exists))
                         } else {
                             resoluteDialogMessage = resources.getString(R.string.resource_pack_gen_dialog_name).format(resourcePackName) + "\n" +
@@ -103,7 +104,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
                                     resources.getString(R.string.resource_pack_gen_dialog_module_uuid).format(resourcePackModuleUUID)
                             resourcePackGenResoluteCheckDialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_is_it_ok),resoluteDialogMessage)
                             resourcePackGenResoluteCheckDialog!!.setDialogListener(this)
-                            val versionTxtFile = File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/version.txt")
+                            val versionTxtFile = File(BedrockPro.getCachePath() + "resource/version.txt")
                             if (versionTxtFile.exists()) {
                                 if(versionTxtFile.readText() != BedrockUtil(activity!!.packageManager).getVersion()) {
                                     val versionErrorDialog = SimpleDialog.newInstance(resources.getString(R.string.dialog_version_error_title),
@@ -167,7 +168,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
         }
 
         resourcePackGenDeleteCache.setOnClickListener {
-            if(File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/").exists()) {
+            if(File(BedrockPro.getCachePath() + "resource/").exists()) {
                 val deleteCacheDialog = SimpleDialog.newInstance(resources.getString(R.string.resource_pack_gen_dialog_delete_cache),resources.getString(R.string.resource_pack_gen_dialog_delete_cache_description))
                 deleteCacheDialog.setDialogListener(this)
                 deleteCacheDialog.show(fragmentManager,"delete_cache_dialog")
@@ -206,7 +207,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
     }
 
     private fun deleteCache(dialogShow : Boolean = false) {
-        val file = File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/")
+        val file = File(BedrockPro.getCachePath() + "resource/")
         val progress = ProgressDialog()
         progress.show(fragmentManager,"ProgressDialog")
         thread {
@@ -221,20 +222,19 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
     private fun generateResourcePack() {
         val mcbeUtil = BedrockUtil(activity!!.packageManager)
-        val cacheFolder = FileUtil.getExternalStoragePath() + "BedrockPro/cache/"
-        val resourceFolder = cacheFolder+"resource/"
+        val resourceFolder = BedrockPro.getCachePath() + "resource/"
         val assetsFolder = resourceFolder + "assets/resource_packs/vanilla/"
-        val outFolder = FileUtil.getExternalStoragePath() + "games/com.mojang/resource_packs/" + resourcePackName + "/"
-        FileUtil.createFile(cacheFolder+".nomedia")
+        val outFolder = BedrockPro.getResourcePacksPath() + resourcePackName + "/"
+        FileUtil.createFile(FileUtil.getExternalStoragePath() + ".nomedia")
         val progress = ProgressDialog()
         progress.show(fragmentManager,"generate_resource_pack_progress_dialog")
         thread {
             progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_message_initial)
             if(FileUtil.getFolderSize(assetsFolder) <= 25000000) {
                 progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_message_unzip)
-                File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/").deleteRecursively()
+                File(resourceFolder + "resource/").deleteRecursively()
                 FileUtil.unzip(mcbeUtil.getinstallLocation()!!,resourceFolder,"assets/resource_packs/vanilla/",progress)
-                FileUtil.createTxtFile(resourceFolder+"version.txt",mcbeUtil.getVersion()!!)
+                FileUtil.createTxtFile(resourceFolder + "version.txt",mcbeUtil.getVersion()!!)
             }
             progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_copy_resource).format(outFolder)
             File(assetsFolder).copyRecursively(File(outFolder))
@@ -261,7 +261,7 @@ class ResourcePackGenFragment : android.support.v4.app.Fragment() , DialogListen
 
             if(!resourcePackCache) {
                 progress.message = resources.getString(R.string.resource_pack_gen_dialog_progress_delete_cache)
-                File(FileUtil.getExternalStoragePath()+"BedrockPro/cache/resource/").deleteRecursively()
+                File(resourceFolder).deleteRecursively()
             }
             progress.dismiss()
         }
