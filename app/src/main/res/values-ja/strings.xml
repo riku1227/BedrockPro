@@ -80,6 +80,7 @@
     <string name="mshook_gen_generate">生成</string>
     <string name="mshook_gen_resolute">生成結果</string>
     <string name="mshook_gen_resolute_copy">コピー</string>
+    <string name="mshook_gen_resolute_copy_message">コピーしました</string>
 
     <string name="dialog_grant_permission">許可してください</string>
     <string name="dialog_grant_external_storage_message">ストレージのアクセス許可が必要です</string>

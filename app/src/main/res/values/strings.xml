@@ -80,6 +80,7 @@
     <string name="mshook_gen_generate">Generate</string>
     <string name="mshook_gen_resolute">Resolute</string>
     <string name="mshook_gen_resolute_copy">Copy</string>
+    <string name="mshook_gen_resolute_copy_message">Copied</string>
 
     <string name="dialog_grant_permission">Please grant permission</string>
     <string name="dialog_grant_external_storage_message">External storage permission is necessary</string>

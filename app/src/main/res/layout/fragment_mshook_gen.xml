@@ -80,7 +80,7 @@
                     android:textSize="20sp"/>
 
                 <Button
-                    android:id="@+id/msHookgenResoluteFunctionCopy"
+                    android:id="@+id/msHookGenResoluteFunctionCopy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/ButtonBase"
@@ -95,7 +95,7 @@
                     android:textSize="20sp"/>
 
                 <Button
-                    android:id="@+id/msHookgenResoluteMSHookCopy"
+                    android:id="@+id/msHookGenResoluteMSHookCopy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/ButtonBase"
