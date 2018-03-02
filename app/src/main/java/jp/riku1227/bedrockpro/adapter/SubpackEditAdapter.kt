@@ -57,9 +57,7 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
         holder?.subPackDirectory?.setText(subPackCardDirectoryList[position])
         holder?.subPackMemoryTier?.setText(subPackCardMemoryTier[position])
 
-        holder?.subPackName!!.requestFocus()
-
-        holder.subPackAddButton.setOnClickListener {
+        holder?.subPackAddButton?.setOnClickListener {
             subPackCardNameList.add("")
             subPackCardDirectoryList.add("")
             subPackCardMemoryTier.add("")
@@ -67,7 +65,7 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
             mRecyclerView?.scrollToPosition(itemCount - 1)
         }
 
-        holder.subPackDeleteButton.setOnClickListener {
+        holder?.subPackDeleteButton?.setOnClickListener {
             subPackCardNameList.removeAt(holder.layoutPosition)
             subPackCardDirectoryList.removeAt(holder.layoutPosition)
             subPackCardMemoryTier.removeAt(holder.layoutPosition)
