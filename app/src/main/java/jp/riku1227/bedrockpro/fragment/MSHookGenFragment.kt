@@ -30,7 +30,7 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
                 returnValue = "void"
             }
 
-            msHookGenResoluteFunction.text = createFuntion(functionName, returnValue)
+            msHookGenResoluteFunction.text = createFunction(functionName, returnValue)
             msHookGenResoluteMSHook.text = createMSHook(functionName)
         }
 
@@ -59,7 +59,7 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
         return resolute
     }
 
-    private fun createFuntion(functionName : String, returnValue: String) : String {
+    private fun createFunction(functionName : String, returnValue: String) : String {
         var resolute = ""
         var className = ""
         var classFunction = ""
