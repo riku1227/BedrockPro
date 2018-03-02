@@ -20,6 +20,7 @@
     <string name="drawer_title_behavior_pack">ビヘイビアー パック</string>
     <string name="drawer_behavior_pack_gen">BehaviorPackGen</string>
     <string name="drawer_title_other">その他</string>
+    <string name="drawer_util_mshook_gen">MSHookGen</string>
     <string name="drawer_util_backup_apk">APKをバックアップする</string>
 
     <string name="backup_apk_start">バックアップ開始</string>

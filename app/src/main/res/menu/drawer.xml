@@ -23,6 +23,9 @@
     <item android:title="@string/drawer_title_other">
         <menu>
             <item
+                android:id="@+id/drawer_util_mshook_gen"
+                android:title="@string/drawer_util_mshook_gen" />
+            <item
                 android:id="@+id/drawer_util_backup_apk"
                 android:title="@string/drawer_util_backup_apk" />
         </menu>

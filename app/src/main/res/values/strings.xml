@@ -20,6 +20,7 @@
     <string name="drawer_title_behavior_pack">BehaviorPack</string>
     <string name="drawer_behavior_pack_gen">BehaviorPackGen</string>
     <string name="drawer_title_other">Other</string>
+    <string name="drawer_util_mshook_gen">MSHookGen</string>
     <string name="drawer_util_backup_apk">Backup APK</string>
 
     <string name="backup_apk_start">Backup start</string>

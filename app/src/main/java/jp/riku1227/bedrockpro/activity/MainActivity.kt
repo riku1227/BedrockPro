@@ -17,6 +17,7 @@ import jp.riku1227.bedrockpro.dialog.PermissionDialog
 import jp.riku1227.bedrockpro.dialog.ProgressDialog
 import jp.riku1227.bedrockpro.fragment.BehaviorPackGenFragment
 import jp.riku1227.bedrockpro.fragment.HomeFragment
+import jp.riku1227.bedrockpro.fragment.MSHookGenFragment
 import jp.riku1227.bedrockpro.fragment.ResourcePackGenFragment
 import jp.riku1227.bedrockpro.util.FileUtil
 import jp.riku1227.bedrockpro.util.BedrockUtil
@@ -61,6 +62,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.drawer_resource_pack_gen -> replaceFragment(fragmentTransaction,ResourcePackGenFragment(),"ResourcePackGenFragment")
             R.id.drawer_util_backup_apk -> backupAPK()
             R.id.drawer_behavior_pack_gen -> replaceFragment(fragmentTransaction,BehaviorPackGenFragment(),"BehaviorPackGenFragment")
+            R.id.drawer_util_mshook_gen -> replaceFragment(fragmentTransaction,MSHookGenFragment(),"MSHookGenFragment")
         }
         drawerLayout.closeDrawers()
         return true
@@ -84,6 +86,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(shortcutId) {
             "ResourcePackGenFragment" -> replaceFragment(fragmentTransaction,ResourcePackGenFragment(),"ResourcePackGenFragment")
             "BehaviorPackGenFragment" -> replaceFragment(fragmentTransaction,BehaviorPackGenFragment(),"BehaviorPackGenFragment")
+            "MSHookGen" -> replaceFragment(fragmentTransaction,MSHookGenFragment(),"MSHookGenFragment")
             "BackupApk" -> backupAPK(true)
         }
     }
