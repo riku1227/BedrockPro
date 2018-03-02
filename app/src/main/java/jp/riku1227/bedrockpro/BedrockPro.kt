@@ -8,6 +8,31 @@ import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.view.View
 import android.widget.Toast
+import jp.riku1227.bedrockpro.util.FileUtil
+
+class BedrockPro {
+    companion object {
+        const val HOMEPATH = "BedrockPro/"
+        const val BEDROCK_HOMEPATH = "games/com.mojang/"
+        const val RESOURCEPACKS_PATH = "resource_packs/"
+
+        fun getHomePath() : String {
+            return FileUtil.getExternalStoragePath() + HOMEPATH
+        }
+
+        fun getCachePath() : String {
+            return getHomePath() + "cache/"
+        }
+
+        fun getBedrockHomePath() : String {
+            return FileUtil.getExternalStoragePath() + BEDROCK_HOMEPATH
+        }
+
+        fun getResourcePacksPath() : String {
+            return getBedrockHomePath() + RESOURCEPACKS_PATH
+        }
+    }
+}
 
 fun webIntent(activity : Activity,urlString : String) {
     val uri = Uri.parse(urlString)
