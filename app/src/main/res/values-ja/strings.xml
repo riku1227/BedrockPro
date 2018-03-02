@@ -75,6 +75,12 @@
     <string name="behavior_pack_gen_delete_cache">キャッシュを削除</string>
     <string name="behavior_pack_gen_icon">アイコン</string>
 
+    <string name="mshook_gen_function_name">関数名</string>
+    <string name="mshook_gen_return_value">返り値</string>
+    <string name="mshook_gen_generate">生成</string>
+    <string name="mshook_gen_resolute">生成結果</string>
+    <string name="mshook_gen_resolute_copy">コピー</string>
+
     <string name="dialog_grant_permission">許可してください</string>
     <string name="dialog_grant_external_storage_message">ストレージのアクセス許可が必要です</string>
     <string name="dialog_version_error_title">バージョンエラー</string>

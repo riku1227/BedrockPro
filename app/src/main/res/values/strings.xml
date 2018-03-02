@@ -75,6 +75,12 @@
     <string name="behavior_pack_gen_delete_cache">Delete Cache</string>
     <string name="behavior_pack_gen_icon">Icon</string>
 
+    <string name="mshook_gen_function_name">Function name</string>
+    <string name="mshook_gen_return_value">Return value</string>
+    <string name="mshook_gen_generate">Generate</string>
+    <string name="mshook_gen_resolute">Resolute</string>
+    <string name="mshook_gen_resolute_copy">Copy</string>
+
     <string name="dialog_grant_permission">Please grant permission</string>
     <string name="dialog_grant_external_storage_message">External storage permission is necessary</string>
 
