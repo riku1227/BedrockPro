@@ -9,7 +9,6 @@ import kotlinx.android.synthetic.main.fragment_mshook_gen.*
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.util.Log
 import jp.riku1227.bedrockpro.makeSnackBar
 
 
@@ -77,7 +76,6 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
                 argument = "$className*,$argument"
             }
 
-            Log.e("Tag",argument)
             if(msHookGenAppendMode.isChecked) {
                 resolute = "${returnValue} (*_${className}_${classFunction})(${argument});\n"+
                         "${returnValue} ${className}_${classFunction}(${argumentNameConversion(argument)[0]}) {\n"+
@@ -121,7 +119,6 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
                 val firstChar = it.substring(0, 1)
                 val upFirstChar = firstChar.toLowerCase()
                 val removePointer = it.substring(0, it.indexOf("*"))
-                Log.e("Tag",removePointer)
 
                 if(firstChar == upFirstChar) {
                     resolute[0] += "$it _$removePointer"
@@ -132,8 +129,6 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
                 }
             }
         }
-        Log.e("Tag",resolute[0])
-        Log.e("Tag",resolute[1])
         return resolute
     }
 
