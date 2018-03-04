@@ -21,6 +21,7 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
 
     override fun onStart() {
         super.onStart()
+        activity?.title = "MSHookGen"
 
         msHookGenGenerate.setOnClickListener {
             val functionName = msHookGenFunctionName.text.toString()
