@@ -77,6 +77,7 @@
 
     <string name="mshook_gen_function_name">Function name</string>
     <string name="mshook_gen_return_value">Return value</string>
+    <string name="mshook_gen_append_mode">Processing append mode(unfinished)</string>
     <string name="mshook_gen_generate">Generate</string>
     <string name="mshook_gen_resolute">Resolute</string>
     <string name="mshook_gen_resolute_copy">Copy</string>

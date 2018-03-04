@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.fragment_mshook_gen.*
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.util.Log
 import jp.riku1227.bedrockpro.makeSnackBar
 
 
@@ -76,14 +77,63 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
                 argument = "$className*,$argument"
             }
 
-            resolute = "${returnValue} (*_${className}_${classFunction})(${argument});\n"+
-                    "${returnValue} ${className}_${classFunction}(${argument}) {\n"+
-                    "  \n"+
-                    "}"
+            Log.e("Tag",argument)
+            if(msHookGenAppendMode.isChecked) {
+                resolute = "${returnValue} (*_${className}_${classFunction})(${argument});\n"+
+                        "${returnValue} ${className}_${classFunction}(${argumentNameConversion(argument)[0]}) {\n"+
+                        "  _${className}_${classFunction}(${argumentNameConversion(argument)[1]});\n"+
+                        "}"
+            } else {
+                resolute = "${returnValue} (*_${className}_${classFunction})(${argument});\n"+
+                        "${returnValue} ${className}_${classFunction}(${argumentNameConversion(argument)[0]}) {\n"+
+                        "  \n"+
+                        "}"
+            }
         } else {
             resolute = "Error"
         }
 
+        return resolute
+    }
+
+    private fun argumentNameConversion(argument : String) : ArrayList<String> {
+        var resolute = arrayListOf("","")
+
+        var argList = argument.split(",")
+        var first = true
+        argList.forEach {
+            if(!first) {
+                resolute[0] += ", "
+                resolute[1] += ", "
+            }
+            first = false
+            if(it.indexOf("*") == -1) {
+                val firstChar = it.substring(0, 1)
+                val upFirstChar = firstChar.toLowerCase()
+                if(firstChar == upFirstChar) {
+                    resolute[0] += "$it _$it"
+                    resolute[1] += "_$it"
+                } else {
+                    resolute[0] += "$it ${it.replaceRange(0, 1, upFirstChar)}"
+                    resolute[1] += it.replaceRange(0, 1, upFirstChar)
+                }
+            } else {
+                val firstChar = it.substring(0, 1)
+                val upFirstChar = firstChar.toLowerCase()
+                val removePointer = it.substring(0, it.indexOf("*"))
+                Log.e("Tag",removePointer)
+
+                if(firstChar == upFirstChar) {
+                    resolute[0] += "$it _$removePointer"
+                    resolute[1] += "_$removePointer"
+                } else {
+                    resolute[0] += "$it ${removePointer.replaceRange(0, 1, upFirstChar)}"
+                    resolute[1] += removePointer.replaceRange(0, 1, upFirstChar)
+                }
+            }
+        }
+        Log.e("Tag",resolute[0])
+        Log.e("Tag",resolute[1])
         return resolute
     }
 
