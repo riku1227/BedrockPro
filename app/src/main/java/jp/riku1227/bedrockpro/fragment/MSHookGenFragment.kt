@@ -98,7 +98,8 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
     private fun argumentNameConversion(argument : String) : ArrayList<String> {
         var resolute = arrayListOf("","")
 
-        var argList = argument.split(",")
+        val noSpaceArg = argument.replace(" ","")
+        var argList = noSpaceArg.split(",")
         var first = true
         argList.forEach {
             if(!first) {
