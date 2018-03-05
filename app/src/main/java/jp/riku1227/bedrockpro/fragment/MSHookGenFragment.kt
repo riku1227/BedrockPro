@@ -113,11 +113,11 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
                 val removePointer = it.substring(0, it.indexOf("*"))
 
                 if(firstChar == upFirstChar) {
-                    resolute[0] += "$it _$removePointer"
-                    resolute[1] += "_$removePointer"
+                    resolute[0] += "$it ${createArgumentName(removePointer)}"
+                    resolute[1] += createArgumentName(removePointer)
                 } else {
-                    resolute[0] += "$it ${removePointer.replaceRange(0, 1, upFirstChar)}"
-                    resolute[1] += removePointer.replaceRange(0, 1, upFirstChar)
+                    resolute[0] += "$it ${createArgumentName(removePointer)}"
+                    resolute[1] += createArgumentName(removePointer)
                 }
             } else if(it.indexOf("&") != -1) {
                 val firstChar = it.substring(0, 1)
@@ -125,25 +125,42 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
                 val removePointer = it.substring(0, it.indexOf("&"))
 
                 if(firstChar == upFirstChar) {
-                    resolute[0] += "$it _$removePointer"
-                    resolute[1] += "_$removePointer"
+                    resolute[0] += "$it ${createArgumentName(removePointer)}"
+                    resolute[1] += "${createArgumentName(removePointer)}"
                 } else {
-                    resolute[0] += "$it ${removePointer.replaceRange(0, 1, upFirstChar)}"
-                    resolute[1] += removePointer.replaceRange(0, 1, upFirstChar)
+                    resolute[0] += "$it ${createArgumentName(removePointer)}"
+                    resolute[1] += createArgumentName(removePointer)
                 }
             } else {
                 val firstChar = it.substring(0, 1)
                 val upFirstChar = firstChar.toLowerCase()
                 if(firstChar == upFirstChar) {
-                    resolute[0] += "$it _$it"
-                    resolute[1] += "_$it"
+                    resolute[0] += "$it ${createArgumentName(it)}"
+                    resolute[1] += createArgumentName(it)
                 } else {
-                    resolute[0] += "$it ${it.replaceRange(0, 1, upFirstChar)}"
-                    resolute[1] += it.replaceRange(0, 1, upFirstChar)
+                    resolute[0] += "$it ${createArgumentName(it)}"
+                    resolute[1] += createArgumentName(it)
                 }
             }
         }
         return resolute
+    }
+
+    private fun createArgumentName(argument : String) :String {
+        var result = ""
+        val removeConst = argument.replace("const","")
+        val firstChar = removeConst.substring(0, 1)
+        val lowFirstChar = firstChar.toLowerCase()
+        if(removeConst.indexOf("std::string") != -1) {
+            result = "str"
+        } else {
+            if(firstChar == lowFirstChar) {
+                result = "_$argument"
+            } else {
+                result = argument.replaceRange(0, 1, lowFirstChar)
+            }
+        }
+        return result
     }
 
     private fun copyToClipboard(text : String) {
