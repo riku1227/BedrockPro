@@ -26,6 +26,7 @@
                         android:id="@+id/msHookGenFunctionName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="text"
                         android:hint="@string/mshook_gen_function_name" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -37,6 +38,7 @@
                         android:id="@+id/msHookGenReturnValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="text"
                         android:hint="@string/mshook_gen_return_value" />
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
