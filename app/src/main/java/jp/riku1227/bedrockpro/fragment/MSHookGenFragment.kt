@@ -113,10 +113,10 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
                 val removePointer = it.substring(0, it.indexOf("*"))
 
                 if(firstChar == upFirstChar) {
-                    resolute[0] += "$it ${createArgumentName(removePointer)}"
+                    resolute[0] += "${createArgument(it)} ${createArgumentName(removePointer)}"
                     resolute[1] += createArgumentName(removePointer)
                 } else {
-                    resolute[0] += "$it ${createArgumentName(removePointer)}"
+                    resolute[0] += "${createArgument(it)} ${createArgumentName(removePointer)}"
                     resolute[1] += createArgumentName(removePointer)
                 }
             } else if(it.indexOf("&") != -1) {
@@ -125,25 +125,39 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
                 val removePointer = it.substring(0, it.indexOf("&"))
 
                 if(firstChar == upFirstChar) {
-                    resolute[0] += "$it ${createArgumentName(removePointer)}"
+                    resolute[0] += "${createArgument(it)} ${createArgumentName(removePointer)}"
                     resolute[1] += "${createArgumentName(removePointer)}"
                 } else {
-                    resolute[0] += "$it ${createArgumentName(removePointer)}"
+                    resolute[0] += "${createArgument(it)} ${createArgumentName(removePointer)}"
                     resolute[1] += createArgumentName(removePointer)
                 }
             } else {
                 val firstChar = it.substring(0, 1)
                 val upFirstChar = firstChar.toLowerCase()
                 if(firstChar == upFirstChar) {
-                    resolute[0] += "$it ${createArgumentName(it)}"
+                    resolute[0] += "${createArgument(it)} ${createArgumentName(it)}"
                     resolute[1] += createArgumentName(it)
                 } else {
-                    resolute[0] += "$it ${createArgumentName(it)}"
+                    resolute[0] += "${createArgument(it)} ${createArgumentName(it)}"
                     resolute[1] += createArgumentName(it)
                 }
             }
         }
         return resolute
+    }
+
+    private fun createArgument(argument : String) : String {
+        var result = ""
+        if(argument.indexOf("const") != -1) {
+            if(argument.indexOf("const") == 0) {
+                result = argument.replace("const","const ")
+            } else {
+                result = argument.replace("const"," const")
+            }
+        } else {
+            result = argument
+        }
+        return result
     }
 
     private fun createArgumentName(argument : String) :String {
@@ -155,9 +169,9 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
             result = "str"
         } else {
             if(firstChar == lowFirstChar) {
-                result = "_$argument"
+                result = "_$removeConst"
             } else {
-                result = argument.replaceRange(0, 1, lowFirstChar)
+                result = removeConst.replaceRange(0, 1, lowFirstChar)
             }
         }
         return result
