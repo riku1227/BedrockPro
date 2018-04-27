@@ -154,6 +154,10 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
             } else {
                 result = argument.replace("const"," const")
             }
+        } else if(argument.indexOf("signed") != -1){
+            result = argument.replace("signed", "signed ")
+        } else if(argument.indexOf("unsigned") != -1){
+            result = argument.replace("unsigned", "unsigned ")
         } else {
             result = argument
         }
@@ -162,7 +166,7 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
 
     private fun createArgumentName(argument : String) :String {
         var result = ""
-        val removeConst = argument.replace("const","")
+        val removeConst = argument.replace("const","").replace("unsigned","").replace("signed","")
         val firstChar = removeConst.substring(0, 1)
         val lowFirstChar = firstChar.toLowerCase()
         if(removeConst.indexOf("std::string") != -1) {
