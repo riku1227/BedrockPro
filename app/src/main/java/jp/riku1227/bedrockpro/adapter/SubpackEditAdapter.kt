@@ -38,16 +38,16 @@ class SubpackEditAdapter(layoutInflater: LayoutInflater, subPackNameList : Array
 
     }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         mRecyclerView = recyclerView
         super.onAttachedToRecyclerView(recyclerView)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) : ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
         return ViewHolder(mInflater!!.inflate(R.layout.card_subpack, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if(viewHolderList.size > position) {
             viewHolderList[position] = holder
         } else {
