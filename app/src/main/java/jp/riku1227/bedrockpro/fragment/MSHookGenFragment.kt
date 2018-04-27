@@ -14,6 +14,8 @@ import jp.riku1227.bedrockpro.makeSnackBar
 
 class MSHookGenFragment : android.support.v4.app.Fragment() {
 
+    var argMap = hashMapOf<String, Int>()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mshook_gen, container, false)
@@ -111,38 +113,43 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
                 val firstChar = it.substring(0, 1)
                 val upFirstChar = firstChar.toLowerCase()
                 val removePointer = it.substring(0, it.indexOf("*"))
+                val argName = createArgumentName(removePointer)
 
                 if(firstChar == upFirstChar) {
-                    resolute[0] += "${createArgument(it)} ${createArgumentName(removePointer)}"
-                    resolute[1] += createArgumentName(removePointer)
+                    resolute[0] += "${createArgument(it)} $argName"
+                    resolute[1] += argName
                 } else {
-                    resolute[0] += "${createArgument(it)} ${createArgumentName(removePointer)}"
-                    resolute[1] += createArgumentName(removePointer)
+                    resolute[0] += "${createArgument(it)} $argName"
+                    resolute[1] += argName
                 }
             } else if(it.indexOf("&") != -1) {
                 val firstChar = it.substring(0, 1)
                 val upFirstChar = firstChar.toLowerCase()
                 val removePointer = it.substring(0, it.indexOf("&"))
+                val argName = createArgumentName(removePointer)
 
                 if(firstChar == upFirstChar) {
-                    resolute[0] += "${createArgument(it)} ${createArgumentName(removePointer)}"
-                    resolute[1] += "${createArgumentName(removePointer)}"
+                    resolute[0] += "${createArgument(it)} $argName"
+                    resolute[1] += argName
                 } else {
-                    resolute[0] += "${createArgument(it)} ${createArgumentName(removePointer)}"
-                    resolute[1] += createArgumentName(removePointer)
+                    resolute[0] += "${createArgument(it)} $argName"
+                    resolute[1] += argName
                 }
             } else {
                 val firstChar = it.substring(0, 1)
                 val upFirstChar = firstChar.toLowerCase()
+                val argName = createArgumentName(it)
+
                 if(firstChar == upFirstChar) {
-                    resolute[0] += "${createArgument(it)} ${createArgumentName(it)}"
-                    resolute[1] += createArgumentName(it)
+                    resolute[0] += "${createArgument(it)} $argName"
+                    resolute[1] += argName
                 } else {
-                    resolute[0] += "${createArgument(it)} ${createArgumentName(it)}"
-                    resolute[1] += createArgumentName(it)
+                    resolute[0] += "${createArgument(it)} $argName"
+                    resolute[1] += argName
                 }
             }
         }
+        argMap.clear()
         return resolute
     }
 
@@ -154,7 +161,8 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
             } else {
                 result = argument.replace("const"," const")
             }
-        } else if(argument.indexOf("signed") != -1){
+        }
+        if(argument.indexOf("signed") != -1){
             result = argument.replace("signed", "signed ")
         } else if(argument.indexOf("unsigned") != -1){
             result = argument.replace("unsigned", "unsigned ")
@@ -167,6 +175,12 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
     private fun createArgumentName(argument : String) :String {
         var result = ""
         val removeConst = argument.replace("const","").replace("unsigned","").replace("signed","")
+        if(argMap[removeConst] == null) {
+            argMap[removeConst] = 1
+        } else {
+            val temp : Int = argMap[removeConst]!!
+            argMap[removeConst] = temp + 1
+        }
         val firstChar = removeConst.substring(0, 1)
         val lowFirstChar = firstChar.toLowerCase()
         if(removeConst.indexOf("std::string") != -1) {
@@ -177,6 +191,9 @@ class MSHookGenFragment : android.support.v4.app.Fragment() {
             } else {
                 result = removeConst.replaceRange(0, 1, lowFirstChar)
             }
+        }
+        if(argMap[removeConst] != 1) {
+            result += argMap[removeConst]
         }
         return result
     }
