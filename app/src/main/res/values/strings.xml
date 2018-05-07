@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">BedrockPro</string>
+    <string name="app_name" translatable="false">BedrockPro</string>
+    <string name="app_url" translatable="false">https://riku1227.github.io/</string>
+    <string name="app_icon">AppIcon</string>
+
+    <!-- Drawer string -->
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+    <string name="drawer_home">Home</string>
+    <string name="drawer_title_resource_pack">Resource Pack</string>
+    <string name="drawer_resource_pack_gen">ResourcePackGen</string>
+    <string name="drawer_title_behavior_pack">Behavior Pack</string>
+    <string name="drawer_behavior_pack_gen">BehaviorPackGen</string>
+    <string name="drawer_title_utility">Utility</string>
+    <string name="drawer_utility_mshook_gen">MSHookGen</string>
+    <string name="drawer_utility_backup_apk">Backup APK</string>
+    <string name="drawer_other">Other</string>
+    <string name="drawer_other_setting">Setting</string>
+    <string name="drawer_other_storage_manager">Storage Manager</string>
+
 </resources>
