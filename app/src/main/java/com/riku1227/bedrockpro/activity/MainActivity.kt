@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.widget.Toast
 import com.riku1227.bedrockpro.R
+import fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +24,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navigationView.setNavigationItemSelectedListener(this)
+
+        if(savedInstanceState == null) {
+            val homeFragment = HomeFragment()
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.flameLayout,homeFragment,"HomeFragment")
+            fragmentTransaction.commit()
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
