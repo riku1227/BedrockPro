@@ -1,4 +1,4 @@
-package com.riku1227.bedrockpro
+package com.riku1227.bedrockpro.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.widget.Toast
+import com.riku1227.bedrockpro.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
