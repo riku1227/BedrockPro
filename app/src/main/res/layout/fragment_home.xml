@@ -62,7 +62,7 @@
                     android:id="@+id/aboutWebsiteButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                     android:text="@string/about_website"
                     android:textSize="16sp"/>
 
@@ -70,7 +70,7 @@
                     android:id="@+id/aboutGithubButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                     android:text="@string/about_github"
                     android:textSize="16sp"/>
 
@@ -78,7 +78,7 @@
                     android:id="@+id/aboutGooglePlusButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Base.Widget.AppCompat.Button.Colored"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                     android:text="@string/about_google_plus"
                     android:textSize="16sp"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
