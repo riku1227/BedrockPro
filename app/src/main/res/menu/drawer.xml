@@ -27,7 +27,7 @@
                 android:title="@string/drawer_utility_mshook_gen" />
             <item
                 android:id="@+id/drawer_util_backup_apk"
-                android:title="@string/drawer_other_storage_manager" />
+                android:title="@string/drawer_utility_backup_apk" />
         </menu>
     </item>
 

@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity(), com.google.android.material.navigation
         if(savedInstanceState == null) {
             val homeFragment = HomeFragment()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.flameLayout,homeFragment,"HomeFragment")
+            fragmentTransaction.replace(R.id.frameLayout,homeFragment,"HomeFragment")
             fragmentTransaction.commit()
         }
     }
