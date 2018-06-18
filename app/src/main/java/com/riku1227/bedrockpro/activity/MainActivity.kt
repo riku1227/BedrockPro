@@ -1,16 +1,15 @@
 package com.riku1227.bedrockpro.activity
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.NavigationView
-import android.support.v7.app.ActionBarDrawerToggle
+import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.widget.Toast
 import com.riku1227.bedrockpro.R
 import fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
