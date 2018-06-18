@@ -6,7 +6,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.widget.Toast
 import com.riku1227.bedrockpro.R
-import fragment.HomeFragment
+import com.riku1227.bedrockpro.fragment.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener {

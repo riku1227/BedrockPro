@@ -1,4 +1,4 @@
-package fragment
+package com.riku1227.bedrockpro.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
