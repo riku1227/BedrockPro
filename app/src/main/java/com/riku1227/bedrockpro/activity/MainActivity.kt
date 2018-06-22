@@ -5,8 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.riku1227.bedrockpro.R
 import com.riku1227.bedrockpro.fragment.HomeFragment
+import com.riku1227.bedrockpro.fragment.ResourcePackGenFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener {
@@ -33,8 +36,18 @@ class MainActivity : AppCompatActivity(), com.google.android.material.navigation
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        Toast.makeText(baseContext, "Unimplemented", Toast.LENGTH_LONG).show()
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        when(item.itemId) {
+            R.id.drawer_resource_pack_gen -> replaceFragment(fragmentTransaction, ResourcePackGenFragment(), "ResourcePackGenFragment")
+            else -> Toast.makeText(baseContext, "Unimplemented", Toast.LENGTH_SHORT).show()
+        }
         drawerLayout.closeDrawers()
         return true
+    }
+
+    private fun replaceFragment(fragmentTransaction : FragmentTransaction, fragment : Fragment, name : String) {
+        fragmentTransaction.replace(R.id.frameLayout,fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 }
