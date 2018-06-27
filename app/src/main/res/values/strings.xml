@@ -26,4 +26,19 @@
     <string name="drawer_other_setting">Setting</string>
     <string name="drawer_other_storage_manager">Storage Manager</string>
 
+    <!-- ResourcePackGen string -->
+    <string name="resource_pack_gen_pack_name">Name</string>
+    <string name="resource_pack_gen_pack_description">Description</string>
+    <string name="resource_pack_gen_pack_header_uuid">Header UUID</string>
+    <string name="resource_pack_gen_pack_module_uuid">Module UUID</string>
+    <string name="resource_pack_gen_pack_cache_resource">Cache resource</string>
+    <string name="resource_pack_gen_pack_auto_generate_uuid">Auto generate UUID</string>
+    <string name="resource_pack_gen_pack_custom_pack_icon">Custom pack icon</string>
+    <string name="resource_pack_gen_pack_generate">Generate</string>
+    <string name="resource_pack_gen_pack_pick_icon">Pick icon</string>
+    <string name="resource_pack_gen_pack_sub_pack_editor">SubPack Editor</string>
+    <string name="resource_pack_gen_pack_delete_cache">Delete cache</string>
+    <string name="resource_pack_gen_pack_icon">Icon</string>
+    <string name="resource_pack_gen_pack_icon_description">Resource pack icon</string>
+
 </resources>
