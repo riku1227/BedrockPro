@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_icon">アプリアイコン</string>
+
+    <string name="app_version">アプリのバージョン: %1$s</string>
+    <string name="app_version_code">アプリのバージョンコード: %1$s</string>
+    <string name="app_author">Made by riku1227</string>
+
+    <string name="about_website">Website</string>
+    <string name="about_github">Github</string>
+    <string name="about_google_plus">Google+</string>
+
+    <!-- Drawer string -->
+    <string name="drawer_open">ドロワーを開く</string>
+    <string name="drawer_close">ドロワーを閉じる</string>>
+    <string name="drawer_title_resource_pack">リソースパック</string>
+    <string name="drawer_resource_pack_gen">ResourcePackGen</string>
+    <string name="drawer_title_behavior_pack">ビヘイビアパック</string>
+    <string name="drawer_behavior_pack_gen">BehaviorPackGen</string>
+    <string name="drawer_title_utility">ユーティリティ</string>
+    <string name="drawer_utility_mshook_gen">MSHookGen</string>
+    <string name="drawer_utility_backup_apk">APKをバックアップする</string>
+    <string name="drawer_other">その他</string>
+    <string name="drawer_other_setting">設定</string>
+    <string name="drawer_other_storage_manager">ストレージ管理</string>
+
+    <!-- ResourcePackGen string -->
+    <string name="resource_pack_gen_pack_name">名前</string>
+    <string name="resource_pack_gen_pack_description">説明</string>
+    <string name="resource_pack_gen_pack_header_uuid">ヘッダー UUID</string>
+    <string name="resource_pack_gen_pack_module_uuid">モジュール UUID</string>
+    <string name="resource_pack_gen_pack_cache_resource">リソースをキャッシュする</string>
+    <string name="resource_pack_gen_pack_auto_generate_uuid">UUIDを自動生成する</string>
+    <string name="resource_pack_gen_pack_custom_pack_icon">カスタムパックアイコン</string>
+    <string name="resource_pack_gen_pack_generate">生成</string>
+    <string name="resource_pack_gen_pack_pick_icon">アイコンを選択する</string>
+    <string name="resource_pack_gen_pack_sub_pack_editor">サブパックエディター</string>
+    <string name="resource_pack_gen_pack_delete_cache">キャッシュを削除する</string>
+    <string name="resource_pack_gen_pack_icon">アイコン</string>
+    <string name="resource_pack_gen_pack_icon_description">リソースパックのアイコン</string>
+
+</resources>
