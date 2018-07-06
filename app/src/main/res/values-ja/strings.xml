@@ -43,4 +43,7 @@
     <string name="dialog_grant_permission">権限を許可してください</string>
     <string name="dialog_grant_external_storage_message">ストレージのアクセス許可が必要です</string>
 
+    <!-- Free space -->
+    <string name="not_entered">入力されていません</string>
+
 </resources>

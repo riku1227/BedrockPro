@@ -84,7 +84,7 @@ class ResourcePackGenFragment : androidx.fragment.app.Fragment() {
             val frameLayout = editTextLayout.getChildAt(0) as ViewGroup
             val editText = frameLayout.getChildAt(0) as TextInputEditText
             if(editText.text.toString() == "") {
-                editText.error = "入力されていません"
+                editText.error = resources.getString(R.string.not_entered)
                 result = false
             }
         }

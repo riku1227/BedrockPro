@@ -45,4 +45,7 @@
     <string name="dialog_grant_permission">Please grant permission</string>
     <string name="dialog_grant_external_storage_message">External storage permission is necessary</string>
 
+    <!-- Free space -->
+    <string name="not_entered">Not entered</string>
+
 </resources>
