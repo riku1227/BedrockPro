@@ -39,4 +39,8 @@
     <string name="resource_pack_gen_pack_icon">アイコン</string>
     <string name="resource_pack_gen_pack_icon_description">リソースパックのアイコン</string>
 
+    <!-- Grant Permission Dialog-->
+    <string name="dialog_grant_permission">権限を許可してください</string>
+    <string name="dialog_grant_external_storage_message">ストレージのアクセス許可が必要です</string>
+
 </resources>
