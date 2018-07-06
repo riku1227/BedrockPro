@@ -1,16 +1,18 @@
 package com.riku1227.bedrockpro.fragment
 
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.PermissionChecker
 
 import com.riku1227.bedrockpro.R
+import com.riku1227.bedrockpro.dialog.PermissionDialog
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
 
 class ResourcePackGenFragment : androidx.fragment.app.Fragment() {
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_resource_pack_gen, container, false)
@@ -18,6 +20,10 @@ class ResourcePackGenFragment : androidx.fragment.app.Fragment() {
 
     override fun onStart() {
         super.onStart()
+
+        if(PermissionChecker.checkSelfPermission(context!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
+            PermissionDialog().show(fragmentManager,"PermissionDialog")
+        }
 
         resourcePackGenAutoGenerateUUID.setOnClickListener {
             if(!resourcePackGenAutoGenerateUUID.isChecked) {
@@ -55,6 +61,4 @@ class ResourcePackGenFragment : androidx.fragment.app.Fragment() {
 
         }
     }
-
-
 }
