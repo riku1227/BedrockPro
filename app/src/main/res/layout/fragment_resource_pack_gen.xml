@@ -14,6 +14,7 @@
             style="@style/Widget.BedrockPro.Card">
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/editTextGroup"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"

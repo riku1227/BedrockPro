@@ -7,10 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.PermissionChecker
+import com.google.android.material.textfield.TextInputEditText
 
 import com.riku1227.bedrockpro.R
 import com.riku1227.bedrockpro.dialog.PermissionDialog
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
+import java.util.*
 
 class ResourcePackGenFragment : androidx.fragment.app.Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +48,14 @@ class ResourcePackGenFragment : androidx.fragment.app.Fragment() {
         }
 
         resourcePackGenGenerate.setOnClickListener {
+            if(resourcePackGenAutoGenerateUUID.isChecked) {
+                resourcePackGenHeaderUUID.setText(UUID.randomUUID().toString())
+                resourcePackGenModuleUUID.setText(UUID.randomUUID().toString())
+            }
 
+            if(checkEditText()) {
+
+            }
         }
 
         resourcePackGenPickIcon.setOnClickListener {
@@ -60,5 +69,19 @@ class ResourcePackGenFragment : androidx.fragment.app.Fragment() {
         resourcePackGenDeleteCache.setOnClickListener {
 
         }
+    }
+
+    private fun checkEditText() : Boolean {
+        var result = true
+        for(i in 0 until editTextGroup.childCount) {
+            val editTextLayout = editTextGroup.getChildAt(i) as ViewGroup
+            val frameLayout = editTextLayout.getChildAt(0) as ViewGroup
+            val editText = frameLayout.getChildAt(0) as TextInputEditText
+            if(editText.text.toString() == "") {
+                editText.error = "入力されていません"
+                result = false
+            }
+        }
+        return result
     }
 }
