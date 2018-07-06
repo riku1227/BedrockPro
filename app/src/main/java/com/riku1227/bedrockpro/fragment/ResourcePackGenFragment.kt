@@ -29,9 +29,15 @@ class ResourcePackGenFragment : androidx.fragment.app.Fragment() {
 
         resourcePackGenAutoGenerateUUID.setOnClickListener {
             if(!resourcePackGenAutoGenerateUUID.isChecked) {
+                resourcePackGenHeaderUUIDLayout.visibility = View.VISIBLE
+                resourcePackGenModuleUUIDLayout.visibility = View.VISIBLE
                 resourcePackGenHeaderUUID.visibility = View.VISIBLE
                 resourcePackGenModuleUUID.visibility = View.VISIBLE
+                resourcePackGenHeaderUUID.setText("")
+                resourcePackGenModuleUUID.setText("")
             } else {
+                resourcePackGenHeaderUUIDLayout.visibility = View.GONE
+                resourcePackGenModuleUUIDLayout.visibility = View.GONE
                 resourcePackGenHeaderUUID.visibility = View.GONE
                 resourcePackGenModuleUUID.visibility = View.GONE
             }
