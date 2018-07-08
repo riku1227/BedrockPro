@@ -21,4 +21,9 @@ class PermissionDialog : DialogFragment() {
         this.isCancelable = false
         return dialog.create()
     }
+
+    override fun onPause() {
+        super.onPause()
+        dismiss()
+    }
 }

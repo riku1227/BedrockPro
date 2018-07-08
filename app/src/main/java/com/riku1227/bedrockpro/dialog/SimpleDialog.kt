@@ -35,4 +35,9 @@ class SimpleDialog : DialogFragment() {
                 }
                 .create()
     }
+
+    override fun onPause() {
+        super.onPause()
+        dismiss()
+    }
 }
