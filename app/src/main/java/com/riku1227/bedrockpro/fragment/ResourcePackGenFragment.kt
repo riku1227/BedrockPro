@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
 import com.riku1227.bedrockpro.R
 import com.riku1227.bedrockpro.dialog.PermissionDialog
+import com.riku1227.bedrockpro.util.MCUtil
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
 import java.util.*
 
@@ -62,7 +65,17 @@ class ResourcePackGenFragment : androidx.fragment.app.Fragment(), ActivityCompat
 
             if(PermissionChecker.checkSelfPermission(context!!,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
                 PermissionDialog().show(fragmentManager,"PermissionDialog")
-            } else if(checkEditText()) {
+                return@setOnClickListener
+            }
+
+            val mcUtil = MCUtil(context!!.packageManager)
+
+            if(mcUtil.isInstalled()) {
+                Snackbar.make(view!!, resources.getString(R.string.minecraft_is_not_installed), Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if(checkEditText()) {
             }
         }
 
