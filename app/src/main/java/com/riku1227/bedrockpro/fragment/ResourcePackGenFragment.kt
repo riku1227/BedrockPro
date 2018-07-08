@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
 import com.google.android.material.textfield.TextInputEditText
 
@@ -14,7 +15,7 @@ import com.riku1227.bedrockpro.dialog.PermissionDialog
 import kotlinx.android.synthetic.main.fragment_resource_pack_gen.*
 import java.util.*
 
-class ResourcePackGenFragment : androidx.fragment.app.Fragment() {
+class ResourcePackGenFragment : androidx.fragment.app.Fragment(), ActivityCompat.OnRequestPermissionsResultCallback {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_resource_pack_gen, container, false)
@@ -59,8 +60,9 @@ class ResourcePackGenFragment : androidx.fragment.app.Fragment() {
                 resourcePackGenModuleUUID.setText(UUID.randomUUID().toString())
             }
 
-            if(checkEditText()) {
-
+            if(PermissionChecker.checkSelfPermission(context!!,Manifest.permission.WRITE_EXTERNAL_STORAGE) != PermissionChecker.PERMISSION_GRANTED) {
+                PermissionDialog().show(fragmentManager,"PermissionDialog")
+            } else if(checkEditText()) {
             }
         }
 

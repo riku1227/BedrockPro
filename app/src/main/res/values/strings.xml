@@ -47,5 +47,6 @@
 
     <!-- Free space -->
     <string name="not_entered">Not entered</string>
+    <string name="permission_is_not_granted">External storage permission is not granted</string>
 
 </resources>
